@@ -357,12 +357,21 @@ function checkTX(hash, type='buy') {
       return;
     }
     changeActiveStep(5);
-    let msg = type == 'buy' ? 'Purchase' : 'Claim'
-    Swal.fire(
-      msg + " Done Successfully",
-      "Please Check Your Account",
-      "success"
-    );
+    if(result.status == '0x1' || result.status == 1) {
+      Swal.fire({
+        type: "success",
+        title: "Done Successfully",
+        text: "Please Check Your Account",
+        footer: ""
+      });
+    } else{
+      Swal.fire({
+        type: "error",
+        title: "Something wrong",
+        text: "Error occured during contract execution",
+        footer: ""
+      });
+    }
   });
 }
 
