@@ -231,6 +231,18 @@ bsstInit = function () {
   $(".loader").hide();
 };
 
+claimInit = function () {
+  $(".bsst-claim").show();
+  // model just exit by close btn
+  $("#claimModal").modal({
+    backdrop: "static",
+    keyboard: false
+  });
+  $(".confirm-icon").hide();
+  $(".loading-icon").hide();
+  $(".loader").hide();
+};
+
 function bsstPurchaseForm() {
   enoughFund = false;
   checkMetaMask();
@@ -438,6 +450,9 @@ function updateState(coin, ptBalance) {
 }
 
 function claim() {
+  claimInit()
+  $(".claim-step").show();
+  changeActiveStep(3);
   bsstMinterContract.claim.sendTransaction(function (error, result) {
     if (error) {
       console.log(error);
