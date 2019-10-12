@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="assets/css/morphext.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
@@ -116,12 +115,12 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text modal-input-txt" readonly>DAI</span>
+                  <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bst-dai" class="form-control just-number" placeholder=0 />
+                <input type="text" id="bst-dai" class="form-control just-number" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
-                <span id="msg"></span>
+                <span id="bst-msg"></span>
               </div>
               <button id="buy-btn" type="button" onclick="purchaseBst()"
                 class="btn btn-info col col-12 modal-buy-btn">
@@ -233,12 +232,12 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text modal-input-txt" readonly>DAI</span>
+                  <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bsst-dai" class="form-control just-number" placeholder=0 />
+                <input type="text" id="bsst-dai" class="form-control just-number" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
-                <span id="msg"></span>
+                <span id="bsst-msg"></span>
               </div>
               <button id="buy-btn" type="button" onclick="purchaseBsst()" class="btn btn-info col col-12 modal-buy-btn">
                 Purchase
