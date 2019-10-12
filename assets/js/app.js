@@ -193,8 +193,8 @@ function checkMetaMask() {
 }
 
 bstInit = function () {
-  $("#msg").html("Waiting for input");
-  $("#msg").css("color", "white");
+  $("#bst-msg").html("Waiting for input");
+  $("#bst-msg").css("color", "white");
   $(".bst-step").hide();
   $(".bst-input").show();
   // model just exit by close btn
@@ -215,8 +215,8 @@ function bstPurchaseForm() {
 }
 
 bsstInit = function () {
-  $("#msg").html("Waiting for input");
-  $("#msg").css("color", "white");
+  $("#bsst-msg").html("Waiting for input");
+  $("#bsst-msg").css("color", "white");
   $(".bsst-step").hide();
   $(".bsst-input").show();
   // model just exit by close btn
@@ -406,7 +406,7 @@ function updateState(coin, ptBalance) {
   if (coin == "bst") {
     amount = $("#bst").val();
     if (!amount || parseFloat(amount) <= 0) {
-      $("#msg").css("color", "white");
+      $("#bst-msg").css("color", "white");
       $("#bst-dai").val("");
       return;
     }
@@ -415,7 +415,7 @@ function updateState(coin, ptBalance) {
   } else {
     amount = $("#bsst").val();
     if (!amount || parseFloat(amount) <= 0) {
-      $("#msg").css("color", "white");
+      $("#bsst-msg").css("color", "white");
       $("#bsst-dai").val("");
       return;
     }
@@ -423,12 +423,16 @@ function updateState(coin, ptBalance) {
     $("#bsst-dai").val(ptAmount);
   }
   if (ptBalance < ptAmount) {
-    $("#msg").css("color", "red");
-    $("#msg").html("INSUFFICIENT DAI BALANCE");
+    $("#bst-msg").css("color", "red");
+    $("#bsst-msg").css("color", "red");
+    $("#bst-msg").html("INSUFFICIENT DAI BALANCE");
+    $("#bsst-msg").html("INSUFFICIENT DAI BALANCE");
     enoughFund = false;
   } else {
-    $("#msg").css("color", "green");
-    $("#msg").html("ENOUGH DAI BALANCE");
+    $("#bst-msg").css("color", "green");
+    $("#bsst-msg").css("color", "green");
+    $("#bst-msg").html("ENOUGH DAI BALANCE");
+    $("#bsst-msg").html("ENOUGH DAI BALANCE");
     enoughFund = true;
   }
 }
