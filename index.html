@@ -7,8 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/assets/img/favicon.png">
-    <title>BST Purchase Dashboard</title>
-
+    <title>BST - BSST Purchase Dashboard</title>
     <link rel="stylesheet" href="assets/css/morphext.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -18,25 +17,28 @@
     <nav class="navbar navbar-expand-lg navbar-transparent bg-primary navbar-absolute">
       <img class="img-fluid" src="assets/img/logo.png" style="width:30%;">
     </nav>
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h3 class="display-4"><span id="js-rotating">BST, BSST</span> Dashboard</h3>
-    </div>
-
     <div class="container">
+      <div class="px-2 py-2 pt-md-4 pb-md-3 mx-auto text-center">
+        <h2 class="display-5"><span id="jsRotating">BST, BSST</span> Dashboard</h2>
+      </div>
       <div class="card-deck mb-3 text-center">
         <div class="card mb-4 box-shadow">
           <div class="card-header">
             <h4 class="my-0 font-weight-normal">BST</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$<span id="bst-price"></span></h1>
+            <h1 class="card-title">$<span id="bstPrice"></span></h1>
+            <h6>
+                <b>BrightID Sponsorship Token</b>
+            </h6>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>BrightID Sponsorship Token</li>
-              <li>***</li>
               <li>Unlimited Supply</li>
-              <li>Total Supply: <span id="bst-supply"></span></li>
+              <li>Total Supply: <span id="bstSupply"></span></li>
+              <li>Balance: <span id="bstBalance"></span></li>
+              <li>Unassigned Balance: <span id="bstUnassignedBalance"></span></li>
             </ul>
             <button type="button" onclick="bstPurchaseForm();" class="btn btn-lg btn-block btn-primary">Purchase</button>
+            <button type="button" onclick="assignBstForm();" class="btn btn-lg btn-block btn-primary">Assign</button>
           </div>
         </div>
         <div class="card mb-4 box-shadow">
@@ -44,15 +46,16 @@
             <h4 class="my-0 font-weight-normal">BSST</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$<span id="bsst-price"></span></h1>
+            <h1 class="card-title">$<span id="bsstPrice"></span></h1>
+            <h6><b>BrightID Sponsorship Subscription Token</b></h6>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>BrightID Sponsorship Subscription Token</li>
-              <li>***</li>
               <li>Supply Limit: 100000</li>
-              <li>Total Supply: <span id="bsst-supply"></span></li>
+              <li>Total Supply: <span id="bsstSupply"></span></li>
+              <li>Balance: <span id="bsstBalance"></span></li>
+              <li>Unassigned Balance: ---</li>
             </ul>
             <button type="button" onclick="bsstPurchaseForm()" class="btn btn-lg btn-block btn-primary">Purchase</button>
-            <button id="claim-btn" type="button" onclick="claim()" class="btn btn-lg btn-block btn-primary">Claim BSST's Revenue</button>
+            <button type="button" onclick="claim()" class="btn btn-lg btn-block btn-primary">Claim</button>
           </div>
         </div>
       </div>
@@ -82,7 +85,6 @@
             <h5>SOCIAL</h5>
             <ul class="list-unstyled text-small">
             <li><a class="text-muted" target="_blank" href="#"><i class="fa fa-twitter"></i>twitter</a></li>
-            <li><a class="text-muted" target="_blank" href="#"><i class="fa fa-slack"></i>slack</a></li>
             <li><a class="text-muted" target="_blank" href="#"><i class="fa fa-medium"></i>medium</a></li>
             <li><a class="text-muted" target="_blank" href="#"><i class="fa fa-github"></i>github</a></li>
             </ul>
@@ -110,20 +112,20 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">BST</span>
                 </div>
-                <input type="text" id="bst" class="form-control just-number" onkeydown="checkState('bst')"
+                <input type="text" id="bst" class="form-control just-number" onkeydown="checkBstState()"
                   placeholder="Amount" />
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bst-dai" class="form-control just-number" placeholder=0 readonly/>
+                <input type="text" id="bstDai" class="form-control just-number" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
-                <span id="bst-msg"></span>
+                <span id="bstMsg"></span>
               </div>
-              <button id="buy-btn" type="button" onclick="purchaseBst()"
-                class="btn btn-info col col-12 modal-buy-btn">
+              <button id="bstBuyBtn" type="button" onclick="purchaseBst()"
+                class="btn btn-info col col-12">
                 Purchase
               </button>
               <br />
@@ -227,19 +229,19 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">BSST</span>
                 </div>
-                <input type="text" id="bsst" class="form-control just-number" onkeydown="checkState('bsst')"
+                <input type="text" id="bsst" class="form-control just-number" onkeydown="checkBsstState()"
                   placeholder="Amount" />
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bsst-dai" class="form-control just-number" placeholder=0 readonly/>
+                <input type="text" id="bsstDai" class="form-control just-number" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
-                <span id="bsst-msg"></span>
+                <span id="bsstMsg"></span>
               </div>
-              <button id="buy-btn" type="button" onclick="purchaseBsst()" class="btn btn-info col col-12 modal-buy-btn">
+              <button id="bsstBuyBtn" type="button" onclick="purchaseBsst()" class="btn btn-info col col-12">
                 Purchase
               </button>
               <br />
@@ -377,14 +379,103 @@
     </div>
   </div>
 
+  <!-- The BST Assign Modal -->
+  <div class="modal animated fadeIn" id="bstAssignModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title m-title">Assign BST</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="col col-12 bst-assign-input">
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text modal-input-txt">BST</span>
+                </div>
+                <input type="text" id="bstAssign" class="form-control just-number" onkeydown="checkUnassigned()"
+                  placeholder="Amount" />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text modal-input-txt">Context</span>
+                </div>
+                <input type="text" id="context" class="form-control" placeholder="Contex Name"/>
+              </div>
+              <div class="col col-12" style="margin-bottom: 4%;">
+                <span id="bstContextMsg"></span>
+              </div>
+              <button id="assignBtn" type="button" onclick="assignBst()"
+                class="btn btn-info col col-12">
+                Assign
+              </button>
+              <br />
+              <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                <p id="proccess"></p>
+                <br />
+                <p id="timer"></p>
+              </div>
+            </form>
+          </div>
+          <div class="col col-12 row justify-content-center bst-assign-step animated fadeIn">
+            <div class="col col-12 row justify-content-center step-box step-box-3">
+              <div class="col col-1">
+                <img src="assets/img/metamask.png" height="30" />
+              </div>
+              <div class="col col-8">
+                <p class="t-text">Waiting for MetaMask Confirmation</p>
+              </div>
+              <div class="col col-2">
+                <div class="loader">
+                  <img src="assets/img/loading.gif" height="30" />
+                </div>
+                <div class="confirm-icon">
+                  <img src="assets/img/confirm.png" height="30" />
+                </div>
+              </div>
+            </div>
+            <div class="sprator"></div>
+            <div class="col col-12 row justify-content-center step-box step-box-4">
+              <div class="col col-1">
+                <img src="assets/img/trx.png" height="30" />
+              </div>
+              <div class="col col-8">
+                <p class="t-text">Waiting for Transaction Confirmation</p>
+              </div>
+              <div class="col col-2">
+                <div class="loader">
+                  <img src="assets/img/loading.gif" height="30" />
+                </div>
+                <div class="confirm-icon">
+                  <img src="assets/img/confirm.png" height="30" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script src="assets/js/core/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <!-- <script src="assets/js/core/web3.min.js"></script> -->
+    <script type="text/javascript" src="assets/js/core/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/js/morphext.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/morphext.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="assets/js/config.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/init.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/bst.js"></script>
+    <script src="assets/js/bsst.js"></script>
+    <script src="assets/js/claim.js"></script>
+    <script src="assets/js/assign.js"></script>
 
   </body>
 </html>
