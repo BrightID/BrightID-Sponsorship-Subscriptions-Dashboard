@@ -402,15 +402,19 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">Context</span>
                 </div>
-                <input type="text" id="context" class="form-control" placeholder="Contex Name"/>
+                <input type="text" id="context" class="form-control" placeholder="Contex Name" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-info" type="button" onclick="contextBalance()">Balance</button>
+                </div>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
                 <span id="bstContextMsg"></span>
+                  </br>
+                <span id="totalAssigned"></span>
+                  </br>
+                <span id="youAssigned"></span>
               </div>
-              <button id="assignBtn" type="button" onclick="assignBst()"
-                class="btn btn-info col col-12">
-                Assign
-              </button>
+              <button id="assignBtn" type="button" onclick="assignBst()" class="btn btn-info col col-12"> Assign </button>
               <br />
               <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
                 <p id="proccess"></p>
@@ -419,38 +423,38 @@
               </div>
             </form>
           </div>
-          <div class="col col-12 row justify-content-center bst-assign-step animated fadeIn">
-            <div class="col col-12 row justify-content-center step-box step-box-3">
-              <div class="col col-1">
-                <img src="assets/img/metamask.png" height="30" />
+        </div>
+        <div class="col col-12 row justify-content-center bst-assign-step animated fadeIn">
+          <div class="col col-12 row justify-content-center step-box step-box-3">
+            <div class="col col-1">
+              <img src="assets/img/metamask.png" height="30" />
+            </div>
+            <div class="col col-8">
+              <p class="t-text">Waiting for MetaMask Confirmation</p>
+            </div>
+            <div class="col col-2">
+              <div class="loader">
+                <img src="assets/img/loading.gif" height="30" />
               </div>
-              <div class="col col-8">
-                <p class="t-text">Waiting for MetaMask Confirmation</p>
-              </div>
-              <div class="col col-2">
-                <div class="loader">
-                  <img src="assets/img/loading.gif" height="30" />
-                </div>
-                <div class="confirm-icon">
-                  <img src="assets/img/confirm.png" height="30" />
-                </div>
+              <div class="confirm-icon">
+                <img src="assets/img/confirm.png" height="30" />
               </div>
             </div>
-            <div class="sprator"></div>
-            <div class="col col-12 row justify-content-center step-box step-box-4">
-              <div class="col col-1">
-                <img src="assets/img/trx.png" height="30" />
+          </div>
+          <div class="sprator"></div>
+          <div class="col col-12 row justify-content-center step-box step-box-4">
+            <div class="col col-1">
+              <img src="assets/img/trx.png" height="30" />
+            </div>
+            <div class="col col-8">
+              <p class="t-text">Waiting for Transaction Confirmation</p>
+            </div>
+            <div class="col col-2">
+              <div class="loader">
+                <img src="assets/img/loading.gif" height="30" />
               </div>
-              <div class="col col-8">
-                <p class="t-text">Waiting for Transaction Confirmation</p>
-              </div>
-              <div class="col col-2">
-                <div class="loader">
-                  <img src="assets/img/loading.gif" height="30" />
-                </div>
-                <div class="confirm-icon">
-                  <img src="assets/img/confirm.png" height="30" />
-                </div>
+              <div class="confirm-icon">
+                <img src="assets/img/confirm.png" height="30" />
               </div>
             </div>
           </div>
