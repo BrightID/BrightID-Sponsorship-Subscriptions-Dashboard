@@ -8,12 +8,12 @@ window.onload = function() {
 };
 
 ethereum.on("networkChanged", function(){
-	location.reload();
+	init();
 	return;
 })
 
 ethereum.on("accountsChanged", function(){
-	location.reload();
+	init();
 	return;
 })
 
