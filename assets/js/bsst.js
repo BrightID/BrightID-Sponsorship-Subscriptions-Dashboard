@@ -76,7 +76,7 @@ function checkBsstState() {
     if (error) {
       return;
     }
-    updateBsstState(esult.c[0] / 10000);
+    updateBsstState(result.c[0] / 10000);
   });
 }
 
