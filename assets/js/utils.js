@@ -101,30 +101,3 @@ function checkApproveResult(hash, cb) {
     cb();
   });
 }
-
-$(".just-number").keypress(function (eve) {
-  if (
-    ((eve.which != 46 ||
-        $(this)
-        .val()
-        .indexOf(".") != -1) &&
-      (eve.which < 48 || eve.which > 57)) ||
-    (eve.which == 46 && $(this).caret().start == 0)
-  ) {
-    eve.preventDefault();
-  }
-
-  $(".just-number").keyup(function (eve) {
-    if (
-      $(this)
-      .val()
-      .indexOf(".") == 0
-    ) {
-      $(this).val(
-        $(this)
-        .val()
-        .substring(1)
-      );
-    }
-  });
-});
