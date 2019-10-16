@@ -110,14 +110,14 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">BST</span>
                 </div>
-                <input type="text" id="bst" class="form-control just-number" onkeydown="checkBstState()"
-                  placeholder="Amount" />
+                <input type="number" min="0" id="bst" class="form-control" onkeydown="checkBstState()"
+                  placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bstDai" class="form-control just-number" placeholder=0 readonly/>
+                <input type="text" id="bstDai" class="form-control" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
                 <span id="bstMsg"></span>
@@ -227,14 +227,13 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">BSST</span>
                 </div>
-                <input type="text" id="bsst" class="form-control just-number" onkeydown="checkBsstState()"
-                  placeholder="Amount" />
+                <input type="number" min="0" id="bsst" class="form-control" onkeydown="checkBsstState()" placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bsstDai" class="form-control just-number" placeholder=0 readonly/>
+                <input type="text" id="bsstDai" class="form-control" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
                 <span id="bsstMsg"></span>
@@ -396,8 +395,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">BST</span>
                 </div>
-                <input type="text" id="bstAssign" class="form-control just-number" onkeydown="checkUnassigned()"
-                  placeholder="Amount" />
+                <input type="number" min="0" id="bstAssign" class="form-control" onkeydown="checkUnassigned()"
+                  placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
