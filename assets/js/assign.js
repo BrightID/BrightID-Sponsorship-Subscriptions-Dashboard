@@ -1,6 +1,10 @@
 function assignInit() {
   $("#bstContextMsg").html("Waiting for input");
   $("#bstContextMsg").css("color", "white");
+
+  $("#totalAssigned").html("");
+  $("#youAssigned").html("");
+
   $(".bst-assign-step").hide();
   $(".bst-assign-input").show();
   $("#bstAssignModal").modal({
