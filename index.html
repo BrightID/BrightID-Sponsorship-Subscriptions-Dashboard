@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/assets/img/favicon.png">
-    <title>BST - BSST Purchase Dashboard</title>
+    <title>SP - SUBS Purchase Dashboard</title>
     <link rel="stylesheet" href="assets/css/morphext.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -24,35 +24,35 @@
       <div class="card-deck mb-3 text-center">
         <div class="card mb-4 box-shadow">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">BST</h4>
+            <h4 class="my-0 font-weight-normal">SP</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title">$<span id="bstPrice"></span></h1>
+            <h1 class="card-title">$<span id="spPrice"></span></h1>
             <h6>
                 <b>BrightID Sponsorship Token</b>
             </h6>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>Total Supply: <span id="bstSupply"></span></li>
-              <li>Balance: <span id="bstBalance"></span></li>
-              <li>Unassigned Balance: <span id="bstUnassignedBalance"></span></li>
+              <li>Total Supply: <span id="spSupply"></span></li>
+              <li>Balance: <span id="spBalance"></span></li>
+              <li>Unassigned Balance: <span id="spUnassignedBalance"></span></li>
             </ul>
-            <button type="button" onclick="bstPurchaseForm();" class="btn btn-lg btn-block btn-info">Purchase</button>
-            <button type="button" onclick="assignBstForm();" class="btn btn-lg btn-block btn-info">Assign</button>
+            <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info">Purchase</button>
+            <button type="button" onclick="assignSpForm();" class="btn btn-lg btn-block btn-info">Assign</button>
           </div>
         </div>
         <div class="card mb-4 box-shadow">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">BSST</h4>
+            <h4 class="my-0 font-weight-normal">SUBS</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title">$<span id="bsstPrice"></span></h1>
+            <h1 class="card-title">$<span id="subsPrice"></span></h1>
             <h6><b>BrightID Sponsorship Subscription Token</b></h6>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Supply Limit: 100000</li>
-              <li>Total Supply: <span id="bsstSupply"></span></li>
-              <li>Balance: <span id="bsstBalance"></span></li>
+              <li>Total Supply: <span id="subsSupply"></span></li>
+              <li>Balance: <span id="subsBalance"></span></li>
             </ul>
-            <button type="button" onclick="bsstPurchaseForm()" class="btn btn-lg btn-block btn-info">Purchase</button>
+            <button type="button" onclick="subsPurchaseForm()" class="btn btn-lg btn-block btn-info">Purchase</button>
             <button type="button" onclick="claim()" class="btn btn-lg btn-block btn-info">Claim</button>
           </div>
         </div>
@@ -91,38 +91,38 @@
       </footer>
     </div>
 
-  <!-- The BST Purchase Modal -->
-  <div class="modal animated fadeIn" id="bstModal">
+  <!-- The SP Purchase Modal -->
+  <div class="modal animated fadeIn" id="spModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title m-title">Purchase BST</h4>
+          <h4 class="modal-title m-title">Purchase SP</h4>
           <button type="button" class="close" data-dismiss="modal" onclick="init()">
             &times;
           </button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <div class="col col-12 bst-input">
+          <div class="col col-12 sp-input">
             <form>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text modal-input-txt">BST</span>
+                  <span class="input-group-text modal-input-txt">SP</span>
                 </div>
-                <input type="number" min="0" id="bst" class="form-control" onkeydown="checkBstState()"
+                <input type="number" min="0" id="sp" class="form-control" onkeydown="checkSpState()"
                   placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bstDai" class="form-control" placeholder=0 readonly/>
+                <input type="text" id="spDai" class="form-control" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
-                <span id="bstMsg"></span>
+                <span id="spMsg"></span>
               </div>
-              <button id="bstBuyBtn" type="button" onclick="purchaseBst()"
+              <button id="spBuyBtn" type="button" onclick="purchaseSp()"
                 class="btn btn-info col col-12">
                 Purchase
               </button>
@@ -134,7 +134,7 @@
               </div>
             </form>
           </div>
-          <div class="col col-12 row justify-content-center bst-step animated fadeIn">
+          <div class="col col-12 row justify-content-center sp-step animated fadeIn">
             <div class="col col-12 row justify-content-center step-box step-box-1">
               <div class="col col-1">
                 <img src="assets/img/metamask.png" height="30" />
@@ -208,37 +208,37 @@
     </div>
   </div>
 
-  <!-- The BSST Purchase Modal -->
-  <div class="modal animated fadeIn" id="bsstModal">
+  <!-- The SUBS Purchase Modal -->
+  <div class="modal animated fadeIn" id="subsModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title m-title">Purchase BSST</h4>
+          <h4 class="modal-title m-title">Purchase SUBS</h4>
           <button type="button" class="close" data-dismiss="modal" onclick="init()">
             &times;
           </button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <div class="col col-12 bsst-input">
+          <div class="col col-12 subs-input">
             <form>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text modal-input-txt">BSST</span>
+                  <span class="input-group-text modal-input-txt">SUBS</span>
                 </div>
-                <input type="number" min="0" id="bsst" class="form-control" onkeydown="checkBsstState()" placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+                <input type="number" min="0" id="subs" class="form-control" onkeydown="checkSubsState()" placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text modal-input-txt">DAI</span>
                 </div>
-                <input type="text" id="bsstDai" class="form-control" placeholder=0 readonly/>
+                <input type="text" id="subsDai" class="form-control" placeholder=0 readonly/>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
-                <span id="bsstMsg"></span>
+                <span id="subsMsg"></span>
               </div>
-              <button id="bsstBuyBtn" type="button" onclick="purchaseBsst()" class="btn btn-info col col-12">
+              <button id="subsBuyBtn" type="button" onclick="purchaseSubs()" class="btn btn-info col col-12">
                 Purchase
               </button>
               <br />
@@ -249,7 +249,7 @@
               </div>
             </form>
           </div>
-          <div class="col col-12 row justify-content-center bsst-step animated fadeIn">
+          <div class="col col-12 row justify-content-center subs-step animated fadeIn">
             <div class="col col-12 row justify-content-center step-box step-box-1">
               <div class="col col-1">
                 <img src="assets/img/metamask.png" height="30" />
@@ -376,26 +376,26 @@
     </div>
   </div>
 
-  <!-- The BST Assign Modal -->
-  <div class="modal animated fadeIn" id="bstAssignModal">
+  <!-- The SP Assign Modal -->
+  <div class="modal animated fadeIn" id="spAssignModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title m-title">Assign BST</h4>
+          <h4 class="modal-title m-title">Assign SP</h4>
           <button type="button" class="close" data-dismiss="modal" onclick="init()">
             &times;
           </button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <div class="col col-12 bst-assign-input">
+          <div class="col col-12 sp-assign-input">
             <form>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text modal-input-txt">BST</span>
+                  <span class="input-group-text modal-input-txt">SP</span>
                 </div>
-                <input type="number" min="0" id="bstAssign" class="form-control" onkeydown="checkUnassigned()"
+                <input type="number" min="0" id="spAssign" class="form-control" onkeydown="checkUnassigned()"
                   placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
               </div>
               <div class="input-group mb-3">
@@ -408,13 +408,13 @@
                 </div>
               </div>
               <div class="col col-12" style="margin-bottom: 4%;">
-                <span id="bstContextMsg"></span>
+                <span id="spContextMsg"></span>
                   </br>
                 <span id="totalAssigned"></span>
                   </br>
                 <span id="youAssigned"></span>
               </div>
-              <button id="assignBtn" type="button" onclick="assignBst()" class="btn btn-info col col-12"> Assign </button>
+              <button id="assignBtn" type="button" onclick="assignSp()" class="btn btn-info col col-12"> Assign </button>
               <br />
               <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
                 <p id="proccess"></p>
@@ -424,7 +424,7 @@
             </form>
           </div>
         </div>
-        <div class="col col-12 row justify-content-center bst-assign-step animated fadeIn">
+        <div class="col col-12 row justify-content-center sp-assign-step animated fadeIn">
           <div class="col col-12 row justify-content-center step-box step-box-3">
             <div class="col col-1">
               <img src="assets/img/metamask.png" height="30" />
@@ -473,8 +473,8 @@
     <script src="assets/js/config.js"></script>
     <script src="assets/js/init.js"></script>
     <script src="assets/js/utils.js"></script>
-    <script src="assets/js/bst.js"></script>
-    <script src="assets/js/bsst.js"></script>
+    <script src="assets/js/sp.js"></script>
+    <script src="assets/js/subs.js"></script>
     <script src="assets/js/claim.js"></script>
     <script src="assets/js/assign.js"></script>
 

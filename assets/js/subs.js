@@ -1,27 +1,27 @@
-function bsstInit() {
-  $("#bsstMsg").html("Waiting for input");
-  $("#bsstMsg").css("color", "white");
-  $(".bsst-step").hide();
-  $(".bsst-input").show();
-  $("#bsstModal").modal({
+function subsInit() {
+  $("#subsMsg").html("Waiting for input");
+  $("#subsMsg").css("color", "white");
+  $(".subs-step").hide();
+  $(".subs-input").show();
+  $("#subsModal").modal({
     backdrop: "static",
     keyboard: false
   });
   clearInputs();
-  $("#bsstBuyBtn").prop("disabled", false);
+  $("#subsBuyBtn").prop("disabled", false);
   $(".confirm-icon").hide();
   $(".loading-icon").hide();
   $(".loader").hide();
 };
 
-function bsstPurchaseForm() {
+function subsPurchaseForm() {
   enoughFund = false;
   checkMetaMask();
-  bsstInit();
+  subsInit();
 }
 
-function purchaseBsst() {
-  val = $("#bsst").val();
+function purchaseSubs() {
+  val = $("#subs").val();
   if (val < 1 ) {
     Swal.fire({
       type: "error",
@@ -40,11 +40,11 @@ function purchaseBsst() {
     });
     return;
   }
-  $(".bsst-input").hide();
-  $(".bsst-step").show();
+  $(".subs-input").hide();
+  $(".subs-step").show();
   changeActiveStep(1);
-  let dai = parseFloat($("#bsstDai").val()) * 10 ** 18;
-  ptContract.approve.sendTransaction(addresses.bsst_minter, dai, function (error, result) {
+  let dai = parseFloat($("#subsDai").val()) * 10 ** 18;
+  ptContract.approve.sendTransaction(addresses.subs_minter, dai, function (error, result) {
     if (error) {
       console.log(error);
       Swal.fire({
@@ -55,13 +55,13 @@ function purchaseBsst() {
       });
       return;
     }
-    checkApproveResult(result, buyBsstConfrim);
+    checkApproveResult(result, buySubsConfrim);
   });
-  $("#bsstBuyBtn").prop("disabled", true);
+  $("#subsBuyBtn").prop("disabled", true);
 }
 
-function buyBsstConfrim() {
-  bsstMinterContract.purchase.sendTransaction(function(error, result) {
+function buySubsConfrim() {
+  subsMinterContract.purchase.sendTransaction(function(error, result) {
     if (error) {
       console.log(error);
       return;
@@ -71,31 +71,31 @@ function buyBsstConfrim() {
 }
 
 
-function checkBsstState() {
+function checkSubsState() {
   ptContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
-    updateBsstState(result.c[0] / 10000);
+    updateSubsState(result.c[0] / 10000);
   });
 }
 
-function updateBsstState(ptBalance) {
-  let amount = $("#bsst").val();
+function updateSubsState(ptBalance) {
+  let amount = $("#subs").val();
   if (!amount || parseFloat(amount) <= 0) {
-    $("#bsstMsg").css("color", "white");
-    $("#bsstDai").val("");
+    $("#subsMsg").css("color", "white");
+    $("#subsDai").val("");
     return;
   }
-  let ptAmount = amount * bsstPrice;
-  $("#bsstDai").val(ptAmount);
+  let ptAmount = amount * subsPrice;
+  $("#subsDai").val(ptAmount);
   if (ptBalance < ptAmount) {
-    $("#bsstMsg").css("color", "red");
-    $("#bsstMsg").html("INSUFFICIENT DAI BALANCE");
+    $("#subsMsg").css("color", "red");
+    $("#subsMsg").html("INSUFFICIENT DAI BALANCE");
     enoughFund = false;
   } else {
-    $("#bsstMsg").css("color", "green");
-    $("#bsstMsg").html("ENOUGH DAI BALANCE");
+    $("#subsMsg").css("color", "green");
+    $("#subsMsg").html("ENOUGH DAI BALANCE");
     enoughFund = true;
   }
 }

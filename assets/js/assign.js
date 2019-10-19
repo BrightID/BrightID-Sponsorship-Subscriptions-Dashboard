@@ -1,13 +1,13 @@
 function assignInit() {
-  $("#bstContextMsg").html("Waiting for input");
-  $("#bstContextMsg").css("color", "white");
+  $("#spContextMsg").html("Waiting for input");
+  $("#spContextMsg").css("color", "white");
 
   $("#totalAssigned").html("");
   $("#youAssigned").html("");
 
-  $(".bst-assign-step").hide();
-  $(".bst-assign-input").show();
-  $("#bstAssignModal").modal({
+  $(".sp-assign-step").hide();
+  $(".sp-assign-input").show();
+  $("#spAssignModal").modal({
     backdrop: "static",
     keyboard: false
   });
@@ -18,13 +18,13 @@ function assignInit() {
   $(".loader").hide();
 };
 
-function assignBstForm() {
+function assignSpForm() {
   checkMetaMask();
   assignInit();
 }
 
-function assignBst() {
-  let amount = $("#bstAssign").val();
+function assignSp() {
+  let amount = $("#spAssign").val();
   let context = $("#context").val();
   if (amount < 1 ) {
     Swal.fire({
@@ -44,10 +44,10 @@ function assignBst() {
     });
     return;
   }
-  $(".bst-assign-input").hide();
-  $(".bst-assign-step").show();
+  $(".sp-assign-input").hide();
+  $(".sp-assign-step").show();
   changeActiveStep(3);
-  bstContract.assignContext.sendTransaction(context, amount, function (error, result) {
+  spContract.assignContext.sendTransaction(context, amount, function (error, result) {
     if (error) {
       console.log(error);
       return;
@@ -57,7 +57,7 @@ function assignBst() {
 }
 
 function checkUnassigned() {
-  bstContract.unassignedBalance(web3.eth.defaultAccount, function (error, result) {
+  spContract.unassignedBalance(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
@@ -65,19 +65,19 @@ function checkUnassigned() {
   });
 }
 
-function updateUnassignedState(bstBalance) {
-  amount = $("#bstAssign").val();
+function updateUnassignedState(spBalance) {
+  amount = $("#spAssign").val();
   if (!amount || parseFloat(amount) <= 0) {
-    $("#bstContextMsg").css("color", "white");
-    $("#bstAssign").val("");
+    $("#spContextMsg").css("color", "white");
+    $("#spAssign").val("");
     return;
   }
-  if (bstBalance < amount) {
-    $("#bstContextMsg").css("color", "red");
-    $("#bstContextMsg").html("INSUFFICIENT UNASSIGNED BST");
+  if (spBalance < amount) {
+    $("#spContextMsg").css("color", "red");
+    $("#spContextMsg").html("INSUFFICIENT UNASSIGNED SP");
   } else {
-    $("#bstContextMsg").css("color", "green");
-    $("#bstContextMsg").html("ENOUGH UNASSIGNED BST");
+    $("#spContextMsg").css("color", "green");
+    $("#spContextMsg").html("ENOUGH UNASSIGNED SP");
   }
 }
 
@@ -92,19 +92,19 @@ function contextBalance() {
     });
     return;
   }
-  bstContract.totalContextBalance(context, function (error, result) {
+  spContract.totalContextBalance(context, function (error, result) {
     if (error) {
       console.log(error);
       return;
     }
-    $("#totalAssigned").html('Total Assigned: '+parseInt(result.c[0])+' BST');
+    $("#totalAssigned").html('Total Assigned: '+parseInt(result.c[0])+' SP');
   });
-  bstContract.contextBalance(web3.eth.defaultAccount, context, function (error, result) {
+  spContract.contextBalance(web3.eth.defaultAccount, context, function (error, result) {
     if (error) {
       console.log(error);
       return;
     }
-    $("#youAssigned").html('You Assigned: '+parseInt(result.c[0])+' BST');
+    $("#youAssigned").html('You Assigned: '+parseInt(result.c[0])+' SP');
   });
 
 }

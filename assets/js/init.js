@@ -1,5 +1,5 @@
-var bstMinterContract = bsstMinterContract = bstContract = bsstContract = ptContract = null;
-var bstPrice, bsstPrice;
+var spMinterContract = subsMinterContract = spContract = subsContract = ptContract = null;
+var spPrice, subsPrice;
 var enoughFund = false;
 ethereum.autoRefreshOnNetworkChange = false;
 
@@ -77,85 +77,85 @@ function init() {
   var pt_contract = web3.eth.contract(abies.pt);
   ptContract = pt_contract.at(addresses.pt);
 
-  var bst_contract = web3.eth.contract(abies.bst);
-  bstContract = bst_contract.at(addresses.bst);
+  var sp_contract = web3.eth.contract(abies.sp);
+  spContract = sp_contract.at(addresses.sp);
 
-  var bsst_contract = web3.eth.contract(abies.bsst);
-  bsstContract = bsst_contract.at(addresses.bsst);
+  var subs_contract = web3.eth.contract(abies.subs);
+  subsContract = subs_contract.at(addresses.subs);
 
-  var bst_minter_contract = web3.eth.contract(abies.bst_minter);
-  bstMinterContract = bst_minter_contract.at(addresses.bst_minter);
+  var sp_minter_contract = web3.eth.contract(abies.sp_minter);
+  spMinterContract = sp_minter_contract.at(addresses.sp_minter);
 
-  var bsst_minter_contract = web3.eth.contract(abies.bsst_minter);
-  bsstMinterContract = bsst_minter_contract.at(addresses.bsst_minter);
+  var subs_minter_contract = web3.eth.contract(abies.subs_minter);
+  subsMinterContract = subs_minter_contract.at(addresses.subs_minter);
 
   // var InfuraWeb3 = new Web3(new Web3.providers.HttpProvider(rpcUrl));
 
-  // var bst_minter_contract = InfuraWeb3.eth.contract(abies.bst_minter);
-  // bstMinterContract = bst_minter_contract.at(addresses.bst_minter);
+  // var sp_minter_contract = InfuraWeb3.eth.contract(abies.sp_minter);
+  // spMinterContract = sp_minter_contract.at(addresses.sp_minter);
 
-  // var bsst_minter_contract = InfuraWeb3.eth.contract(abies.bsst_minter);
-  // bsstMinterContract = bsst_minter_contract.at(addresses.bsst_minter);
+  // var subs_minter_contract = InfuraWeb3.eth.contract(abies.subs_minter);
+  // subsMinterContract = subs_minter_contract.at(addresses.subs_minter);
 
-  // var bst_contract = InfuraWeb3.eth.contract(abies.bst);
-  // bstContract = bst_contract.at(addresses.bst);
+  // var sp_contract = InfuraWeb3.eth.contract(abies.sp);
+  // spContract = sp_contract.at(addresses.sp);
 
-  // var bsst_contract = InfuraWeb3.eth.contract(abies.bsst);
-  // bsstContract = bsst_contract.at(addresses.bsst);
+  // var subs_contract = InfuraWeb3.eth.contract(abies.subs);
+  // subsContract = subs_contract.at(addresses.subs);
 
   // var pt_contract = InfuraWeb3.eth.contract(abies.pt);
   // ptContract = pt_contract.at(addresses.pt);
 
 
-  bstMinterContract.price(function (error, result) {
+  spMinterContract.price(function (error, result) {
     if (error) {
       return;
     }
-    bstPrice = parseInt(result.c[0] / 10000);
-    $("#bstPrice").html(bstPrice);
+    spPrice = parseInt(result.c[0] / 10000);
+    $("#spPrice").html(spPrice);
   });
 
-  bstContract.totalSupply(function (error, result) {
+  spContract.totalSupply(function (error, result) {
     if (error) {
       return;
     }
-    $("#bstSupply").html(parseInt(result.c[0]));
+    $("#spSupply").html(parseInt(result.c[0]));
   });
 
-  bsstMinterContract.price(function (error, result) {
+  subsMinterContract.price(function (error, result) {
     if (error) {
       return;
     }
-    bsstPrice = parseInt(result.c[0] / 10000);
-    $("#bsstPrice").html(bsstPrice);
+    subsPrice = parseInt(result.c[0] / 10000);
+    $("#subsPrice").html(subsPrice);
   });
 
-  bsstContract.totalSupply(function (error, result) {
+  subsContract.totalSupply(function (error, result) {
     if (error) {
       return;
     }
-    $("#bsstSupply").html(parseInt(result.c[0]));
+    $("#subsSupply").html(parseInt(result.c[0]));
   });
 
-  bstContract.unassignedBalance(web3.eth.defaultAccount, function (error, result) {
+  spContract.unassignedBalance(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
-    $("#bstUnassignedBalance").html(parseInt(result.c[0]));
+    $("#spUnassignedBalance").html(parseInt(result.c[0]));
   });
 
-  bsstContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
-    $("#bsstBalance").html(parseInt(result.c[0]));
+    $("#subsBalance").html(parseInt(result.c[0]));
   });
 
-  bstContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  spContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
-    $("#bstBalance").html(parseInt(result.c[0]));
+    $("#spBalance").html(parseInt(result.c[0]));
   });
 
 }

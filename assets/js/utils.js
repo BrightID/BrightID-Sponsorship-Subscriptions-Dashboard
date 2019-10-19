@@ -30,11 +30,11 @@ function checkMetaMask() {
 }
 
 function clearInputs() {
-  $("#bst").val("");
-  $("#bstDai").val("");
-  $("#bsst").val("");
-  $("#bsstDai").val("");
-  $("#bstAssign").val("");
+  $("#sp").val("");
+  $("#spDai").val("");
+  $("#subs").val("");
+  $("#subsDai").val("");
+  $("#spAssign").val("");
   $("#context").val("");
 }
 
