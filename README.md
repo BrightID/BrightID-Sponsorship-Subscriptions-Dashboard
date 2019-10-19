@@ -1,1 +1,1 @@
-# BrightID-BST-Dashboard
+# BrightID-Sponsorship-Subscriptions-Dashboard
