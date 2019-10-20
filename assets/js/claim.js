@@ -13,7 +13,7 @@ function claim() {
   claimInit()
   $(".claim-step").show();
   changeActiveStep(3);
-  spMinterContract.claim.sendTransaction(function (error, result) {
+  subsMinterContract.claim.sendTransaction(function (error, result) {
     if (error) {
       console.log(error);
       return;
