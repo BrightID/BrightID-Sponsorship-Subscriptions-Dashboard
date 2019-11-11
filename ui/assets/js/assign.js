@@ -74,10 +74,10 @@ function updateBalanceState(spBalance) {
   }
   if (spBalance < amount) {
     $("#spContextMsg").css("color", "red");
-    $("#spContextMsg").html("INSUFFICIENT UNASSIGNED SP");
+    $("#spContextMsg").html("Insufficient Sp");
   } else {
     $("#spContextMsg").css("color", "green");
-    $("#spContextMsg").html("ENOUGH UNASSIGNED SP");
+    $("#spContextMsg").html("Sufficient Sp");
   }
 }
 
