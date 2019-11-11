@@ -77,5 +77,17 @@ def submit_purchase():
     return json.dumps({'status': True})
 
 
+@app.route('/get-purchases')
+def get_purchases():
+    purchases = []
+    cursor = g.db.purchases.find({})
+    for purchase in cursor:
+        del purchase['_id']
+        purchase['timestamp'] = time.strftime(
+            "%Y-%m-%d %H:%M:%S", time.localtime(int(purchase['timestamp'])))
+        purchases.append(purchase)
+    return json.dumps({'purchases': purchases, 'status': True})
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5008, threaded=True)
