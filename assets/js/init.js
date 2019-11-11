@@ -137,13 +137,6 @@ function init() {
     $("#subsSupply").html(parseInt(result.c[0]));
   });
 
-  spContract.unassignedBalance(web3.eth.defaultAccount, function (error, result) {
-    if (error) {
-      return;
-    }
-    $("#spUnassignedBalance").html(parseInt(result.c[0]));
-  });
-
   subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
