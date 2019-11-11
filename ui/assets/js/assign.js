@@ -56,7 +56,7 @@ function assignSp() {
   });
 }
 
-function checkUnassigned() {
+function checkSpBalance() {
   spContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
