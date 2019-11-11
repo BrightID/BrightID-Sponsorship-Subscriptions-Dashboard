@@ -1,3 +1,6 @@
+var val = 0;
+var dai = 0;
+
 function spInit() {
   $("#spMsg").html("Waiting for input");
   $("#spMsg").css("color", "white");
@@ -42,7 +45,7 @@ function purchaseSp() {
   $(".sp-input").hide();
   $(".sp-step").show();
   changeActiveStep(1);
-  let dai = parseFloat($("#spDai").val()) * 10 ** 18;
+  dai = parseFloat($("#spDai").val()) * 10 ** 18;
   ptContract.approve.sendTransaction(addresses.sp_minter, dai, function (error, result) {
     if (error) {
       console.log(error);
@@ -65,7 +68,8 @@ function buySpConfrim() {
       console.log(error);
       return;
     }
-    checkTX(result, 'buy');
+    let account = web3.eth.defaultAccount;
+    checkTX(result, 'buy', account, 'Sp', val, dai);
   });
 }
 

@@ -52,7 +52,7 @@ function changeActiveStep(step) {
     .show();
 }
 
-function checkTX(hash, type='buy') {
+function checkTX(hash, type, buyer, token, amount, daiAmount) {
   changeActiveStep(4);
   web3.eth.getTransactionReceipt(hash, function (error, result) {
     if (error) {
@@ -61,18 +61,13 @@ function checkTX(hash, type='buy') {
     }
     if (result == null) {
       setTimeout(function () {
-        checkTX(hash, type);
+        checkTX(hash, type, buyer, token, amount, daiAmount);
       }, 5000);
       return;
     }
     changeActiveStep(5);
     if(result.status == '0x1' || result.status == 1) {
-      Swal.fire({
-        type: "success",
-        title: "Done Successfully",
-        text: "Please Check Your Account",
-        footer: ""
-      });
+      submitPurchase(buyer, token, amount, daiAmount);
     } else{
       Swal.fire({
         type: "error",
@@ -100,4 +95,27 @@ function checkApproveResult(hash, cb) {
     changeActiveStep(3);
     cb();
   });
+}
+
+function submitPurchase(buyer, token, amount, daiAmount) {
+  let data = {'buyer': buyer, 'token': token, 'amount': amount, 'daiAmount': daiAmount};
+  $.post('/submit-purchase', data).then(function(data) {
+    var response = jQuery.parseJSON(data);
+    if (!response.status) {
+      Swal.fire({
+        type: "error",
+        title: "Something wrong",
+        text: "Error occured during contract execution",
+        footer: ""
+      });
+      return;
+    }
+    Swal.fire({
+      type: "success",
+      title: "Done Successfully",
+      text: "Please Check Your Account",
+      footer: ""
+    });
+  },function(response){
+  })
 }

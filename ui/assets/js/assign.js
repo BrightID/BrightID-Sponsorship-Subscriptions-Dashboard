@@ -57,15 +57,15 @@ function assignSp() {
 }
 
 function checkUnassigned() {
-  spContract.unassignedBalance(web3.eth.defaultAccount, function (error, result) {
+  spContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
-    updateUnassignedState(result.c[0]);
+    updateBalanceState(result.c[0]);
   });
 }
 
-function updateUnassignedState(spBalance) {
+function updateBalanceState(spBalance) {
   amount = $("#spAssign").val();
   if (!amount || parseFloat(amount) <= 0) {
     $("#spContextMsg").css("color", "white");
