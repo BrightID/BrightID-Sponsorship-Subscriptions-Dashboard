@@ -3,6 +3,7 @@
 from flask import Flask, redirect, request, g
 from io import BytesIO as IO
 import pymongo
+import requests
 import time
 import gzip
 import json
@@ -72,18 +73,40 @@ def index():
 def submit_purchase():
     data = request.form.to_dict()
     data['ip'] = request.remote_addr
+    data['location'] = get_ip_location(request.remote_addr)
     data['timestamp'] = time.time()
     g.db.purchases.insert_one(data)
     return json.dumps({'status': True})
 
 
-@app.route('/get-purchases')
-def get_purchases():
+def get_ip_location(ip):
+    location = None
+    url = "https://freegeoip.app/json/"
+    headers = {
+        'accept': "application/json",
+        'content-type': "application/json"
+    }
+    while not location:
+        response = requests.request("GET", url, headers=headers)
+        location = json.loads(response.text)
+    return location
+
+
+@app.route('/report')
+def report():
+    return redirect('/pages/report.html')
+
+
+@app.route('/purchases-report', methods=['POST'])
+def purchases_report():
     purchases = []
     cursor = g.db.purchases.find({})
     for purchase in cursor:
         del purchase['_id']
-        purchase['timestamp'] = time.strftime(
+        purchase['country'] = purchase['location']['country_name']
+        del purchase['location']
+        purchase['daiAmount'] = int(int(purchase['daiAmount']) / 10**18)
+        purchase['time'] = time.strftime(
             "%Y-%m-%d %H:%M:%S", time.localtime(int(purchase['timestamp'])))
         purchases.append(purchase)
     return json.dumps({'purchases': purchases, 'status': True})
