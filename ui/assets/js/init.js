@@ -17,14 +17,6 @@ ethereum.on("accountsChanged", function(){
 	return;
 })
 
-$("#jsRotating").Morphext({
-    animation: "fadeInLeftBig",
-    separator: ",",
-    speed: 10000,
-    complete: function () {
-    }
-});
-
 function init() {
   var web3 = window.web3;
   if (typeof web3 === "undefined") {
