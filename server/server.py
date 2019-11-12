@@ -81,7 +81,7 @@ def submit_purchase():
 
 def get_ip_location(ip):
     location = None
-    url = "https://freegeoip.app/json/"
+    url = "https://freegeoip.app/json/{0}".format(ip)
     headers = {
         'accept': "application/json",
         'content-type': "application/json"
