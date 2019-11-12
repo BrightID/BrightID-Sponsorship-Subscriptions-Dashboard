@@ -1,3 +1,6 @@
+var val = 0;
+var dai = 0;
+
 function subsInit() {
   $("#subsMsg").html("Waiting for input");
   $("#subsMsg").css("color", "white");
@@ -43,7 +46,7 @@ function purchaseSubs() {
   $(".subs-input").hide();
   $(".subs-step").show();
   changeActiveStep(1);
-  let dai = parseFloat($("#subsDai").val()) * 10 ** 18;
+  dai = parseFloat($("#subsDai").val()) * 10 ** 18;
   ptContract.approve.sendTransaction(addresses.subs_minter, dai, function (error, result) {
     if (error) {
       console.log(error);
@@ -66,7 +69,8 @@ function buySubsConfrim() {
       console.log(error);
       return;
     }
-    checkTX(result, 'buy');
+    let account = web3.eth.defaultAccount;
+    checkTX(result, 'buy', account, 'Subs', val, dai);
   });
 }
 
