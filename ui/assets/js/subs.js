@@ -1,5 +1,6 @@
 var val = 0;
 var dai = 0;
+var business = true;
 
 function subsInit() {
   $("#subsMsg").html("Waiting for input");
@@ -25,6 +26,7 @@ function subsPurchaseForm() {
 
 function purchaseSubs() {
   val = $("#subs").val();
+  business = $("#subsCheckbox").prop('checked');
   if (val < 1 ) {
     Swal.fire({
       type: "error",
@@ -70,7 +72,7 @@ function buySubsConfrim() {
       return;
     }
     let account = web3.eth.defaultAccount;
-    checkTX(result, 'buy', account, 'Subs', val, dai);
+    checkTX(result, 'buy', account, 'Subs', val, dai, business);
   });
 }
 
