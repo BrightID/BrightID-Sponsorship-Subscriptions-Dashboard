@@ -1,5 +1,6 @@
 var val = 0;
 var dai = 0;
+var business = true;
 
 function spInit() {
   $("#spMsg").html("Waiting for input");
@@ -24,6 +25,7 @@ function spPurchaseForm() {
 
 function purchaseSp() {
   val = $("#sp").val();
+  business = $("#spCheckbox").prop('checked');
   if (val < 1 ) {
     Swal.fire({
       type: "error",
@@ -69,7 +71,7 @@ function buySpConfrim() {
       return;
     }
     let account = web3.eth.defaultAccount;
-    checkTX(result, 'buy', account, 'Sp', val, dai);
+    checkTX(result, 'buy', account, 'Sp', val, dai, business);
   });
 }
 

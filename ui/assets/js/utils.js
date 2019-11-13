@@ -52,7 +52,7 @@ function changeActiveStep(step) {
     .show();
 }
 
-function checkTX(hash, type, buyer, token, amount, daiAmount) {
+function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
   changeActiveStep(4);
   web3.eth.getTransactionReceipt(hash, function (error, result) {
     if (error) {
@@ -61,13 +61,13 @@ function checkTX(hash, type, buyer, token, amount, daiAmount) {
     }
     if (result == null) {
       setTimeout(function () {
-        checkTX(hash, type, buyer, token, amount, daiAmount);
+        checkTX(hash, type, buyer, token, amount, daiAmount, business);
       }, 5000);
       return;
     }
     changeActiveStep(5);
     if(result.status == '0x1' || result.status == 1) {
-      submitPurchase(buyer, token, amount, daiAmount);
+      submitPurchase(buyer, token, amount, daiAmount, business);
     } else{
       Swal.fire({
         type: "error",
@@ -97,8 +97,8 @@ function checkApproveResult(hash, cb) {
   });
 }
 
-function submitPurchase(buyer, token, amount, daiAmount) {
-  let data = {'buyer': buyer, 'token': token, 'amount': amount, 'daiAmount': daiAmount};
+function submitPurchase(buyer, token, amount, daiAmount, business) {
+  let data = {'buyer': buyer, 'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business};
   $.post('/submit-purchase', data).then(function(data) {
     var response = jQuery.parseJSON(data);
     if (!response.status) {
