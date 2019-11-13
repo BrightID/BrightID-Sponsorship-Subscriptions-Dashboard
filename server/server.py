@@ -104,6 +104,7 @@ def purchases_report():
     for purchase in cursor:
         del purchase['_id']
         purchase['country'] = purchase['location']['country_name']
+        purchase['state'] = purchase['location']['region_name']
         del purchase['location']
         purchase['daiAmount'] = int(int(purchase['daiAmount']) / 10**18)
         purchase['time'] = time.strftime(

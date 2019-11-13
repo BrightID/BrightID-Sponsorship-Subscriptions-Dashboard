@@ -22,6 +22,8 @@ function init() {
             { "data": "buyer" },
             { "data": "ip" },
             { "data": "country" },
+            { "data": "state" },
+            { "data": "business" },
             { "data": "token" },
             { "data": "amount" },
             { "data": "daiAmount" },
