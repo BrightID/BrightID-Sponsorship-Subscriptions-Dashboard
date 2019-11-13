@@ -51,7 +51,7 @@
               <li>Balance: <span id="subsBalance"></span></li>
             </ul>
             <button type="button" onclick="subsPurchaseForm()" class="btn btn-lg btn-block btn-info">Purchase</button>
-            <button type="button" onclick="claim()" class="btn btn-lg btn-block btn-info">Claim</button>
+            <button type="button" onclick="claimForm()" class="btn btn-lg btn-block btn-info">Claim</button>
           </div>
         </div>
       </div>
@@ -340,6 +340,25 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
+          <div class="col col-12 claim-input">
+            <form>
+							<div class="checkbox">
+							  <label><input type="checkbox" id="claimCheckbox" value="business" checked="checked">I represent a business</label>
+							</div>
+              <div class="col col-12" style="margin-bottom: 4%;">
+                <span id="claimMsg"></span>
+              </div>
+              <button id="claimBtn" type="button" onclick="claim()" class="btn btn-info col col-12">
+                Claim
+              </button>
+              <br />
+              <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                <p id="proccess"></p>
+                <br />
+                <p id="timer"></p>
+              </div>
+            </form>
+          </div>
           <div class="col col-12 row justify-content-center claim-step animated fadeIn">
             <div class="col col-12 row justify-content-center step-box step-box-3">
               <div class="col col-1">
