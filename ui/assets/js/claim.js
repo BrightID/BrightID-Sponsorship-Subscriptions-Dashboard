@@ -1,8 +1,6 @@
-var val = 0;
-var dai = 0;
-var business = true;
-
 function claimForm() {
+	val = 0;
+	business = true;
   checkMetaMask();
   claimInit();
 }
@@ -36,6 +34,6 @@ function claim() {
     }
     business = $("#claimCheckbox").prop('checked');
     let account = web3.eth.defaultAccount;
-    checkTX(result, 'claim', account, 'Claim Sp', val, dai, business);
+    checkTX(result, 'claim', account, 'Claim Sp', val, 0, business);
   });
 }

@@ -1,7 +1,3 @@
-var val = 0;
-var dai = 0;
-var business = true;
-
 function subsInit() {
   $("#subsMsg").html("Waiting for input");
   $("#subsMsg").css("color", "white");
@@ -19,6 +15,9 @@ function subsInit() {
 };
 
 function subsPurchaseForm() {
+	val = 0;
+	dai = 0;
+	business = true;
   enoughFund = false;
   checkMetaMask();
   subsInit();

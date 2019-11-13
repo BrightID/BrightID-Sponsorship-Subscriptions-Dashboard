@@ -1,7 +1,3 @@
-var val = 0;
-var dai = 0;
-var business = true;
-
 function spInit() {
   $("#spMsg").html("Waiting for input");
   $("#spMsg").css("color", "white");
@@ -18,6 +14,9 @@ function spInit() {
 };
 
 function spPurchaseForm() {
+	val = 0;
+	dai = 0;
+	business = true;
   enoughFund = false;
   checkMetaMask();
   spInit();

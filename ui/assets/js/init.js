@@ -1,6 +1,10 @@
 var spMinterContract = subsMinterContract = spContract = subsContract = ptContract = null;
 var spPrice, subsPrice;
 var enoughFund = false;
+var val = 0;
+var dai = 0;
+var business = true;
+
 ethereum.autoRefreshOnNetworkChange = false;
 
 window.onload = function() {
