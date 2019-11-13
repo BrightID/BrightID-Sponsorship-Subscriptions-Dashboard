@@ -65,16 +65,17 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
       }, 5000);
       return;
     }
-    changeActiveStep(5);
     if(result.status == '0x1' || result.status == 1) {
       submitPurchase(buyer, token, amount, daiAmount, business);
     } else{
+  		changeActiveStep(5);
       Swal.fire({
         type: "error",
         title: "Something wrong",
         text: "Error occured during contract execution",
         footer: ""
       });
+
     }
   });
 }
@@ -101,6 +102,7 @@ function submitPurchase(buyer, token, amount, daiAmount, business) {
   let data = {'buyer': buyer, 'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business};
   $.post('/submit-purchase', data).then(function(data) {
     var response = jQuery.parseJSON(data);
+    changeActiveStep(5);
     if (!response.status) {
       Swal.fire({
         type: "error",
