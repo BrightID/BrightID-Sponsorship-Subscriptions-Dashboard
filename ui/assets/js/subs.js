@@ -15,9 +15,9 @@ function subsInit() {
 };
 
 function subsPurchaseForm() {
-	val = 0;
-	dai = 0;
-	business = true;
+  val = 0;
+  dai = 0;
+  business = true;
   enoughFund = false;
   checkMetaMask();
   subsInit();
