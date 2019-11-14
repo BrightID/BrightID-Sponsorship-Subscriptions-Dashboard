@@ -64,6 +64,16 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
       return;
     }
     if(result.status == '0x1' || result.status == 1) {
+      if (type == 'assignContext') {
+        changeActiveStep(5);
+        Swal.fire({
+          type: "success",
+          title: "Done Successfully",
+          text: "Please Check Your Account",
+          footer: ""
+        });
+        return;
+      }
       submitPurchase(buyer, token, amount, daiAmount, business);
     } else{
   		changeActiveStep(5);
@@ -87,7 +97,7 @@ function checkApproveResult(hash, cb) {
     }
     if (result == null) {
       setTimeout(function () {
-        checkApproveResult(hash, cb);
+      checkApproveResult(hash, cb);
       }, 5000);
       return;
     }
