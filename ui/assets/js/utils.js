@@ -1,5 +1,3 @@
-var enoughFund = false;
-
 function checkMetaMask() {
   if (typeof web3 === "undefined") {
     Swal.fire({
