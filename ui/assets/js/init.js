@@ -111,11 +111,11 @@ function init() {
     $("#spPrice").html(spPrice);
   });
 
-  spContract.totalSupply(function (error, result) {
+  spContract.totalSold(function (error, result) {
     if (error) {
       return;
     }
-    $("#spSupply").html(parseInt(result.c[0]));
+    $("#spTotalSold").html(parseInt(result.c[0]));
   });
 
   subsMinterContract.price(function (error, result) {
@@ -126,11 +126,11 @@ function init() {
     $("#subsPrice").html(subsPrice);
   });
 
-  subsContract.totalSupply(function (error, result) {
+  subsContract.totalSold(function (error, result) {
     if (error) {
       return;
     }
-    $("#subsSupply").html(parseInt(result.c[0]));
+    $("#subsTotalSold").html(parseInt(result.c[0]));
   });
 
   subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
