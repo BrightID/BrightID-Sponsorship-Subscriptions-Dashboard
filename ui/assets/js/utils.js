@@ -34,6 +34,7 @@ function clearInputs() {
   $("#subsDai").val("");
   $("#spAssign").val("");
   $("#context").val("");
+  $("#subsActivate").val("");
 }
 
 function changeActiveStep(step) {
@@ -64,7 +65,7 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
       return;
     }
     if(result.status == '0x1' || result.status == 1) {
-      if (type == 'assignContext') {
+      if (type == 'assignContext' || type == 'activateSubs') {
         changeActiveStep(5);
         Swal.fire({
           type: "success",

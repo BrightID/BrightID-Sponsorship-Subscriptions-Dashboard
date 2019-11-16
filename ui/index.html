@@ -31,9 +31,10 @@
             </h6>
             <ul class="list-unstyled mt-3 mb-4">
               <li>&#160;</li>
-              <li>Total Supply: <span id="spSupply"></span></li>
+              <li>Total Sold: <span id="spTotalSold"></span></li>
               <li>Balance: <span id="spBalance"></span></li>
             </ul>
+            <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info d-none">Purchase</button>
             <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info">Purchase</button>
             <button type="button" onclick="assignSpForm();" class="btn btn-lg btn-block btn-info">Assign</button>
           </div>
@@ -46,11 +47,12 @@
             <h1 class="card-title">$<span id="subsPrice"></span></h1>
             <h6><b>SUBS</b></h6>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>Supply Limit: 900000</li>
-              <li>Total Supply: <span id="subsSupply"></span></li>
+              <li>Sale Limit: 900000</li>
+              <li>Total Sold: <span id="subsTotalSold"></span></li>
               <li>Balance: <span id="subsBalance"></span></li>
             </ul>
             <button type="button" onclick="subsPurchaseForm()" class="btn btn-lg btn-block btn-info">Purchase</button>
+            <button type="button" onclick="activateForm()" class="btn btn-lg btn-block btn-info">Activate</button>
             <button type="button" onclick="claimForm()" class="btn btn-lg btn-block btn-info">Claim</button>
           </div>
         </div>
@@ -486,6 +488,80 @@
     </div>
   </div>
 
+  <!-- The Subs Activate Modal -->
+  <div class="modal animated fadeIn" id="subsActivateModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title m-title">Activate Subs</h4>
+          <button type="button" class="close" data-dismiss="modal" onclick="init()">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="col col-12 subs-activaten-input">
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text modal-input-txt">Subs</span>
+                </div>
+                <input type="number" min="0" id="subsActivate" class="form-control" onkeydown="checkSubsBalance()"
+                  placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+              </div>
+              <div class="col col-12" style="margin-bottom: 4%;">
+                <span id="subsActivateMsg"></span>
+              </div>
+              <button id="activateBtn" type="button" onclick="activate()" class="btn btn-info col col-12"> Activate </button>
+              <br />
+              <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                <p id="proccess"></p>
+                <br />
+                <p id="timer"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col col-12 row justify-content-center subs-activaten-step animated fadeIn">
+          <div class="col col-12 row justify-content-center step-box step-box-3">
+            <div class="col col-1">
+              <img src="assets/img/metamask.png" height="30" />
+            </div>
+            <div class="col col-8">
+              <p class="t-text">Waiting for MetaMask Confirmation</p>
+            </div>
+            <div class="col col-2">
+              <div class="loader">
+                <img src="assets/img/loading.gif" height="30" />
+              </div>
+              <div class="confirm-icon">
+                <img src="assets/img/confirm.png" height="30" />
+              </div>
+            </div>
+          </div>
+          <div class="sprator"></div>
+          <div class="col col-12 row justify-content-center step-box step-box-4">
+            <div class="col col-1">
+              <img src="assets/img/trx.png" height="30" />
+            </div>
+            <div class="col col-8">
+              <p class="t-text">Waiting for Transaction Confirmation</p>
+            </div>
+            <div class="col col-2">
+              <div class="loader">
+                <img src="assets/img/loading.gif" height="30" />
+              </div>
+              <div class="confirm-icon">
+                <img src="assets/img/confirm.png" height="30" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script src="assets/js/core/jquery.min.js"></script>
     <!-- <script src="assets/js/core/web3.min.js"></script> -->
     <script type="text/javascript" src="assets/js/core/jquery-migrate-1.2.1.min.js"></script>
@@ -499,6 +575,7 @@
     <script src="assets/js/subs.js"></script>
     <script src="assets/js/claim.js"></script>
     <script src="assets/js/assign.js"></script>
+    <script src="assets/js/activate.js"></script>
 
   </body>
 </html>
