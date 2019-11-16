@@ -34,7 +34,7 @@ function activate() {
   $(".subs-activate-input").hide();
   $(".subs-activate-step").show();
   changeActiveStep(3);
-  subsContract.activate.sendTransaction(context, amount, function (error, result) {
+  subsContract.activate.sendTransaction(amount, function (error, result) {
     if (error) {
       console.log(error);
       return;
