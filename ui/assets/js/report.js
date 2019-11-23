@@ -19,10 +19,9 @@ function init() {
     $('#example').DataTable( {
         "data": response.purchases,
         "columns": [
-            { "data": "buyer" },
-            { "data": "ip" },
             { "data": "country" },
             { "data": "state" },
+            { "data": "city" },
             { "data": "business" },
             { "data": "token" },
             { "data": "amount" },
