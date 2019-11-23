@@ -72,7 +72,6 @@ def index():
 @app.route('/submit-purchase', methods=['POST'])
 def submit_purchase():
     data = request.form.to_dict()
-    data['ip'] = request.remote_addr
     data['location'] = get_ip_location(request.remote_addr)
     data['timestamp'] = time.time()
     g.db.purchases.insert_one(data)
