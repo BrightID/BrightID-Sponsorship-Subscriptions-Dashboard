@@ -108,7 +108,7 @@ function checkApproveResult(hash, cb) {
 }
 
 function submitPurchase(buyer, token, amount, daiAmount, business) {
-  let data = {'buyer': buyer, 'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business};
+  let data = {'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business};
   $.post('/submit-purchase', data).then(function(data) {
     var response = jQuery.parseJSON(data);
     changeActiveStep(5);
