@@ -111,7 +111,7 @@ function init() {
     $("#spPrice").html(spPrice);
   });
 
-  spContract.totalSold(function (error, result) {
+  spMinterContract.totalSold(function (error, result) {
     if (error) {
       return;
     }
@@ -126,7 +126,7 @@ function init() {
     $("#subsPrice").html(subsPrice);
   });
 
-  subsContract.totalSold(function (error, result) {
+  subsMinterContract.totalSold(function (error, result) {
     if (error) {
       return;
     }
