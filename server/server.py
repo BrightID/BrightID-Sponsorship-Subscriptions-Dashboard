@@ -88,6 +88,7 @@ def get_ip_location(ip):
     while not location:
         response = requests.request("GET", url, headers=headers)
         location = json.loads(response.text)
+        del location['ip']
     return location
 
 
@@ -104,6 +105,7 @@ def purchases_report():
         del purchase['_id']
         purchase['country'] = purchase['location']['country_name']
         purchase['state'] = purchase['location']['region_name']
+        purchase['city'] = purchase['location']['city']
         del purchase['location']
         purchase['daiAmount'] = int(int(purchase['daiAmount']) / 10**18)
         purchase['time'] = time.strftime(
