@@ -1,3 +1,7 @@
+$('a[href$="#Modal"]').on( "click", function() {
+   $('#privacyPolicyModal').modal('show');
+});
+
 function checkMetaMask() {
   if (typeof web3 === "undefined") {
     Swal.fire({

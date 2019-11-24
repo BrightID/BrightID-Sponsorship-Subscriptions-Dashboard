@@ -1,3 +1,7 @@
+var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
+  $("#activateBtn").prop('disabled', !$activatePrivacyCheckbox.is(":checked"));
+});
+
 function activateInit() {
   $("#subsActivateMsg").html("Waiting for input");
   $("#subsActivateMsg").css("color", "white");
@@ -16,12 +20,23 @@ function activateInit() {
 };
 
 function activateForm() {
+  privacyAgreement = false;
   checkMetaMask();
   activateInit();
 }
 
 function activate() {
   let amount = $("#subsActivate").val();
+  privacyAgreement = $("#activatePrivacyCheckbox").prop('checked');
+  if ( !privacyAgreement ) {
+    Swal.fire({
+      type: "error",
+      title: "incorect value",
+      text: "Your should read and agree to the privacy policy and terms of use first",
+      footer: ""
+    });
+    return;
+  }
   if (amount < 1 ) {
     Swal.fire({
       type: "error",

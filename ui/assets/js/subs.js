@@ -1,3 +1,7 @@
+var $subsPrivacyCheckbox = $('#subsPrivacyCheckbox').change(function() {
+  $("#subsBuyBtn").prop('disabled', !$subsPrivacyCheckbox.is(":checked"));
+});
+
 function subsInit() {
   $("#subsMsg").html("Waiting for input");
   $("#subsMsg").css("color", "white");
@@ -8,7 +12,6 @@ function subsInit() {
     keyboard: false
   });
   clearInputs();
-  $("#subsBuyBtn").prop("disabled", false);
   $(".confirm-icon").hide();
   $(".loading-icon").hide();
   $(".loader").hide();
@@ -18,6 +21,7 @@ function subsPurchaseForm() {
   val = 0;
   dai = 0;
   business = true;
+  privacyAgreement = false;
   enoughFund = false;
   checkMetaMask();
   subsInit();
@@ -26,6 +30,16 @@ function subsPurchaseForm() {
 function purchaseSubs() {
   val = $("#subs").val();
   business = $("#subsCheckbox").prop('checked');
+  privacyAgreement = $("#subsPrivacyCheckbox").prop('checked');
+  if ( !privacyAgreement ) {
+    Swal.fire({
+      type: "error",
+      title: "incorect value",
+      text: "Your should read and agree to the privacy policy and terms of use first",
+      footer: ""
+    });
+    return;
+  }
   if (val < 1 ) {
     Swal.fire({
       type: "error",

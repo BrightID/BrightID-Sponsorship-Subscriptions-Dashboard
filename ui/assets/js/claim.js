@@ -1,7 +1,12 @@
+var $claimPrivacyCheckbox = $('#claimPrivacyCheckbox').change(function() {
+  $("#claimBtn").prop('disabled', !$claimPrivacyCheckbox.is(":checked"));
+});
+
 function claimForm() {
   val = 0;
   dai = 0;
   business = true;
+  privacyAgreement = false;
   checkMetaMask();
   claimInit();
 }
@@ -13,7 +18,6 @@ function claimInit() {
     backdrop: "static",
     keyboard: false
   });
-  $("#claimBtn").prop("disabled", false);
   $(".confirm-icon").hide();
   $(".loader").hide();
 };
@@ -21,6 +25,16 @@ function claimInit() {
 function claim() {
   $(".claim-input").hide();
   $(".claim-step").show();
+  privacyAgreement = $("#claimPrivacyCheckbox").prop('checked');
+  if ( !privacyAgreement ) {
+    Swal.fire({
+      type: "error",
+      title: "incorect value",
+      text: "Your should read and agree to the privacy policy and terms of use first",
+      footer: ""
+    });
+    return;
+  }
   changeActiveStep(3);
   subsContract.claimable(web3.eth.defaultAccount, function (error, result) {
     if (error) {

@@ -119,14 +119,18 @@
                 </div>
                 <input type="text" id="spDai" class="form-control" placeholder=0 readonly/>
               </div>
-							<div class="checkbox">
-							  <label><input type="checkbox" id="spCheckbox" value="business" checked="checked">I represent a business</label>
-							</div>
+								<div class="checkbox">
+								  <label><input type="checkbox" id="spCheckbox" value="business" checked="checked">I represent a business</label>
+								</div>
+								<div class="checkbox">
+								  <label><input type="checkbox" id="spPrivacyCheckbox" value="privacyAgreement">I have read and agree to the
+                    <a href="#Modal"> privacy policy </a>
+                  and terms of use</label>
+								</div>
               <div class="col col-12" style="margin-bottom: 4%;">
                 <span id="spMsg"></span>
               </div>
-              <button id="spBuyBtn" type="button" onclick="purchaseSp()"
-                class="btn btn-info col col-12">
+              <button id="spBuyBtn" type="button" onclick="purchaseSp()" class="btn btn-info col col-12" disabled>
                 Purchase
               </button>
               <br />
@@ -241,10 +245,15 @@
 							<div class="checkbox">
 							  <label><input type="checkbox" id="subsCheckbox" value="business" checked="checked">I represent a business</label>
 							</div>
+              <div class="checkbox">
+                <label><input type="checkbox" id="subsPrivacyCheckbox" value="privacyAgreement">I have read and agree to the
+                  <a href="#Modal"> privacy policy </a>
+                and terms of use</label>
+              </div>
               <div class="col col-12" style="margin-bottom: 4%;">
                 <span id="subsMsg"></span>
               </div>
-              <button id="subsBuyBtn" type="button" onclick="purchaseSubs()" class="btn btn-info col col-12">
+              <button id="subsBuyBtn" type="button" onclick="purchaseSubs()" class="btn btn-info col col-12" disabled>
                 Purchase
               </button>
               <br />
@@ -347,10 +356,15 @@
 							<div class="checkbox">
 							  <label><input type="checkbox" id="claimCheckbox" value="business" checked="checked">I represent a business</label>
 							</div>
+              <div class="checkbox">
+                <label><input type="checkbox" id="claimPrivacyCheckbox" value="privacyAgreement">I have read and agree to the
+                  <a href="#Modal"> privacy policy </a>
+                and terms of use</label>
+              </div>
               <div class="col col-12" style="margin-bottom: 4%;">
                 <span id="claimMsg"></span>
               </div>
-              <button id="claimBtn" type="button" onclick="claim()" class="btn btn-info col col-12">
+              <button id="claimBtn" type="button" onclick="claim()" class="btn btn-info col col-12" disabled>
                 Claim
               </button>
               <br />
@@ -510,10 +524,15 @@
                 <input type="number" min="0" id="subsActivate" class="form-control" onkeydown="checkSubsBalance()"
                   placeholder="Amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
               </div>
+              <div class="checkbox">
+                <label><input type="checkbox" id="activatePrivacyCheckbox" value="privacyAgreement">I have read and agree to the
+                  <a href="#Modal"> privacy policy </a>
+                and terms of use</label>
+              </div>
               <div class="col col-12" style="margin-bottom: 4%;">
                 <span id="subsActivateMsg"></span>
               </div>
-              <button id="activateBtn" type="button" onclick="activate()" class="btn btn-info col col-12"> Activate </button>
+              <button id="activateBtn" type="button" onclick="activate()" class="btn btn-info col col-12" disabled> Activate </button>
               <br />
               <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
                 <p id="proccess"></p>
@@ -557,6 +576,93 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: privacyPolicyModal -->
+  <div class="modal  animated fadeIn" id="privacyPolicyModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <h4 class="modal-title m-title" id="myModalLabel">Privacy Agreement</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+          <div>
+            <p>
+              Last modified: 11/23/2019<br/>
+              By using the Sponsorships Purchase application, you agree to share the country, region and city of your connection; and the time and amount of your purchases, activations, and claims with BrightID Main DAO. Purchase, activation, and claim information will be aggregated by day and location and publicly displayed for tax authorities.
+            </p>
+            <h5>Terms of Use</h5>
+            Last modified: 11/23/2019</br>
+            <P>
+              No one under the age of 13 may use this application.</br>
+            </P>
+            <P>
+              <ul>
+                Sponsorships are meant for use with the BrightID application only.
+                <li>
+                  <a href="https://play.google.com/store/apps/details?id=org.brightid&hl=en_US" target="_blank">Google Play Store</a>
+                </li>
+                <li>
+                  <a href="https://testflight.apple.com/join/L99RcYEc" target="_blank">Apple TestFlight</a>
+                </li>
+              </ul>
+            </P>
+            <p>
+              Subscriptions (after being activated through this application) entitle the user to return to this application to claim sponsorships according to the following schedule:
+            </p>
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Month (inclusive)</th>
+                <th>Sponsorships per month</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">0-11</th>
+                <td>1</td>
+              </tr>
+              <tr>
+                <th scope="row">12-23</th>
+                <td>2</td>
+              </tr>
+              <tr>
+                <th scope="row">24-35</th>
+                <td>3</td>
+              </tr>
+              <tr>
+                <th scope="row">36-47</th>
+                <td>4</td>
+              </tr>
+              <tr>
+                <th scope="row">48-59</th>
+                <td>5</td>
+              </tr>
+              <tr>
+                <th scope="row">36-47</th>
+                <td>6</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Sponsorships and Subscriptions are sold “as-is” for their intended purpose with no refund possible.
+          </p>
+          <a href="https://docs.google.com/document/d/1rNOfIRgofsY8jJ1-6DLX9qJS9tQVW7jLa4BlmHvZqeQ/edit#" target="_blank">
+            See this document for more information on sponsorships and subscriptions.
+          </a>
+        </div>
+        <!--Footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

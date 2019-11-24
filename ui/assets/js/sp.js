@@ -1,3 +1,7 @@
+var $spPrivacyCheckbox = $('#spPrivacyCheckbox').change(function() {
+  $("#spBuyBtn").prop('disabled', !$spPrivacyCheckbox.is(":checked"));
+});
+
 function spInit() {
   $("#spMsg").html("Waiting for input");
   $("#spMsg").css("color", "white");
@@ -8,7 +12,6 @@ function spInit() {
     keyboard: false
   });
   clearInputs();
-  $("#spBuyBtn").prop("disabled", false);
   $(".confirm-icon").hide();
   $(".loader").hide();
 };
@@ -17,6 +20,7 @@ function spPurchaseForm() {
 	val = 0;
 	dai = 0;
 	business = true;
+  privacyAgreement = false;
   enoughFund = false;
   checkMetaMask();
   spInit();
@@ -25,6 +29,16 @@ function spPurchaseForm() {
 function purchaseSp() {
   val = $("#sp").val();
   business = $("#spCheckbox").prop('checked');
+  privacyAgreement = $("#spPrivacyCheckbox").prop('checked');
+  if ( !privacyAgreement ) {
+    Swal.fire({
+      type: "error",
+      title: "incorect value",
+      text: "Your should read and agree to the privacy policy and terms of use first",
+      footer: ""
+    });
+    return;
+  }
   if (val < 1 ) {
     Swal.fire({
       type: "error",
