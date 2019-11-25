@@ -72,7 +72,10 @@ def index():
 @app.route('/submit-purchase', methods=['POST'])
 def submit_purchase():
     data = request.form.to_dict()
-    data['location'] = get_ip_location(request.remote_addr)
+    location = get_ip_location(request.remote_addr)
+    data['country'] = location['country_name']
+    data['state'] = location['region_name']
+    data['city'] = location['city']
     data['timestamp'] = time.time()
     g.db.purchases.insert_one(data)
     return json.dumps({'status': True})
@@ -88,7 +91,6 @@ def get_ip_location(ip):
     while not location:
         response = requests.request("GET", url, headers=headers)
         location = json.loads(response.text)
-        del location['ip']
     return location
 
 
@@ -103,10 +105,6 @@ def purchases_report():
     cursor = g.db.purchases.find({})
     for purchase in cursor:
         del purchase['_id']
-        purchase['country'] = purchase['location']['country_name']
-        purchase['state'] = purchase['location']['region_name']
-        purchase['city'] = purchase['location']['city']
-        del purchase['location']
         purchase['daiAmount'] = int(int(purchase['daiAmount']) / 10**18)
         purchase['time'] = time.strftime(
             "%Y-%m-%d %H:%M:%S", time.localtime(int(purchase['timestamp'])))
