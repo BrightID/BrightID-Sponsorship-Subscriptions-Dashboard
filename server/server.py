@@ -99,23 +99,5 @@ def get_ip_location(ip):
     return {}
 
 
-@app.route('/report')
-def report():
-    return redirect('/pages/report.html')
-
-
-@app.route('/purchases-report', methods=['POST'])
-def purchases_report():
-    purchases = []
-    cursor = g.db.purchases.find({})
-    for purchase in cursor:
-        del purchase['_id']
-        purchase['daiAmount'] = int(int(purchase['daiAmount']) / 10**18)
-        purchase['time'] = time.strftime(
-            "%Y-%m-%d %H:%M:%S", time.localtime(int(purchase['timestamp'])))
-        purchases.append(purchase)
-    return jsonify({'purchases': purchases, 'status': True})
-
-
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=7070, threaded=True)
