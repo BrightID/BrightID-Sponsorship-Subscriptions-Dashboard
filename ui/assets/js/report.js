@@ -5,8 +5,7 @@ window.onload = function() {
 }
 
 function init() {
-  $.post('/purchases-report').then(function(data) {
-    var response = jQuery.parseJSON(data);
+  $.post('/purchases-report').then(function(response) {
     if (!response.status) {
       Swal.fire({
         type: "error",

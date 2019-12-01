@@ -113,8 +113,7 @@ function checkApproveResult(hash, cb) {
 
 function submitPurchase(buyer, token, amount, daiAmount, business) {
   let data = {'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business};
-  $.post('/submit-purchase', data).then(function(data) {
-    var response = jQuery.parseJSON(data);
+  $.post('/submit-purchase', data).then(function(response) {
     changeActiveStep(5);
     if (!response.status) {
       Swal.fire({
