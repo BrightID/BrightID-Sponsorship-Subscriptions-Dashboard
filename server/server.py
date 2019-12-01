@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Flask, redirect, request, g
+from flask import Flask, redirect, request, g, jsonify
 from io import BytesIO as IO
 import pymongo
 import requests
@@ -73,25 +73,30 @@ def index():
 def submit_purchase():
     data = request.form.to_dict()
     location = get_ip_location(request.remote_addr)
-    data['country'] = location['country_name']
-    data['state'] = location['region_name']
-    data['city'] = location['city']
+    data['country'] = location.get('country_name')
+    data['state'] = location.get('region_name')
+    data['city'] = location.get('city')
     data['timestamp'] = time.time()
     g.db.purchases.insert_one(data)
-    return json.dumps({'status': True})
+    return jsonify({'status': True})
 
 
 def get_ip_location(ip):
-    location = None
+    attempts = 20
     url = "https://freegeoip.app/json/{0}".format(ip)
     headers = {
         'accept': "application/json",
         'content-type': "application/json"
     }
-    while not location:
-        response = requests.request("GET", url, headers=headers)
-        location = json.loads(response.text)
-    return location
+    for i in range(attempts):
+        try:
+            response = requests.request("GET", url, headers=headers)
+            location = json.loads(response.text)
+            if location:
+                return location
+        except:
+            pass
+    return {}
 
 
 @app.route('/report')
@@ -109,7 +114,7 @@ def purchases_report():
         purchase['time'] = time.strftime(
             "%Y-%m-%d %H:%M:%S", time.localtime(int(purchase['timestamp'])))
         purchases.append(purchase)
-    return json.dumps({'purchases': purchases, 'status': True})
+    return jsonify({'purchases': purchases, 'status': True})
 
 
 if __name__ == '__main__':
