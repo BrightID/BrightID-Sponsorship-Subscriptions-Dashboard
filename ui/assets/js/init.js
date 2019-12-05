@@ -45,7 +45,7 @@ function init() {
       Swal.fire({
         type: "info",
         title: "MetaMask is locked",
-        text: "Please unlocked MetaMask",
+        text: "Please unlock MetaMask",
         footer: ""
       });
     }
