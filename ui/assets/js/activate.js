@@ -31,8 +31,8 @@ function activate() {
   if ( !privacyAgreement ) {
     Swal.fire({
       type: "error",
-      title: "incorect value",
-      text: "Your should read and agree to the privacy policy and terms of use first",
+      title: "Attention",
+      text: "Please read and agree to the privacy policy and terms of use.",
       footer: ""
     });
     return;
@@ -40,8 +40,8 @@ function activate() {
   if (amount < 1 ) {
     Swal.fire({
       type: "error",
-      title: "Incorect Value",
-      text: "Your value should biger than 0",
+      title: "Amount too small",
+      text: "Please enter a value greater than 0",
       footer: ""
     });
     return;

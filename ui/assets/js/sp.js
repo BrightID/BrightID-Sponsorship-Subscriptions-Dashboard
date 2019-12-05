@@ -33,8 +33,8 @@ function purchaseSp() {
   if ( !privacyAgreement ) {
     Swal.fire({
       type: "error",
-      title: "incorect value",
-      text: "Your should read and agree to the privacy policy and terms of use first",
+      title: "Attention",
+      text: "Please read and agree to the privacy policy and terms of use.",
       footer: ""
     });
     return;
@@ -42,8 +42,8 @@ function purchaseSp() {
   if (val < 1 ) {
     Swal.fire({
       type: "error",
-      title: "incorect value",
-      text: "Your value should biger than 1",
+      title: "Amount too small",
+      text: "Please enter a value greater than 0",
       footer: ""
     });
     return;
@@ -51,8 +51,8 @@ function purchaseSp() {
   if (!enoughFund) {
     Swal.fire({
       type: "error",
-      title: "Your stable coin balance is not enough",
-      text: "Please recharge your account and try again",
+      title: "Insufficient funds",
+      text: "Please add more of the purchase token to your account and try again",
       footer: ""
     });
     return;

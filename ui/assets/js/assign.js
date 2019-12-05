@@ -29,8 +29,8 @@ function assignSp() {
   if (amount < 1 ) {
     Swal.fire({
       type: "error",
-      title: "Incorect Value",
-      text: "Your value should biger than 0",
+      title: "Amount too small",
+      text: "Please enter a value greater than 0",
       footer: ""
     });
     return;
@@ -38,8 +38,8 @@ function assignSp() {
   if (!context) {
     Swal.fire({
       type: "error",
-      title: "Incorect Value",
-      text: "Please inset context's name",
+      title: "Missing context",
+      text: "Please enter the name of a context",
       footer: ""
     });
     return;
@@ -86,8 +86,8 @@ function contextBalance() {
   if (!context) {
     Swal.fire({
       type: "error",
-      title: "Incorect Value",
-      text: "Please inset context's name",
+      title: "Missing context",
+      text: "Please enter the name of a context",
       footer: ""
     });
     return;

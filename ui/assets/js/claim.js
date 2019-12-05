@@ -29,8 +29,8 @@ function claim() {
   if ( !privacyAgreement ) {
     Swal.fire({
       type: "error",
-      title: "incorect value",
-      text: "Your should read and agree to the privacy policy and terms of use first",
+      title: "Attention",
+      text: "Please read and agree to the privacy policy and terms of use.",
       footer: ""
     });
     return;

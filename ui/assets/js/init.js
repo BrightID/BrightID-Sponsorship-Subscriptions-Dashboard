@@ -37,8 +37,8 @@ function init() {
     if (err != null) {
       Swal.fire({
         type: "error",
-        title: "Something wrong",
-        text: "Check this error: " + err,
+        title: "Error",
+        text: err,
         footer: ""
       });
     } else if (accounts.length === 0) {
@@ -64,7 +64,7 @@ function init() {
   } else if (window.web3) {
     window.web3 = new Web3(web3.currentProvider);
   } else {
-    console.log("You should consider trying MetaMask!");
+    console.log("You should consider trying MetaMask");
     return;
   }
 
