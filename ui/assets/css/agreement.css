@@ -1,0 +1,22 @@
+.agreement p,
+.agreement li
+{
+    font-size: 80%;
+    line-height: 140%;
+    color: black;
+}
+
+.agreement .date
+{
+    font-size: 100%;
+}
+
+.agreement h5
+{
+    font-size: 100%;
+}
+
+.agreement h6
+{
+    font-size: 85%;
+}
