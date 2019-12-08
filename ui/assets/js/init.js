@@ -115,7 +115,7 @@ function init() {
     if (error) {
       return;
     }
-    $("#spTotalSold").html(parseInt(result.c[0]));
+ //   $("#spTotalSold").html(parseInt(result.c[0]));
   });
 
   subsMinterContract.price(function (error, result) {
