@@ -78,7 +78,9 @@ def record_action():
     data['state'] = location.get('region_name')
     data['city'] = location.get('city')
     data['timestamp'] = time.time()
-    data['month'] = datetime.now().month
+    now = datetime.now()
+    data['month'] = now.month
+    data['year'] = now.year
     g.db.purchases.insert_one(data)
     return jsonify({'status': True})
 
