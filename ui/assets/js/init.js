@@ -130,7 +130,7 @@ function init() {
     if (error) {
       return;
     }
-    $("#subsTotalSold").html(parseInt(result.c[0]));
+    $("#subsLeft").html(900000 - parseInt(result.c[0]));
   });
 
   subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
