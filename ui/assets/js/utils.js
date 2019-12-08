@@ -1,8 +1,8 @@
-$('a[href$="#Modal"]').on( "click", function() {
-   $('#privacyPolicyModal').modal('show');
+$('a[href$="#Modal"]').on("click", function(){
+  $('#privacyPolicyModal').modal('show');
 });
 
-function checkMetaMask() {
+function checkMetaMask(){
   if (typeof web3 === "undefined") {
     Swal.fire({
       type: "error",
@@ -12,7 +12,7 @@ function checkMetaMask() {
     });
     return;
   }
-  web3.eth.getAccounts(function (err, accounts) {
+  web3.eth.getAccounts(function(err, accounts){
     if (err != null) {
       Swal.fire({
         type: "error",
@@ -31,7 +31,7 @@ function checkMetaMask() {
   });
 }
 
-function clearInputs() {
+function clearInputs(){
   $("#sp").val("");
   $("#spDai").val("");
   $("#subs").val("");
@@ -41,7 +41,7 @@ function clearInputs() {
   $("#subsActivate").val("");
 }
 
-function changeActiveStep(step) {
+function changeActiveStep(step){
   $(".step-box").removeClass("active");
   $(".step-box-" + step).addClass("active done");
   $(".step-box-" + step)
@@ -55,61 +55,61 @@ function changeActiveStep(step) {
     .show();
 }
 
-function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
+function checkTX(hash, type, buyer, token, amount, daiAmount, business){
   changeActiveStep(4);
-  web3.eth.getTransactionReceipt(hash, function (error, result) {
+  web3.eth.getTransactionReceipt(hash, function(error, result){
     if (error) {
       console.error(error);
       return;
     }
     if (result == null) {
-      setTimeout(function () {
+      setTimeout(function(){
         checkTX(hash, type, buyer, token, amount, daiAmount, business);
       }, 5000);
       return;
     }
-    if(result.status == '0x1' || result.status == 1) {
-      if (type == 'assignContext' || type == 'activateSubs') {
-        changeActiveStep(5);
-        let alertText;
-        if(type == 'assignContext'){
-          alertText = 'Sponsorships were assigned.'
-        }
-        if(type == 'activateSubs'){
-          alertText = 'Subscriptions were activated.'
-        }
-        Swal.fire({
-          type: "success",
-          title: "Success",
-          text: alertText,
-          footer: ""
-        });
-        return;
+    changeActiveStep(5);
+    if (result.status == '0x1' || result.status == 1) {
+      let alertText;
+      if (type == 'assignContext') {
+        alertText = 'Sponsorships were assigned.';
+      } else if (type == 'activateSubs') {
+        alertText = 'Subscriptions were activated.';
+      } else if (type == 'claim') {
+        alertText = 'Claim succeeded.';
+      } else if (type == 'buy') {
+        alertText = 'Purchase succeeded.';
       }
-      submitPurchase(buyer, token, amount, daiAmount, business);
-    } else{
-  		changeActiveStep(5);
+      Swal.fire({
+        type: "success",
+        title: "Success",
+        text: alertText,
+        footer: ""
+      });
+      if (type == 'buy' || type == 'claim') {
+        submitPurchase(buyer, token, amount, daiAmount, business);
+      }
+    } else {
       Swal.fire({
         type: "error",
         title: "Error",
         text: "There was a problem with the contract execution",
         footer: ""
       });
-
     }
   });
 }
 
-function checkApproveResult(hash, cb) {
+function checkApproveResult(hash, cb){
   changeActiveStep(2);
-  web3.eth.getTransactionReceipt(hash, function (error, result) {
+  web3.eth.getTransactionReceipt(hash, function(error, result){
     if (error) {
       console.error(error);
       return;
     }
     if (result == null) {
-      setTimeout(function () {
-      checkApproveResult(hash, cb);
+      setTimeout(function(){
+        checkApproveResult(hash, cb);
       }, 5000);
       return;
     }
@@ -118,25 +118,7 @@ function checkApproveResult(hash, cb) {
   });
 }
 
-function submitPurchase(buyer, token, amount, daiAmount, business) {
-  let data = {'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business};
-  $.post('/submit-purchase', data).then(function(response) {
-    changeActiveStep(5);
-    if (!response.status) {
-      Swal.fire({
-        type: "error",
-        title: "Error",
-        text: "There was a problem with the contract execution",
-        footer: ""
-      });
-      return;
-    }
-    Swal.fire({
-      type: "success",
-      title: "Success",
-      text: "The purchase succeeded.",
-      footer: ""
-    });
-  },function(response){
-  })
+function submitPurchase(buyer, token, amount, daiAmount, business){
+  let data = { 'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business };
+  $.post('/submit-purchase', data);
 }
