@@ -41,7 +41,7 @@ def gzip_content(response):
 
 @app.errorhandler(ErrorToClient)
 def error_to_client(error):
-    return json.dumps({
+    return jsonify({
         'msg': error.args[0],
         'args': error.args[1:],
         'status': False
@@ -69,7 +69,7 @@ def index():
     return redirect('/index.html')
 
 
-@app.route('/submit-purchase', methods=['POST'])
+@app.route('/action', methods=['POST'])
 def submit_purchase():
     data = request.form.to_dict()
     location = get_ip_location(request.remote_addr)

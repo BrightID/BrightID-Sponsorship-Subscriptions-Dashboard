@@ -87,7 +87,9 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business){
         footer: ""
       });
       if (type == 'buy' || type == 'claim') {
-        submitPurchase(buyer, token, amount, daiAmount, business);
+        recordAction(
+          { type, buyer, token, amount, daiAmount, business }
+        );
       }
     } else {
       Swal.fire({
@@ -118,7 +120,6 @@ function checkApproveResult(hash, cb){
   });
 }
 
-function submitPurchase(buyer, token, amount, daiAmount, business){
-  let data = { 'token': token, 'amount': amount, 'daiAmount': daiAmount, 'business': business };
-  $.post('/submit-purchase', data);
+function recordAction(data){
+  $.post('/action', data);
 }
