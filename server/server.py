@@ -81,7 +81,7 @@ def record_action():
     now = datetime.now()
     data['month'] = now.month
     data['year'] = now.year
-    g.db.purchases.insert_one(data)
+    g.db.actions.insert_one(data)
     return jsonify({'status': True})
 
 
