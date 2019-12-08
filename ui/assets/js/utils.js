@@ -71,10 +71,17 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
     if(result.status == '0x1' || result.status == 1) {
       if (type == 'assignContext' || type == 'activateSubs') {
         changeActiveStep(5);
+        let alertText;
+        if(type == 'assignContext'){
+          alertText = 'Sponsorships were assigned.'
+        }
+        if(type == 'activateSubs'){
+          alertText = 'Subscriptions were activated.'
+        }
         Swal.fire({
           type: "success",
-          title: "Done Successfully",
-          text: "Please Check Your Account",
+          title: "Success",
+          text: alertText,
           footer: ""
         });
         return;
@@ -84,8 +91,8 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
   		changeActiveStep(5);
       Swal.fire({
         type: "error",
-        title: "Something wrong",
-        text: "Error occured during contract execution",
+        title: "Error",
+        text: "There was a problem with the contract execution",
         footer: ""
       });
 
@@ -118,16 +125,16 @@ function submitPurchase(buyer, token, amount, daiAmount, business) {
     if (!response.status) {
       Swal.fire({
         type: "error",
-        title: "Something wrong",
-        text: "Error occured during contract execution",
+        title: "Error",
+        text: "There was a problem with the contract execution",
         footer: ""
       });
       return;
     }
     Swal.fire({
       type: "success",
-      title: "Done Successfully",
-      text: "Please Check Your Account",
+      title: "Success",
+      text: "The purchase succeeded.",
       footer: ""
     });
   },function(response){
