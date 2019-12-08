@@ -73,7 +73,7 @@ def index():
 @app.route('/action', methods=['POST'])
 def record_action():
     data = request.form.to_dict()
-    location = get_ip_location(request.remote_addr)
+    location = get_ip_location(request.headers['X-Forwarded-For'])
     data['country'] = location.get('country_name')
     data['state'] = location.get('region_name')
     data['city'] = location.get('city')
