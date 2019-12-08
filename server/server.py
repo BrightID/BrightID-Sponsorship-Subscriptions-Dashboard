@@ -5,6 +5,7 @@ from io import BytesIO as IO
 import pymongo
 import requests
 import time
+from datetime import datetime
 import gzip
 import json
 import os
@@ -70,13 +71,14 @@ def index():
 
 
 @app.route('/action', methods=['POST'])
-def submit_purchase():
+def record_action():
     data = request.form.to_dict()
     location = get_ip_location(request.remote_addr)
     data['country'] = location.get('country_name')
     data['state'] = location.get('region_name')
     data['city'] = location.get('city')
     data['timestamp'] = time.time()
+    data['month'] = datetime.now().month
     g.db.purchases.insert_one(data)
     return jsonify({'status': True})
 
