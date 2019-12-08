@@ -7,7 +7,7 @@ function checkMetaMask(){
     Swal.fire({
       type: "error",
       title: "MetaMask is not installed",
-      text: "Please install MetaMask from below link",
+      text: "Please install MetaMask.",
       footer: '<a href="https://metamask.io">Install MetaMask</a>'
     });
     return;
