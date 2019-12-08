@@ -88,7 +88,7 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business){
       });
       if (type == 'buy' || type == 'claim') {
         recordAction(
-          { type, buyer, token, amount, daiAmount, business }
+          { type, token, amount, daiAmount, business }
         );
       }
     } else {
