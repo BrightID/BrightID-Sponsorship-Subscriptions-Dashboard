@@ -4,7 +4,6 @@ from flask import Flask, redirect, request, g, jsonify
 from io import BytesIO as IO
 import pymongo
 import requests
-import time
 from datetime import datetime
 import gzip
 import json
@@ -77,7 +76,6 @@ def record_action():
     data['country'] = location.get('country_name')
     data['state'] = location.get('region_name')
     data['city'] = location.get('city')
-    data['timestamp'] = time.time()
     now = datetime.now()
     data['month'] = now.month
     data['year'] = now.year
