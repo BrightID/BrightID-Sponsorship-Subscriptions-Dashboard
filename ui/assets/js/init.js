@@ -147,4 +147,7 @@ function init() {
     $("#spBalance").html(parseInt(result.c[0]));
   });
 
+  $("#spContractAddress").html(addresses.sp);
+  $("#subsContractAddress").html(addresses.subs);
+
 }
