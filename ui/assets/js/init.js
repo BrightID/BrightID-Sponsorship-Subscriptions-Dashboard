@@ -7,18 +7,18 @@ var business = true;
 
 ethereum.autoRefreshOnNetworkChange = false;
 
-window.onload = function() {
+window.onload = function () {
   init();
 };
 
-ethereum.on("networkChanged", function(){
-	init();
-	return;
+ethereum.on("networkChanged", function () {
+  init();
+  return;
 })
 
-ethereum.on("accountsChanged", function(){
-	init();
-	return;
+ethereum.on("accountsChanged", function () {
+  init();
+  return;
 })
 
 function init() {
@@ -115,7 +115,7 @@ function init() {
     if (error) {
       return;
     }
- //   $("#spTotalSold").html(parseInt(result.c[0]));
+    //   $("#spTotalSold").html(parseInt(result.c[0]));
   });
 
   subsMinterContract.price(function (error, result) {
@@ -137,7 +137,7 @@ function init() {
     if (error) {
       return;
     }
-    $("#subsBalance").html(parseInt(result.c[0]));
+    $("#subsInactiveBalance").html(parseInt(result.c[0]));
   });
 
   spContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
@@ -149,5 +149,28 @@ function init() {
 
   $("#spContractAddress").html(addresses.sp);
   $("#subsContractAddress").html(addresses.subs);
+  console.dir(subsContract);
+  console.dir(subsContract.SubscriptionsActivated);
+  console.log(subsContract.SubscriptionsActivated());
+  subsContract.SubscriptionsActivated({}, {
+    fromBlock: 0
+  }).get(
+    function (err, data) {
+      console.log(data);
+      activeBalance(data);
+    }
+  )
+}
 
+function activeBalance(events) {
+  var totalAmount = events.reduce(function (total, event) {
+    if (event.args.account == web3.eth.defaultAccount) {
+      amount = event.args.amount.c[0];
+    } else {
+      amount = 0;
+    }
+    return total + amount;
+  }, 0);
+  console.log(totalAmount);
+  $("#subsActiveBalance").html(parseInt(totalAmount));
 }
