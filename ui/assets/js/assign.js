@@ -2,8 +2,8 @@ function assignInit() {
   $("#spContextMsg").html("Waiting for input");
   $("#spContextMsg").css("color", "white");
 
-  $("#totalAssigned").html("");
-  $("#youAssigned").html("");
+  $(".totalAssigned").html("");
+  $(".youAssigned").html("");
 
   $(".sp-assign-step").hide();
   $(".sp-assign-input").show();
@@ -25,7 +25,7 @@ function assignSpForm() {
 
 function assignSp() {
   let amount = $("#spAssign").val();
-  let context = $("#context").val();
+  let context = $("#assignContextName").val();
   if (amount < 1 ) {
     Swal.fire({
       type: "error",
@@ -79,32 +79,4 @@ function updateBalanceState(spBalance) {
     $("#spContextMsg").css("color", "green");
     $("#spContextMsg").html("Sufficient Sp");
   }
-}
-
-function contextBalance() {
-  let context = $("#context").val();
-  if (!context) {
-    Swal.fire({
-      type: "error",
-      title: "Missing context",
-      text: "Please enter the name of a context",
-      footer: ""
-    });
-    return;
-  }
-  spContract.totalContextBalance(context, function (error, result) {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    $("#totalAssigned").html('Total Assigned: '+parseInt(result.c[0])+' SP');
-  });
-  spContract.contextBalance(web3.eth.defaultAccount, context, function (error, result) {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    $("#youAssigned").html('You Assigned: '+parseInt(result.c[0])+' SP');
-  });
-
 }
