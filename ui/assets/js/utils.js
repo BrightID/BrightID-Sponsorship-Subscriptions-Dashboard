@@ -1,8 +1,8 @@
-$('a[href$="#Modal"]').on("click", function(){
+$('a[href$="#Modal"]').on("click", function () {
   $('#privacyPolicyModal').modal('show');
 });
 
-function checkMetaMask(){
+function checkMetaMask() {
   if (typeof web3 === "undefined") {
     Swal.fire({
       type: "error",
@@ -12,7 +12,7 @@ function checkMetaMask(){
     });
     return;
   }
-  web3.eth.getAccounts(function(err, accounts){
+  web3.eth.getAccounts(function (err, accounts) {
     if (err != null) {
       Swal.fire({
         type: "error",
@@ -31,17 +31,18 @@ function checkMetaMask(){
   });
 }
 
-function clearInputs(){
+function clearInputs() {
   $("#sp").val("");
   $("#spDai").val("");
   $("#subs").val("");
   $("#subsDai").val("");
   $("#spAssign").val("");
-  $("#context").val("");
+  $("#assignContextName").val("");
+  $("#balanceContextName").val("");
   $("#subsActivate").val("");
 }
 
-function changeActiveStep(step){
+function changeActiveStep(step) {
   $(".step-box").removeClass("active");
   $(".step-box-" + step).addClass("active done");
   $(".step-box-" + step)
@@ -55,21 +56,50 @@ function changeActiveStep(step){
     .show();
 }
 
-function checkTX(hash, type, buyer, token, amount, daiAmount, business){
+function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
+  confirmed = false;
   changeActiveStep(4);
-  web3.eth.getTransactionReceipt(hash, function(error, result){
+  web3.eth.getTransactionReceipt(hash, function (error, result) {
     if (error) {
       console.error(error);
       return;
     }
     if (result == null) {
-      setTimeout(function(){
+      setTimeout(function () {
         checkTX(hash, type, buyer, token, amount, daiAmount, business);
       }, 5000);
       return;
     }
-    changeActiveStep(5);
     if (result.status == '0x1' || result.status == 1) {
+      isConfirmed(result.blockNumber, type);
+      if (type == 'buy' || type == 'claim') {
+        recordAction({
+          type,
+          token,
+          amount,
+          daiAmount,
+          business
+        });
+      }
+    } else {
+      changeActiveStep(5);
+      Swal.fire({
+        type: "error",
+        title: "Error",
+        text: "There was a problem with the contract execution",
+        footer: ""
+      });
+    }
+  });
+}
+
+function isConfirmed(txBlockNumber, type) {
+  web3.eth.getBlockNumber(function (error, blockNumber) {
+    if (error) {
+      console.error(error);
+      return false;
+    } else if (1 <= blockNumber - txBlockNumber) {
+      changeActiveStep(5);
       let alertText;
       if (type == 'assignContext') {
         alertText = 'Sponsorships were assigned.';
@@ -86,31 +116,24 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business){
         text: alertText,
         footer: ""
       });
-      if (type == 'buy' || type == 'claim') {
-        recordAction(
-          { type, token, amount, daiAmount, business }
-        );
-      }
     } else {
-      Swal.fire({
-        type: "error",
-        title: "Error",
-        text: "There was a problem with the contract execution",
-        footer: ""
-      });
+      setTimeout(function () {
+        isConfirmed(txBlockNumber, type);
+      }, 5000);
+      return;
     }
   });
 }
 
-function checkApproveResult(hash, cb){
+function checkApproveResult(hash, cb) {
   changeActiveStep(2);
-  web3.eth.getTransactionReceipt(hash, function(error, result){
+  web3.eth.getTransactionReceipt(hash, function (error, result) {
     if (error) {
       console.error(error);
       return;
     }
     if (result == null) {
-      setTimeout(function(){
+      setTimeout(function () {
         checkApproveResult(hash, cb);
       }, 5000);
       return;
@@ -120,6 +143,6 @@ function checkApproveResult(hash, cb){
   });
 }
 
-function recordAction(data){
+function recordAction(data) {
   $.post('/action', data);
 }
