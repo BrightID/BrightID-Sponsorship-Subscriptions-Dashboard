@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,212 +14,220 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
-    <img class="img-fluid mx-auto" src="assets/img/logo.svg" style="width:350px;">
-</nav>
-<div class="container">
-    <div class="px-2 py-2 pt-md-4 pb-md-3 mx-auto text-center">
-        <h2 class="display-5">Sponsorships Dashboard</h2>
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
+        <img class="img-fluid mx-auto" src="assets/img/logo.svg" style="width:350px;">
+    </nav>
+    <div class="container">
+        <div class="px-2 py-2 pt-md-4 pb-md-3 mx-auto text-center">
+            <h2 class="display-5">Sponsorships Dashboard</h2>
+        </div>
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Sponsorships</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title">$<span id="spPrice"></span></h1>
+                    <h6>
+                        <b>Sp</b>
+                    </h6>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>&#160;</li>
+                        <li>&#160;</li>
+                        <li>Balance: <span id="spBalance"></span></li>
+                    </ul>
+                    <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info d-none">
+                        Purchase
+                    </button>
+                    <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info">Purchase
+                    </button>
+                    <button type="button" onclick="assignSpForm();"
+                        class="btn btn-lg btn-block btn-info">Assign</button>
+                    <button type="button" onclick="contextBalanceForm();" class="btn btn-lg btn-block btn-info">Check
+                        Context Balance</button>
+
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Subscriptions</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title">$<span id="subsPrice"></span></h1>
+                    <h6><b>Subs</b></h6>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Sale Limit: 900000</li>
+                        <li>Remaining: <span id="subsLeft"></span></li>
+                        <li>Balance: <span id="subsBalance"></span></li>
+                    </ul>
+                    <button type="button" onclick="subsPurchaseForm()" class="btn btn-lg btn-block btn-info">Purchase
+                    </button>
+                    <button type="button" onclick="activateForm()"
+                        class="btn btn-lg btn-block btn-info">Activate</button>
+                    <button type="button" onclick="claimForm()" class="btn btn-lg btn-block btn-info">Claim</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="pt-4 border-top">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>MORE INFO</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" target="_blank"
+                                href="https://www.brightid.org/sponsorships">Sponsorships
+                                & Subscriptions</a></li>
+                        <li><a class="text-muted" target="_blank"
+                                href="https://www.brightid.org/whitepaper">Whitepaper</a>
+                        </li>
+                        <li><a class="text-muted" target="_blank" href="https://medium.com/brightid">Medium</a></li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <h5>DISCUSS</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" target="_blank" href="https://discord.gg/nTtuB2M">Discord</a></li>
+                        <li><a class="text-muted" target="_blank"
+                                href="https://riot.im/app/#brightid:matrix.org">Riot.im</a></li>
+                        <li><a class="text-muted" target="_blank" href="https://t.me/brightid">Telegram</a></li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <h5>FOLLOW</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" target="_blank" href="https://twitter.com/BrightIDProject">Twitter</a>
+                        </li>
+                        <li><a class="text-muted" target="_blank" href="https://github.com/BrightID">Github</a></li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <p><a href="#Modal">Privacy Policy and Terms of Use</a></p>
+                    <small class="d-block mb-3 text-muted">&copy; BrightID Main DAO. All rights reserved.</small>
+                </div>
+            </div>
+        </footer>
     </div>
-    <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Sponsorships</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title">$<span id="spPrice"></span></h1>
-                <h6>
-                    <b>Sp</b>
-                </h6>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>&#160;</li>
-                    <li>&#160;</li>
-                    <li>Balance: <span id="spBalance"></span></li>
-                </ul>
-                <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info d-none">
-                    Purchase
-                </button>
-                <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info">Purchase
-                </button>
-                <button type="button" onclick="assignSpForm();" class="btn btn-lg btn-block btn-info">Assign</button>
-                <button type="button" onclick="contextBalanceForm();" class="btn btn-lg btn-block btn-info">Check Context Balance</button>
 
-            </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Subscriptions</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title">$<span id="subsPrice"></span></h1>
-                <h6><b>Subs</b></h6>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>Sale Limit: 900000</li>
-                    <li>Remaining: <span id="subsLeft"></span></li>
-                    <li>Balance: <span id="subsBalance"></span></li>
-                </ul>
-                <button type="button" onclick="subsPurchaseForm()" class="btn btn-lg btn-block btn-info">Purchase
-                </button>
-                <button type="button" onclick="activateForm()" class="btn btn-lg btn-block btn-info">Activate</button>
-                <button type="button" onclick="claimForm()" class="btn btn-lg btn-block btn-info">Claim</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="pt-4 border-top">
-        <div class="row">
-            <div class="col-md-4">
-                <h5>MORE INFO</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" target="_blank" href="https://www.brightid.org/sponsorships">Sponsorships
-                        & Subscriptions</a></li>
-                    <li><a class="text-muted" target="_blank" href="https://www.brightid.org/whitepaper">Whitepaper</a>
-                    </li>
-                    <li><a class="text-muted" target="_blank" href="https://medium.com/brightid">Medium</a></li>
-                </ul>
-            </div>
-            <div class="col-md">
-                <h5>DISCUSS</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" target="_blank" href="https://discord.gg/nTtuB2M">Discord</a></li>
-                    <li><a class="text-muted" target="_blank"
-                           href="https://riot.im/app/#brightid:matrix.org">Riot.im</a></li>
-                    <li><a class="text-muted" target="_blank" href="https://t.me/brightid">Telegram</a></li>
-                </ul>
-            </div>
-            <div class="col-md">
-                <h5>FOLLOW</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" target="_blank" href="https://twitter.com/BrightIDProject">Twitter</a>
-                    </li>
-                    <li><a class="text-muted" target="_blank" href="https://github.com/BrightID">Github</a></li>
-                </ul>
-            </div>
-            <div class="col-md">
-                <p><a href="#Modal">Privacy Policy and Terms of Use</a></p>
-                <small class="d-block mb-3 text-muted">&copy; BrightID Main DAO. All rights reserved.</small>
-            </div>
-        </div>
-    </footer>
-</div>
-
-<!-- The SP Purchase Modal -->
-<div class="modal animated fadeIn" id="spModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title m-title">Purchase Sponsorships</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="init()">
-                    &times;
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="col col-12 sp-input">
-                    <form>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Sp</span>
+    <!-- The SP Purchase Modal -->
+    <div class="modal animated fadeIn" id="spModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title m-title">Purchase Sponsorships</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="init()">
+                        &times;
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="col col-12 sp-input">
+                        <form>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">Sp</span>
+                                </div>
+                                <input type="number" min="0" id="sp" class="form-control" onkeydown="checkSpState()"
+                                    placeholder="150"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
                             </div>
-                            <input type="number" min="0" id="sp" class="form-control" onkeydown="checkSpState()"
-                                   placeholder="150" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">DAI</span>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">DAI</span>
+                                </div>
+                                <input type="text" id="spDai" class="form-control" placeholder=0 readonly />
                             </div>
-                            <input type="text" id="spDai" class="form-control" placeholder=0 readonly />
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="spCheckbox" value="business" checked="checked"> I
-                                represent a business</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="spPrivacyCheckbox" value="privacyAgreement"> I have read
-                                and agree to the
-                                <a href="#Modal"> privacy policy and terms of use </a></label>
-                        </div>
-                        <div class="col col-12" style="margin-bottom: 4%;">
-                            <span id="spMsg"></span>
-                        </div>
-                        <button id="spBuyBtn" type="button" onclick="purchaseSp()" class="btn btn-info col col-12"
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="spCheckbox" value="business" checked="checked"> I
+                                    represent a business</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="spPrivacyCheckbox" value="privacyAgreement"> I have
+                                    read
+                                    and agree to the
+                                    <a href="#Modal"> privacy policy and terms of use </a></label>
+                            </div>
+                            <div class="col col-12" style="margin-bottom: 4%;">
+                                <span id="spMsg"></span>
+                            </div>
+                            <button id="spBuyBtn" type="button" onclick="purchaseSp()" class="btn btn-info col col-12"
                                 disabled>
-                            Purchase
-                        </button>
-                        <br />
-                        <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
-                            <p id="proccess"></p>
+                                Purchase
+                            </button>
                             <br />
-                            <p id="timer"></p>
-                        </div>
-                    </form>
-                </div>
-                <div class="col col-12 row justify-content-center sp-step animated fadeIn">
-                    <div class="col col-12 row justify-content-center step-box step-box-1">
-                        <div class="col col-1">
-                            <img src="assets/img/metamask.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for MetaMask Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
+                            <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                                <p id="proccess"></p>
+                                <br />
+                                <p id="timer"></p>
                             </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    <div class="sprator"></div>
-                    <div class="col col-12 row justify-content-center step-box step-box-2">
-                        <div class="col col-1">
-                            <img src="assets/img/trx.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for Transaction Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
+                    <div class="col col-12 row justify-content-center sp-step animated fadeIn">
+                        <div class="col col-12 row justify-content-center step-box step-box-1">
+                            <div class="col col-1">
+                                <img src="assets/img/metamask.png" height="30" />
                             </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for MetaMask Confirmation</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="sprator"></div>
-                    <div class="col col-12 row justify-content-center step-box step-box-3">
-                        <div class="col col-1">
-                            <img src="assets/img/metamask.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for MetaMask Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
-                            </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sprator"></div>
-                    <div class="col col-12 row justify-content-center step-box step-box-4">
-                        <div class="col col-1">
-                            <img src="assets/img/trx.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for Transaction Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
+                        <div class="sprator"></div>
+                        <div class="col col-12 row justify-content-center step-box step-box-2">
+                            <div class="col col-1">
+                                <img src="assets/img/trx.png" height="30" />
                             </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for Transaction Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sprator"></div>
+                        <div class="col col-12 row justify-content-center step-box step-box-3">
+                            <div class="col col-1">
+                                <img src="assets/img/metamask.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for MetaMask Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sprator"></div>
+                        <div class="col col-12 row justify-content-center step-box step-box-4">
+                            <div class="col col-1">
+                                <img src="assets/img/trx.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for Transaction Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -226,95 +235,272 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- The SUBS Purchase Modal -->
-<div class="modal animated fadeIn" id="subsModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title m-title">Purchase Subscriptions</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="init()">
-                    &times;
-                </button>
+    <!-- The SUBS Purchase Modal -->
+    <div class="modal animated fadeIn" id="subsModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title m-title">Purchase Subscriptions</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="init()">
+                        &times;
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="col col-12 subs-input">
+                        <form>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">Subs</span>
+                                </div>
+                                <input type="number" min="0" id="subs" class="form-control" onkeydown="checkSubsState()"
+                                    placeholder="150"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">DAI</span>
+                                </div>
+                                <input type="text" id="subsDai" class="form-control" placeholder=0 readonly />
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="subsCheckbox" value="business" checked="checked"> I
+                                    represent a business</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="subsPrivacyCheckbox" value="privacyAgreement"> I have
+                                    read
+                                    and agree to the
+                                    <a href="#Modal"> privacy policy and terms of use </a></label>
+                            </div>
+                            <div class="col col-12" style="margin-bottom: 4%;">
+                                <span id="subsMsg"></span>
+                            </div>
+                            <button id="subsBuyBtn" type="button" onclick="purchaseSubs()"
+                                class="btn btn-info col col-12" disabled>
+                                Purchase
+                            </button>
+                            <br />
+                            <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                                <p id="proccess"></p>
+                                <br />
+                                <p id="timer"></p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col col-12 row justify-content-center subs-step animated fadeIn">
+                        <div class="col col-12 row justify-content-center step-box step-box-1">
+                            <div class="col col-1">
+                                <img src="assets/img/metamask.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for MetaMask Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sprator"></div>
+                        <div class="col col-12 row justify-content-center step-box step-box-2">
+                            <div class="col col-1">
+                                <img src="assets/img/trx.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for Transaction Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sprator"></div>
+                        <div class="col col-12 row justify-content-center step-box step-box-3">
+                            <div class="col col-1">
+                                <img src="assets/img/metamask.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for MetaMask Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sprator"></div>
+                        <div class="col col-12 row justify-content-center step-box step-box-4">
+                            <div class="col col-1">
+                                <img src="assets/img/trx.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for Transaction Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="col col-12 subs-input">
-                    <form>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Subs</span>
+        </div>
+    </div>
+
+    <!-- The Claim Modal -->
+    <div class="modal animated fadeIn" id="claimModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title m-title">Claim Sponsorships from Subscriptions</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="init()">
+                        &times;
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p>This will claim any unclaimed sponsorships that have been produced by any of your
+                        subscriptions. See the <a href="https://www.brightid.org/sponsorships"
+                            target="_blank">sponsorships
+                            and subscriptions document</a> for the schedule.</p>
+                    <div class="col col-12 claim-input">
+                        <form>
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="claimCheckbox" value="business" checked="checked"> I
+                                    represent a business</label>
                             </div>
-                            <input type="number" min="0" id="subs" class="form-control" onkeydown="checkSubsState()"
-                                   placeholder="150" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">DAI</span>
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="claimPrivacyCheckbox" value="privacyAgreement"> I have
+                                    read and agree to the
+                                    <a href="#Modal"> privacy policy and terms of use </a></label>
                             </div>
-                            <input type="text" id="subsDai" class="form-control" placeholder=0 readonly />
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="subsCheckbox" value="business" checked="checked"> I
-                                represent a business</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="subsPrivacyCheckbox" value="privacyAgreement"> I have read
-                                and agree to the
-                                <a href="#Modal"> privacy policy and terms of use </a></label>
-                        </div>
-                        <div class="col col-12" style="margin-bottom: 4%;">
-                            <span id="subsMsg"></span>
-                        </div>
-                        <button id="subsBuyBtn" type="button" onclick="purchaseSubs()" class="btn btn-info col col-12"
+                            <div class="col col-12" style="margin-bottom: 4%;">
+                                <span id="claimMsg"></span>
+                            </div>
+                            <button id="claimBtn" type="button" onclick="claim()" class="btn btn-info col col-12"
                                 disabled>
-                            Purchase
-                        </button>
-                        <br />
-                        <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
-                            <p id="proccess"></p>
+                                Claim
+                            </button>
                             <br />
-                            <p id="timer"></p>
+                            <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                                <p id="proccess"></p>
+                                <br />
+                                <p id="timer"></p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col col-12 row justify-content-center claim-step animated fadeIn">
+                        <div class="col col-12 row justify-content-center step-box step-box-3">
+                            <div class="col col-1">
+                                <img src="assets/img/metamask.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for MetaMask Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                        <div class="sprator"></div>
+                        <div class="col col-12 row justify-content-center step-box step-box-4">
+                            <div class="col col-1">
+                                <img src="assets/img/trx.png" height="30" />
+                            </div>
+                            <div class="col col-8">
+                                <p class="t-text">Waiting for Transaction Confirmation</p>
+                            </div>
+                            <div class="col col-2">
+                                <div class="loader">
+                                    <img src="assets/img/loading.gif" height="30" />
+                                </div>
+                                <div class="confirm-icon">
+                                    <img src="assets/img/confirm.png" height="30" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col col-12 row justify-content-center subs-step animated fadeIn">
-                    <div class="col col-12 row justify-content-center step-box step-box-1">
-                        <div class="col col-1">
-                            <img src="assets/img/metamask.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for MetaMask Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
+            </div>
+        </div>
+    </div>
+
+    <!-- The SP Assign Modal -->
+    <div class="modal animated fadeIn" id="spAssignModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title m-title">Assign Sponsorships</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="init()">
+                        &times;
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="col col-12 sp-assign-input">
+                        <form>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">Sp</span>
+                                </div>
+                                <input type="number" min="0" id="spAssign" class="form-control"
+                                    onkeydown="checkSpBalance()" placeholder="Amount"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
                             </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">Context</span>
+                                </div>
+                                <input type="text" id="assignContextName" class="form-control"
+                                    placeholder="Context Name" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-info" type="button"
+                                        onclick="contextBalance()">Balance</button>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col col-12" style="margin-bottom: 4%;">
+                                <span id="spContextMsg"></span>
+                                </br>
+                                <span class="totalAssigned"></span>
+                                </br>
+                                <span class="youAssigned"></span>
+                            </div>
+                            <button id="assignBtn" type="button" onclick="assignSp()" class="btn btn-info col col-12">
+                                Assign
+                            </button>
+                            <br />
+                            <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                                <p id="proccess"></p>
+                                <br />
+                                <p id="timer"></p>
+                            </div>
+                        </form>
                     </div>
-                    <div class="sprator"></div>
-                    <div class="col col-12 row justify-content-center step-box step-box-2">
-                        <div class="col col-1">
-                            <img src="assets/img/trx.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for Transaction Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
-                            </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sprator"></div>
+                </div>
+                <div class="col col-12 row justify-content-center sp-assign-step animated fadeIn">
                     <div class="col col-12 row justify-content-center step-box step-box-3">
                         <div class="col col-1">
                             <img src="assets/img/metamask.png" height="30" />
@@ -352,536 +538,418 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- The Claim Modal -->
-<div class="modal animated fadeIn" id="claimModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title m-title">Claim Sponsorships from Subscriptions</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="init()">
-                    &times;
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <p>This will claim any unclaimed sponsorships that have been produced by any of your
-                    subscriptions. See the <a href="https://www.brightid.org/sponsorships" target="_blank">sponsorships
-                        and subscriptions document</a> for the schedule.</p>
-                <div class="col col-12 claim-input">
-                    <form>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="claimCheckbox" value="business" checked="checked"> I
-                                represent a business</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="claimPrivacyCheckbox" value="privacyAgreement"> I have
-                                read and agree to the
-                                <a href="#Modal"> privacy policy and terms of use </a></label>
-                        </div>
-                        <div class="col col-12" style="margin-bottom: 4%;">
-                            <span id="claimMsg"></span>
-                        </div>
-                        <button id="claimBtn" type="button" onclick="claim()" class="btn btn-info col col-12" disabled>
-                            Claim
-                        </button>
-                        <br />
-                        <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
-                            <p id="proccess"></p>
-                            <br />
-                            <p id="timer"></p>
-                        </div>
-                    </form>
+    <!-- The Context Balance Modal -->
+    <div class="modal animated fadeIn" id="contextBalanceModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title m-title">Context's Balance</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="init()">
+                        &times;
+                    </button>
                 </div>
-                <div class="col col-12 row justify-content-center claim-step animated fadeIn">
-                    <div class="col col-12 row justify-content-center step-box step-box-3">
-                        <div class="col col-1">
-                            <img src="assets/img/metamask.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for MetaMask Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="col col-12 context-balance-input">
+                        <form>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">Context</span>
+                                </div>
+                                <input type="text" id="balanceContextName" class="form-control contextname"
+                                    placeholder="Context Name" aria-describedby="basic-addon2">
                             </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
+                            <div class="col col-12" style="margin-bottom: 4%;">
+                                <span class="totalAssigned"></span>
+                                </br>
+                                <span class="youAssigned"></span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="sprator"></div>
-                    <div class="col col-12 row justify-content-center step-box step-box-4">
-                        <div class="col col-1">
-                            <img src="assets/img/trx.png" height="30" />
-                        </div>
-                        <div class="col col-8">
-                            <p class="t-text">Waiting for Transaction Confirmation</p>
-                        </div>
-                        <div class="col col-2">
-                            <div class="loader">
-                                <img src="assets/img/loading.gif" height="30" />
-                            </div>
-                            <div class="confirm-icon">
-                                <img src="assets/img/confirm.png" height="30" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- The SP Assign Modal -->
-<div class="modal animated fadeIn" id="spAssignModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title m-title">Assign Sponsorships</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="init()">
-                    &times;
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="col col-12 sp-assign-input">
-                    <form>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Sp</span>
-                            </div>
-                            <input type="number" min="0" id="spAssign" class="form-control" onkeydown="checkSpBalance()"
-                                   placeholder="Amount"
-                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Context</span>
-                            </div>
-                            <input type="text" id="assignContextName" class="form-control" placeholder="Context Name"
-                                   aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-info" type="button" onclick="contextBalance()">Balance</button>
+                                <button class="btn btn-info col col-12" type="button"
+                                    onclick="contextBalance()">Balance</button>
                             </div>
-                        </div>
-                        <div class="col col-12" style="margin-bottom: 4%;">
-                            <span id="spContextMsg"></span>
-                            </br>
-                            <span class="totalAssigned"></span>
-                            </br>
-                            <span class="youAssigned"></span>
-                        </div>
-                        <button id="assignBtn" type="button" onclick="assignSp()" class="btn btn-info col col-12">
-                            Assign
-                        </button>
-                        <br />
-                        <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
-                            <p id="proccess"></p>
                             <br />
-                            <p id="timer"></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col col-12 row justify-content-center sp-assign-step animated fadeIn">
-                <div class="col col-12 row justify-content-center step-box step-box-3">
-                    <div class="col col-1">
-                        <img src="assets/img/metamask.png" height="30" />
-                    </div>
-                    <div class="col col-8">
-                        <p class="t-text">Waiting for MetaMask Confirmation</p>
-                    </div>
-                    <div class="col col-2">
-                        <div class="loader">
-                            <img src="assets/img/loading.gif" height="30" />
-                        </div>
-                        <div class="confirm-icon">
-                            <img src="assets/img/confirm.png" height="30" />
-                        </div>
-                    </div>
-                </div>
-                <div class="sprator"></div>
-                <div class="col col-12 row justify-content-center step-box step-box-4">
-                    <div class="col col-1">
-                        <img src="assets/img/trx.png" height="30" />
-                    </div>
-                    <div class="col col-8">
-                        <p class="t-text">Waiting for Transaction Confirmation</p>
-                    </div>
-                    <div class="col col-2">
-                        <div class="loader">
-                            <img src="assets/img/loading.gif" height="30" />
-                        </div>
-                        <div class="confirm-icon">
-                            <img src="assets/img/confirm.png" height="30" />
-                        </div>
+                            <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                                <p id="proccess"></p>
+                                <br />
+                                <p id="timer"></p>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- The Context Balance Modal -->
-<div class="modal animated fadeIn" id="contextBalanceModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title m-title">Context's Balance</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="init()">
-                    &times;
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="col col-12 context-balance-input">
-                    <form>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Context</span>
-                            </div>
-                            <input type="text" id="balanceContextName" class="form-control contextname" placeholder="Context Name"
-                                   aria-describedby="basic-addon2">
-                        </div>
-                        <div class="col col-12" style="margin-bottom: 4%;">
-                            <span class="totalAssigned"></span>
-                            </br>
-                            <span class="youAssigned"></span>
-                        </div>
-                        <div class="input-group-append">
-                            <button class="btn btn-info col col-12" type="button" onclick="contextBalance()">Balance</button>
-                        </div>
-                        <br />
-                        <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
-                            <p id="proccess"></p>
-                            <br />
-                            <p id="timer"></p>
-                        </div>
-                    </form>
+
+
+
+
+    <!-- The Subs Activate Modal -->
+    <div class="modal animated fadeIn" id="subsActivateModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title m-title">Activate Subscriptions</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="init()">
+                        &times;
+                    </button>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-<!-- The Subs Activate Modal -->
-<div class="modal animated fadeIn" id="subsActivateModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title m-title">Activate Subscriptions</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="init()">
-                    &times;
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="col col-12 subs-activate-input">
-                    <form>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Subs</span>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="col col-12 subs-activate-input">
+                        <form>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-input-txt">Subs</span>
+                                </div>
+                                <input type="number" min="0" id="subsActivate" class="form-control"
+                                    onkeydown="checkSubsBalance()" placeholder="Amount"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
                             </div>
-                            <input type="number" min="0" id="subsActivate" class="form-control"
-                                   onkeydown="checkSubsBalance()"
-                                   placeholder="Amount"
-                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="activatePrivacyCheckbox" value="privacyAgreement"> I have
-                                read and agree to the
-                                <a href="#Modal"> privacy policy and terms of use </a></label>
-                        </div>
-                        <div class="col col-12" style="margin-bottom: 4%;">
-                            <span id="subsActivateMsg"></span>
-                        </div>
-                        <button id="activateBtn" type="button" onclick="activate()" class="btn btn-info col col-12"
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="activatePrivacyCheckbox" value="privacyAgreement"> I
+                                    have
+                                    read and agree to the
+                                    <a href="#Modal"> privacy policy and terms of use </a></label>
+                            </div>
+                            <div class="col col-12" style="margin-bottom: 4%;">
+                                <span id="subsActivateMsg"></span>
+                            </div>
+                            <button id="activateBtn" type="button" onclick="activate()" class="btn btn-info col col-12"
                                 disabled> Activate
-                        </button>
-                        <br />
-                        <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
-                            <p id="proccess"></p>
+                            </button>
                             <br />
-                            <p id="timer"></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col col-12 row justify-content-center subs-activate-step animated fadeIn">
-                <div class="col col-12 row justify-content-center step-box step-box-3">
-                    <div class="col col-1">
-                        <img src="assets/img/metamask.png" height="30" />
-                    </div>
-                    <div class="col col-8">
-                        <p class="t-text">Waiting for MetaMask Confirmation</p>
-                    </div>
-                    <div class="col col-2">
-                        <div class="loader">
-                            <img src="assets/img/loading.gif" height="30" />
-                        </div>
-                        <div class="confirm-icon">
-                            <img src="assets/img/confirm.png" height="30" />
-                        </div>
+                            <div class="col col-12 row justify-content-center" style="margin-top: 15px;">
+                                <p id="proccess"></p>
+                                <br />
+                                <p id="timer"></p>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="sprator"></div>
-                <div class="col col-12 row justify-content-center step-box step-box-4">
-                    <div class="col col-1">
-                        <img src="assets/img/trx.png" height="30" />
-                    </div>
-                    <div class="col col-8">
-                        <p class="t-text">Waiting for Transaction Confirmation</p>
-                    </div>
-                    <div class="col col-2">
-                        <div class="loader">
-                            <img src="assets/img/loading.gif" height="30" />
+                <div class="col col-12 row justify-content-center subs-activate-step animated fadeIn">
+                    <div class="col col-12 row justify-content-center step-box step-box-3">
+                        <div class="col col-1">
+                            <img src="assets/img/metamask.png" height="30" />
                         </div>
-                        <div class="confirm-icon">
-                            <img src="assets/img/confirm.png" height="30" />
+                        <div class="col col-8">
+                            <p class="t-text">Waiting for MetaMask Confirmation</p>
+                        </div>
+                        <div class="col col-2">
+                            <div class="loader">
+                                <img src="assets/img/loading.gif" height="30" />
+                            </div>
+                            <div class="confirm-icon">
+                                <img src="assets/img/confirm.png" height="30" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sprator"></div>
+                    <div class="col col-12 row justify-content-center step-box step-box-4">
+                        <div class="col col-1">
+                            <img src="assets/img/trx.png" height="30" />
+                        </div>
+                        <div class="col col-8">
+                            <p class="t-text">Waiting for Transaction Confirmation</p>
+                        </div>
+                        <div class="col col-2">
+                            <div class="loader">
+                                <img src="assets/img/loading.gif" height="30" />
+                            </div>
+                            <div class="confirm-icon">
+                                <img src="assets/img/confirm.png" height="30" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal: privacyPolicyModal -->
-<div class="modal animated fadeIn" id="privacyPolicyModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content agreement">
-            <!--Header-->
-            <div class="modal-header">
-                <h3 class="modal-title m-title" id="myModalLabel">Privacy Policy and Terms of Use</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <!--Body-->
-            <div class="modal-body">
-                <h4 class="mb-2">BrightID Privacy Policy</h4>
-                <p class="text-secondary date">Last modified: 12/8/2019</p>
-                <p>
-                    This privacy policy (“Privacy Policy”) governs data collection and usage of the services, software,
-                    platform, and websites provided by <a target="_blank"
-                                                          href="https://github.com/BrightID/BrightID-Constitution">BrightID
-                    Main DAO</a> (“BrightID,”
-                    “us” or “we”) and any of its affiliates (collectively, the “Services”). This Privacy Policy is
-                    intended to meet requirements
-                    globally, including those in North America, Europe, APAC, and other jurisdictions. By using the
-                    Services, you consent to the data practices described in this Privacy Policy. Please read this
-                    document carefully and ensure that you understand it. If you do not agree to any part of this
-                    Privacy Policy, then you should stop accessing the Services immediately. Please read this carefully
-                    as this Privacy Policy is legally binding when you use the Services.
-                </p>
-                <p>If you use the Services, BrightID may request certain personally-identifiable information (“PII”).
-                    This may include contact information such as your email address. In addition, BrightID may collect
-                    personal information regarding other accounts you choose to link with BrightID or the Services
-                    (e.g., Metamask, Google, etc.). </p>
-                <p>By using the Services in connection with a BrightID Sponsorships Purchase application, you agree to
-                    share the country, region and city of your connection; and the time and amount of your purchases and
-                    claims with BrightID. Purchase and claim information will be
-                    aggregated by month and location and publicly displayed for tax authorities. </p>
-                <p>If you contact BrightID in person, by phone, email, instant messaging, live chat, or by some other
-                    means (either through the Services or through a third-party service), BrightID may keep a record of
-                    your contact information and correspondence for later reference.</p>
-                <p>BrightID retains the personal information it receives as described in this Privacy Policy for as long
-                    as you use the Services or as necessary to fulfill the purpose(s) for which it was collected,
-                    provide the Services, resolve disputes, establish legal defenses, conduct audits, pursue legitimate
-                    business purposes, enforce BrightID agreements, and comply with applicable laws.</p>
-                <h5>Your rights</h5>
-                <h6>Right to access</h6>
-                <p>As a data subject you have the right to obtain from us free information about your personal data
-                    processed at any time and a copy of this information. Furthermore, you will have access to the
-                    following information: the purposes of the processing; the categories of personal data concerned;
-                    where possible, the envisaged period for which the personal data will be processed, or, if not
-                    possible, the criteria used to determine that period; the existence of the right to request from us
-                    rectification or erasure of personal data, or restriction of processing of personal data concerning
-                    you, or to object to such processing; the existence of the right to lodge a complaint with a
-                    supervisory authority; where the personal data are not collected directly from you, any available
-                    information as to their source; and the existence of automated decision-making, including profiling,
-                    and, at least in those cases, meaningful information about the logic involved, as well as the
-                    significance and envisaged consequences of such processing for you.</p>
-                <h6>Right to rectification</h6>
-                <p>You have the right to obtain from us, without undue delay, the rectification of inaccurate personal
-                    data concerning you. Taking into account the purposes of the processing, you shall have the right to
-                    have incomplete personal data completed, including by means of providing a supplementary
-                    statement.</p>
-                <h6>Right to be forgotten</h6>
-                <p>You have the right to obtain from us the erasure of personal data concerning you as soon as possible,
-                    and we shall have the obligation to erase personal data without undue delay where required by the
-                    law, including when:</p>
-                <ul>
-                    <li>the personal data is no longer necessary in relation to the purposes for which they were
-                        collected or otherwise processed;
-                    </li>
-                    <li>there is no longer a legal ground for the processing;</li>
-                    <li>you object to the processing and there are no overriding legitimate grounds for the
-                        processing;
-                    </li>
-                    <li>the personal data has been unlawfully processed;</li>
-                    <li>the personal data must be erased for compliance with a legal obligation in accordance with the
-                        applicable law to which we are subject.
-                    </li>
-                </ul>
-                <h6>Right to restriction of processing</h6>
-                <p>You have the right to obtain from BrightID restriction of processing where one of the following
-                    applies:</p>
-                <ul>
-                    <li>the accuracy of the personal data is contested by you, for a period enabling us to verify the
-                        accuracy of the personal data;
-                    </li>
-                    <li>the processing is unlawful and you oppose the erasure of the personal data and requests instead
-                        the restriction of their use instead;
-                    </li>
-                    <li>we no longer needs the personal data for the purposes of the processing, but they are required
-                        by you for the establishment, exercise or defense of legal claims; and/or
-                    </li>
-                    <li>you have objected to processing pursuant to applicable laws.</li>
-                </ul>
-                <h6>Right to object</h6>
-                <p>You have the right to object, on grounds relating to your particular situation, at any time, to the
-                    processing of personal data concerning you. We shall no longer process the personal data in the
-                    event of the objection, unless we can demonstrate reasonable grounds for the processing, which
-                    override the interests, rights and freedoms of you, or for the establishment, exercise or defense of
-                    legal claims.</p>
-                <h6>Right to withdraw data protection consent</h6>
-                <p>You have the right to withdraw your consent to the processing of your personal data at any time.</p>
-                <h6>International transfers</h6>
-                <p>We are entitled to transfer your personal data to third parties abroad for the purposes of data
-                    processing.</p>
-                <p>As personal data processors, they are obliged to protect data privacy to the same extent as we
-                    ourselves. We choose the processors carefully to ensure compliance with applicable laws.</p>
-                <h6>Data security</h6>
-                <p>We use appropriate technical and organizational security measures to protect your personal data. Our
-                    security measures are continuously improved in line with technical developments.</p>
-                <h6>Duration of data processing</h6>
-                <p>We will process your personal data only for the period necessary to achieve the purpose of the
-                    processing, or as required by applicable laws. After the period the personal data will be
-                    deleted.</p>
-                <h5>Other Notices</h5>
-                <h6>California Online Privacy Protection Act</h6>
-                <p>CalOPPA is the first state law in the nation to require commercial websites and online services to
-                    post a privacy policy. The law’s reach stretches well beyond California to require a person or
-                    company in the United States (and conceivably the world) that operates websites collecting
-                    personally identifiable information from California consumers to post a conspicuous privacy policy
-                    on its website stating exactly the information being collected and those individuals with whom it is
-                    being shared, and to comply with this Privacy Policy. See more at:
-                    <a target="_blank"
-                       href="http://consumercal.org/california-online-privacy-protection-act-caloppa/#sthash.0FdRbT51.dpuf">http://consumercal.org/california-online-privacy-protection-act-caloppa/#sthash.0FdRbT51.dpuf</a>
-                </p>
-                <p>According to CalOPPA, BrightID agrees to the following:</p>
-                <ul>
-                    <li>Users can explore the Services anonymously;</li>
-                    <li>Once this Privacy Policy is created, BrightID will add a link to it on its home page, or at a
-                        minimum, on the first significant page after entering the BrightID website central to the
-                        Services;
-                    </li>
-                    <li>The BrightID Privacy Policy link includes the word ‘Privacy’, and can be easily be found on the
-                        page(s) specified above; and
-                    </li>
-                    <li>Users will be notified of any privacy policy changes on the BrightID Privacy Policy page.</li>
-                </ul>
-                <p>Users are able to change their personal information:</p>
-                <ul>
-                    <li>By emailing BrightID.</li>
-                    <li>By calling BrightID.</li>
-                    <li>By chatting with or sending BrightID representatives a ticket.</li>
-                </ul>
-                <h6>Children</h6>
-                <p>This site and the Services are not targeted towards children, and BrightID does not knowingly collect
-                    PII from children under the age of thirteen (13). If you become aware that a child has provided
-                    BrightID or its affiliates with PII, please contact BrightID as set forth in this Privacy Policy. If
-                    you are a parent or legal guardian of a minor child, BrightID will treat any information that you
-                    provide BrightID while using the Services on behalf of your minor child as PII as otherwise provided
-                    in this Privacy Policy.</p>
-                <p>If you have questions concerning BrightID information practices with respect to children, or if you
-                    learn that a child under the age of thirteen (13) has used the Services or provided BrightID with
-                    personal information, please email BrightID at info@brightid.org.</p>
-                <h6>Non Recourse</h6>
-                <p>All claims or causes of action (whether in contract or in tort, in law or in equity) that may be
-                    based upon, arise out of or relate to this Privacy Policy, or the negotiation, execution or
-                    performance of this Privacy Policy (including any representation or warranty made in or in
-                    connection with this Privacy Policy or as an inducement to enter into this Privacy Policy), may be
-                    made only against the entities that are expressly identified as parties hereto. No person who is not
-                    a named party to this Privacy Policy, including, without limitation, any past, present or future
-                    director, officer, employee, incorporator, member, partner, equity-holder, affiliate, agent,
-                    attorney or representative of any named party to this Privacy Policy, shall have any liability
-                    (whether in contract or in tort, in law or in equity, or based upon any theory that seeks to impose
-                    liability of an entity party against its owners or affiliates) for any obligations or liabilities
-                    arising under, in connection with or related to this Privacy Policy or for any claim based on, in
-                    respect of, or by reason of this Privacy Policy or its negotiation or execution; and each party
-                    hereto waives and releases all such liabilities, claims and obligations against any such person who
-                    is not a named party to this Privacy Policy.</p>
-                <h6>We Reserve the Right to Update and Revise This Privacy Policy at Any Time</h6>
-                <p>We occasionally review this Privacy Policy to make sure it complies with applicable laws and conforms
-                    to changes in the Services. We may need to update this Privacy Policy, and we reserve the right to
-                    do so at any time. If we make a change to this Privacy Policy that, in our sole discretion, is
-                    material, we will provide you with additional notice. By continuing to use the Services after
-                    Privacy Policy changes go into effect, you agree to be bound by the revised policy. We strongly
-                    encourage you to review the Privacy Policy whenever you access or use the Services or otherwise
-                    interact with us to stay informed about our information practices and your privacy rights and
-                    choices.</p>
-                <h4 class="mb-2">BrightID Terms of Use</h4>
-                <p class="text-secondary date">Last modified: 12/6/2019</p>
-                <p>Please review the terms described herein carefully (the “Terms”). Your use of the services, software,
-                    platform, and websites provided by BrightID Main DAO (“BrightID,” “us” or “we”) and any of its
-                    affiliates (collectively, the “Services”) is contingent on your acceptance of these Terms and all
-                    the terms and policies incorporated herein, including, but not limited to, the BrightID Privacy
-                    Policy.</p>
-                <p>This site and the Services are not targeted towards children; no one under the age of thirteen (13)
-                    may use this application.</p>
-                <p><em>Sponsorships are meant for use with the BrightID application only.</em></p>
-                <ul>
-                    <li><a href="https://play.google.com/store/apps/details?id=org.brightid&hl=en_US" target="_blank">Google
-                        Play Store</a></li>
-                    <li><a href="https://testflight.apple.com/join/L99RcYEc" target="_blank">Apple TestFlight</a></li>
-                </ul>
-                <p>Sponsorships and Subscriptions are sold “as-is” for their intended purpose with no refund possible.
-                    Sponsorships and Subscriptions shall not be transferred, assigned or otherwise used except in
-                    compliance with these Terms and all applicable laws, rules and regulations.</p>
-                <p>Please review the <a href="https://www.brightid.org/sponsorships"
-                                        target="_blank">
-                    BrightID Sponsorships and Subscriptions Page
-                </a> for additional information.</p>
-                <p>In the event that any terms or policies incorporated herein shall contradict, these Terms shall
-                    control.
-                <p>
-                <p>If you have questions concerning these Terms, please email BrightID at info@brightid.org.</p>
-            </div>
-            <!--Footer-->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+    <!-- Modal: privacyPolicyModal -->
+    <div class="modal animated fadeIn" id="privacyPolicyModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content agreement">
+                <!--Header-->
+                <div class="modal-header">
+                    <h3 class="modal-title m-title" id="myModalLabel">Privacy Policy and Terms of Use</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <h4 class="mb-2">BrightID Privacy Policy</h4>
+                    <p class="text-secondary date">Last modified: 12/8/2019</p>
+                    <p>
+                        This privacy policy (“Privacy Policy”) governs data collection and usage of the services,
+                        software,
+                        platform, and websites provided by <a target="_blank"
+                            href="https://github.com/BrightID/BrightID-Constitution">BrightID
+                            Main DAO</a> (“BrightID,”
+                        “us” or “we”) and any of its affiliates (collectively, the “Services”). This Privacy Policy is
+                        intended to meet requirements
+                        globally, including those in North America, Europe, APAC, and other jurisdictions. By using the
+                        Services, you consent to the data practices described in this Privacy Policy. Please read this
+                        document carefully and ensure that you understand it. If you do not agree to any part of this
+                        Privacy Policy, then you should stop accessing the Services immediately. Please read this
+                        carefully
+                        as this Privacy Policy is legally binding when you use the Services.
+                    </p>
+                    <p>If you use the Services, BrightID may request certain personally-identifiable information
+                        (“PII”).
+                        This may include contact information such as your email address. In addition, BrightID may
+                        collect
+                        personal information regarding other accounts you choose to link with BrightID or the Services
+                        (e.g., Metamask, Google, etc.). </p>
+                    <p>By using the Services in connection with a BrightID Sponsorships Purchase application, you agree
+                        to
+                        share the country, region and city of your connection; and the time and amount of your purchases
+                        and
+                        claims with BrightID. Purchase and claim information will be
+                        aggregated by month and location and publicly displayed for tax authorities. </p>
+                    <p>If you contact BrightID in person, by phone, email, instant messaging, live chat, or by some
+                        other
+                        means (either through the Services or through a third-party service), BrightID may keep a record
+                        of
+                        your contact information and correspondence for later reference.</p>
+                    <p>BrightID retains the personal information it receives as described in this Privacy Policy for as
+                        long
+                        as you use the Services or as necessary to fulfill the purpose(s) for which it was collected,
+                        provide the Services, resolve disputes, establish legal defenses, conduct audits, pursue
+                        legitimate
+                        business purposes, enforce BrightID agreements, and comply with applicable laws.</p>
+                    <h5>Your rights</h5>
+                    <h6>Right to access</h6>
+                    <p>As a data subject you have the right to obtain from us free information about your personal data
+                        processed at any time and a copy of this information. Furthermore, you will have access to the
+                        following information: the purposes of the processing; the categories of personal data
+                        concerned;
+                        where possible, the envisaged period for which the personal data will be processed, or, if not
+                        possible, the criteria used to determine that period; the existence of the right to request from
+                        us
+                        rectification or erasure of personal data, or restriction of processing of personal data
+                        concerning
+                        you, or to object to such processing; the existence of the right to lodge a complaint with a
+                        supervisory authority; where the personal data are not collected directly from you, any
+                        available
+                        information as to their source; and the existence of automated decision-making, including
+                        profiling,
+                        and, at least in those cases, meaningful information about the logic involved, as well as the
+                        significance and envisaged consequences of such processing for you.</p>
+                    <h6>Right to rectification</h6>
+                    <p>You have the right to obtain from us, without undue delay, the rectification of inaccurate
+                        personal
+                        data concerning you. Taking into account the purposes of the processing, you shall have the
+                        right to
+                        have incomplete personal data completed, including by means of providing a supplementary
+                        statement.</p>
+                    <h6>Right to be forgotten</h6>
+                    <p>You have the right to obtain from us the erasure of personal data concerning you as soon as
+                        possible,
+                        and we shall have the obligation to erase personal data without undue delay where required by
+                        the
+                        law, including when:</p>
+                    <ul>
+                        <li>the personal data is no longer necessary in relation to the purposes for which they were
+                            collected or otherwise processed;
+                        </li>
+                        <li>there is no longer a legal ground for the processing;</li>
+                        <li>you object to the processing and there are no overriding legitimate grounds for the
+                            processing;
+                        </li>
+                        <li>the personal data has been unlawfully processed;</li>
+                        <li>the personal data must be erased for compliance with a legal obligation in accordance with
+                            the
+                            applicable law to which we are subject.
+                        </li>
+                    </ul>
+                    <h6>Right to restriction of processing</h6>
+                    <p>You have the right to obtain from BrightID restriction of processing where one of the following
+                        applies:</p>
+                    <ul>
+                        <li>the accuracy of the personal data is contested by you, for a period enabling us to verify
+                            the
+                            accuracy of the personal data;
+                        </li>
+                        <li>the processing is unlawful and you oppose the erasure of the personal data and requests
+                            instead
+                            the restriction of their use instead;
+                        </li>
+                        <li>we no longer needs the personal data for the purposes of the processing, but they are
+                            required
+                            by you for the establishment, exercise or defense of legal claims; and/or
+                        </li>
+                        <li>you have objected to processing pursuant to applicable laws.</li>
+                    </ul>
+                    <h6>Right to object</h6>
+                    <p>You have the right to object, on grounds relating to your particular situation, at any time, to
+                        the
+                        processing of personal data concerning you. We shall no longer process the personal data in the
+                        event of the objection, unless we can demonstrate reasonable grounds for the processing, which
+                        override the interests, rights and freedoms of you, or for the establishment, exercise or
+                        defense of
+                        legal claims.</p>
+                    <h6>Right to withdraw data protection consent</h6>
+                    <p>You have the right to withdraw your consent to the processing of your personal data at any time.
+                    </p>
+                    <h6>International transfers</h6>
+                    <p>We are entitled to transfer your personal data to third parties abroad for the purposes of data
+                        processing.</p>
+                    <p>As personal data processors, they are obliged to protect data privacy to the same extent as we
+                        ourselves. We choose the processors carefully to ensure compliance with applicable laws.</p>
+                    <h6>Data security</h6>
+                    <p>We use appropriate technical and organizational security measures to protect your personal data.
+                        Our
+                        security measures are continuously improved in line with technical developments.</p>
+                    <h6>Duration of data processing</h6>
+                    <p>We will process your personal data only for the period necessary to achieve the purpose of the
+                        processing, or as required by applicable laws. After the period the personal data will be
+                        deleted.</p>
+                    <h5>Other Notices</h5>
+                    <h6>California Online Privacy Protection Act</h6>
+                    <p>CalOPPA is the first state law in the nation to require commercial websites and online services
+                        to
+                        post a privacy policy. The law’s reach stretches well beyond California to require a person or
+                        company in the United States (and conceivably the world) that operates websites collecting
+                        personally identifiable information from California consumers to post a conspicuous privacy
+                        policy
+                        on its website stating exactly the information being collected and those individuals with whom
+                        it is
+                        being shared, and to comply with this Privacy Policy. See more at:
+                        <a target="_blank"
+                            href="http://consumercal.org/california-online-privacy-protection-act-caloppa/#sthash.0FdRbT51.dpuf">http://consumercal.org/california-online-privacy-protection-act-caloppa/#sthash.0FdRbT51.dpuf</a>
+                    </p>
+                    <p>According to CalOPPA, BrightID agrees to the following:</p>
+                    <ul>
+                        <li>Users can explore the Services anonymously;</li>
+                        <li>Once this Privacy Policy is created, BrightID will add a link to it on its home page, or at
+                            a
+                            minimum, on the first significant page after entering the BrightID website central to the
+                            Services;
+                        </li>
+                        <li>The BrightID Privacy Policy link includes the word ‘Privacy’, and can be easily be found on
+                            the
+                            page(s) specified above; and
+                        </li>
+                        <li>Users will be notified of any privacy policy changes on the BrightID Privacy Policy page.
+                        </li>
+                    </ul>
+                    <p>Users are able to change their personal information:</p>
+                    <ul>
+                        <li>By emailing BrightID.</li>
+                        <li>By calling BrightID.</li>
+                        <li>By chatting with or sending BrightID representatives a ticket.</li>
+                    </ul>
+                    <h6>Children</h6>
+                    <p>This site and the Services are not targeted towards children, and BrightID does not knowingly
+                        collect
+                        PII from children under the age of thirteen (13). If you become aware that a child has provided
+                        BrightID or its affiliates with PII, please contact BrightID as set forth in this Privacy
+                        Policy. If
+                        you are a parent or legal guardian of a minor child, BrightID will treat any information that
+                        you
+                        provide BrightID while using the Services on behalf of your minor child as PII as otherwise
+                        provided
+                        in this Privacy Policy.</p>
+                    <p>If you have questions concerning BrightID information practices with respect to children, or if
+                        you
+                        learn that a child under the age of thirteen (13) has used the Services or provided BrightID
+                        with
+                        personal information, please email BrightID at info@brightid.org.</p>
+                    <h6>Non Recourse</h6>
+                    <p>All claims or causes of action (whether in contract or in tort, in law or in equity) that may be
+                        based upon, arise out of or relate to this Privacy Policy, or the negotiation, execution or
+                        performance of this Privacy Policy (including any representation or warranty made in or in
+                        connection with this Privacy Policy or as an inducement to enter into this Privacy Policy), may
+                        be
+                        made only against the entities that are expressly identified as parties hereto. No person who is
+                        not
+                        a named party to this Privacy Policy, including, without limitation, any past, present or future
+                        director, officer, employee, incorporator, member, partner, equity-holder, affiliate, agent,
+                        attorney or representative of any named party to this Privacy Policy, shall have any liability
+                        (whether in contract or in tort, in law or in equity, or based upon any theory that seeks to
+                        impose
+                        liability of an entity party against its owners or affiliates) for any obligations or
+                        liabilities
+                        arising under, in connection with or related to this Privacy Policy or for any claim based on,
+                        in
+                        respect of, or by reason of this Privacy Policy or its negotiation or execution; and each party
+                        hereto waives and releases all such liabilities, claims and obligations against any such person
+                        who
+                        is not a named party to this Privacy Policy.</p>
+                    <h6>We Reserve the Right to Update and Revise This Privacy Policy at Any Time</h6>
+                    <p>We occasionally review this Privacy Policy to make sure it complies with applicable laws and
+                        conforms
+                        to changes in the Services. We may need to update this Privacy Policy, and we reserve the right
+                        to
+                        do so at any time. If we make a change to this Privacy Policy that, in our sole discretion, is
+                        material, we will provide you with additional notice. By continuing to use the Services after
+                        Privacy Policy changes go into effect, you agree to be bound by the revised policy. We strongly
+                        encourage you to review the Privacy Policy whenever you access or use the Services or otherwise
+                        interact with us to stay informed about our information practices and your privacy rights and
+                        choices.</p>
+                    <h4 class="mb-2">BrightID Terms of Use</h4>
+                    <p class="text-secondary date">Last modified: 12/6/2019</p>
+                    <p>Please review the terms described herein carefully (the “Terms”). Your use of the services,
+                        software,
+                        platform, and websites provided by BrightID Main DAO (“BrightID,” “us” or “we”) and any of its
+                        affiliates (collectively, the “Services”) is contingent on your acceptance of these Terms and
+                        all
+                        the terms and policies incorporated herein, including, but not limited to, the BrightID Privacy
+                        Policy.</p>
+                    <p>This site and the Services are not targeted towards children; no one under the age of thirteen
+                        (13)
+                        may use this application.</p>
+                    <p><em>Sponsorships are meant for use with the BrightID application only.</em></p>
+                    <ul>
+                        <li><a href="https://play.google.com/store/apps/details?id=org.brightid&hl=en_US"
+                                target="_blank">Google
+                                Play Store</a></li>
+                        <li><a href="https://testflight.apple.com/join/L99RcYEc" target="_blank">Apple TestFlight</a>
+                        </li>
+                    </ul>
+                    <p>Sponsorships and Subscriptions are sold “as-is” for their intended purpose with no refund
+                        possible.
+                        Sponsorships and Subscriptions shall not be transferred, assigned or otherwise used except in
+                        compliance with these Terms and all applicable laws, rules and regulations.</p>
+                    <p>Please review the <a href="https://www.brightid.org/sponsorships" target="_blank">
+                            BrightID Sponsorships and Subscriptions Page
+                        </a> for additional information.</p>
+                    <p>In the event that any terms or policies incorporated herein shall contradict, these Terms shall
+                        control.
+                        <p>
+                            <p>If you have questions concerning these Terms, please email BrightID at info@brightid.org.
+                            </p>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="assets/js/core/jquery.min.js"></script>
-<!-- <script src="assets/js/core/web3.min.js"></script> -->
-<script type="text/javascript" src="assets/js/core/jquery-migrate-1.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<script src="assets/js/core/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script src="assets/js/config.js"></script>
-<script src="assets/js/init.js"></script>
-<script src="assets/js/utils.js"></script>
-<script src="assets/js/sp.js"></script>
-<script src="assets/js/subs.js"></script>
-<script src="assets/js/claim.js"></script>
-<script src="assets/js/balance.js"></script>
-<script src="assets/js/assign.js"></script>
-<script src="assets/js/activate.js"></script>
+    <script src="assets/js/core/jquery.min.js"></script>
+    <!-- <script src="assets/js/core/web3.min.js"></script> -->
+    <script type="text/javascript" src="assets/js/core/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/init.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/sp.js"></script>
+    <script src="assets/js/subs.js"></script>
+    <script src="assets/js/claim.js"></script>
+    <script src="assets/js/balance.js"></script>
+    <script src="assets/js/assign.js"></script>
+    <script src="assets/js/activate.js"></script>
 
 </body>
+
 </html>
