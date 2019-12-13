@@ -3,6 +3,13 @@ var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
 });
 
 function activateInit() {
+  subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+    if (error) {
+      return;
+    }
+    $("#subsActivate").val(parseInt(result.c[0]));
+  });
+
   $("#subsActivateMsg").html("Waiting for input");
   $("#subsActivateMsg").css("color", "white");
 
