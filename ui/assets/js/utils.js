@@ -146,3 +146,7 @@ function checkApproveResult(hash, cb) {
 function recordAction(data) {
   $.post('/action', data);
 }
+
+function numberDecorator(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

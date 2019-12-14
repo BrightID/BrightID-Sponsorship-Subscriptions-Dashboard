@@ -111,12 +111,12 @@ function init() {
     $("#spPrice").html(spPrice);
   });
 
-  spMinterContract.totalSold(function (error, result) {
-    if (error) {
-      return;
-    }
-    //   $("#spTotalSold").html(parseInt(result.c[0]));
-  });
+  // spMinterContract.totalSold(function (error, result) {
+  //   if (error) {
+  //     return;
+  //   }
+  //   $("#spTotalSold").html(parseInt(result.c[0]));
+  // });
 
   subsMinterContract.price(function (error, result) {
     if (error) {
@@ -130,7 +130,7 @@ function init() {
     if (error) {
       return;
     }
-    $("#subsLeft").html(900000 - parseInt(result.c[0]));
+    $("#subsLeft").html(numberDecorator(900000 - parseInt(result.c[0])));
   });
 
   subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
