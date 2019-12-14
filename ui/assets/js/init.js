@@ -147,16 +147,13 @@ function init() {
     $("#spBalance").html(parseInt(result.c[0]));
   });
 
-  $("#spContractAddress").html(addresses.sp);
-  $("#subsContractAddress").html(addresses.subs);
-  console.dir(subsContract);
-  console.dir(subsContract.SubscriptionsActivated);
-  console.log(subsContract.SubscriptionsActivated());
+  $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.sp}" target="_blank">${addresses.sp}</a>`);
+  $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.subs}" target="_blank">${addresses.subs}</a>`);
+
   subsContract.SubscriptionsActivated({}, {
     fromBlock: 0
   }).get(
     function (err, data) {
-      console.log(data);
       activeBalance(data);
     }
   )
@@ -171,6 +168,5 @@ function activeBalance(events) {
     }
     return total + amount;
   }, 0);
-  console.log(totalAmount);
   $("#subsActiveBalance").html(parseInt(totalAmount));
 }
