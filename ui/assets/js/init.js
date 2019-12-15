@@ -137,14 +137,14 @@ function init() {
     if (error) {
       return;
     }
-    $("#subsInactiveBalance").html(parseInt(result.c[0]));
+    $("#subsInactiveBalance").html(numberDecorator(parseInt(result.c[0])));
   });
 
   spContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
-    $("#spBalance").html(parseInt(result.c[0]));
+    $("#spBalance").html(numberDecorator(parseInt(result.c[0])));
   });
 
   $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.sp}" target="_blank">${addresses.sp}</a>`);
@@ -168,5 +168,5 @@ function activeBalance(events) {
     }
     return total + amount;
   }, 0);
-  $("#subsActiveBalance").html(parseInt(totalAmount));
+  $("#subsActiveBalance").html(numberDecorator(parseInt(totalAmount)));
 }

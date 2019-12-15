@@ -34,14 +34,14 @@ function contextBalance() {
       console.log(error);
       return;
     }
-    $(".totalAssigned").html('Total Assigned: '+parseInt(result.c[0])+' SP');
+    $(".totalAssigned").html('Total Assigned: '+numberDecorator(parseInt(result.c[0])+' SP'));
   });
   spContract.contextBalance(web3.eth.defaultAccount, context, function (error, result) {
     if (error) {
       console.log(error);
       return;
     }
-    $(".youAssigned").html('You Assigned: '+parseInt(result.c[0])+' SP');
+    $(".youAssigned").html('You Assigned: '+numberDecorator(parseInt(result.c[0])+' SP'));
   });
 
 }
