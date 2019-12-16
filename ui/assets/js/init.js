@@ -37,8 +37,8 @@ function init() {
     if (err != null) {
       Swal.fire({
         type: "error",
-        title: "Error",
-        text: err,
+        title: "Something went wrong",
+        text: "Error message: " + String(error),
         footer: ""
       });
     } else if (accounts.length === 0) {
