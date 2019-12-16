@@ -20,7 +20,7 @@ async function init(){
   if (window.ethereum) {
     Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
     window.web3 = new Web3(ethereum);
-    web3 = windows.web3;
+    web3 = window.web3;
     try {
       // Request account access if needed
       await ethereum.enable();
