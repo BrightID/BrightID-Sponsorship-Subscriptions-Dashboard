@@ -34,7 +34,7 @@ function init() {
   }
 
   web3.eth.getAccounts(function (error, accounts) {
-    if (err != null) {
+    if (error != null) {
       Swal.fire({
         type: "error",
         title: "Something went wrong",
