@@ -33,7 +33,7 @@ function init() {
     return;
   }
 
-  web3.eth.getAccounts(function (err, accounts) {
+  web3.eth.getAccounts(function (error, accounts) {
     if (err != null) {
       Swal.fire({
         type: "error",
