@@ -36,13 +36,13 @@ function claim() {
     return;
   }
   changeActiveStep(3);
-  subsContract.claimable(web3.eth.defaultAccount, function (error, result) {
+  subsContract.methods.claimable(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       console.log(error);
       return;
     }
     val = parseInt(result.c[0]);
-    subsMinterContract.claim.sendTransaction(function (error, result) {
+    subsMinterContract.methods.claim.sendTransaction(function (error, result) {
       if (error) {
         console.log(error);
         return;

@@ -98,7 +98,7 @@ function init() {
   // ptContract = pt_contract.at(addresses.pt);
 
 
-  spMinterContract.price().call(function (error, result) {
+  spMinterContract.methods.price().call(function (error, result) {
     if (error) {
       return;
     }
@@ -106,14 +106,14 @@ function init() {
     $("#spPrice").html(spPrice);
   });
 
-  // spMinterContract.totalSold(function (error, result) {
+  // spMinterContract.methods.totalSold(function (error, result) {
   //   if (error) {
   //     return;
   //   }
   //   $("#spTotalSold").html(parseInt(result.c[0]));
   // });
 
-  subsMinterContract.price().call(function (error, result) {
+  subsMinterContract.methods.price().call(function (error, result) {
     if (error) {
       return;
     }
@@ -121,21 +121,21 @@ function init() {
     $("#subsPrice").html(subsPrice);
   });
 
-  subsMinterContract.totalSold().call(function (error, result) {
+  subsMinterContract.methods.totalSold().call(function (error, result) {
     if (error) {
       return;
     }
     $("#subsLeft").html(numberDecorator(900000 - parseInt(result.c[0])));
   });
 
-  subsContract.balanceOf().call(web3.eth.defaultAccount, function (error, result) {
+  subsContract.methods.balanceOf().call(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
     $("#subsInactiveBalance").html(numberDecorator(parseInt(result.c[0])));
   });
 
-  spContract.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+  spContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }
@@ -145,7 +145,7 @@ function init() {
   $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.sp}" target="_blank">${addresses.sp}</a>`);
   $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.subs}" target="_blank">${addresses.subs}</a>`);
 
-  subsContract.SubscriptionsActivated({}, {
+  subsContract.methods.SubscriptionsActivated({}, {
     fromBlock: 0
   }).call(
     function (err, data) {

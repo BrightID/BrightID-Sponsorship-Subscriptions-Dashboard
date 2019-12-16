@@ -61,7 +61,7 @@ function purchaseSp() {
   $(".sp-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#spDai").val()) * 10 ** 18;
-  ptContract.approve.sendTransaction(addresses.sp_minter, dai, function (error, result) {
+  ptContract.methods.approve.sendTransaction(addresses.sp_minter, dai, function (error, result) {
     if (error) {
       console.log(error);
       Swal.fire({
@@ -78,7 +78,7 @@ function purchaseSp() {
 }
 
 function buySpConfirm() {
-  spMinterContract.purchase.sendTransaction(function(error, result) {
+  spMinterContract.methods.purchase.sendTransaction(function(error, result) {
     if (error) {
       console.log(error);
       return;
@@ -89,7 +89,7 @@ function buySpConfirm() {
 }
 
 function checkSpState() {
-  ptContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  ptContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }

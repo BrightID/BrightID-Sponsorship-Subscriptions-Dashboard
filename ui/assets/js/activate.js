@@ -3,7 +3,7 @@ var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
 });
 
 function activateInit() {
-  subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
@@ -56,7 +56,7 @@ function activate() {
   $(".subs-activate-input").hide();
   $(".subs-activate-step").show();
   changeActiveStep(3);
-  subsContract.activate.sendTransaction(amount, function (error, result) {
+  subsContract.methods.activate.sendTransaction(amount, function (error, result) {
     if (error) {
       console.log(error);
       return;
@@ -66,7 +66,7 @@ function activate() {
 }
 
 function checkSubsBalance() {
-  subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }

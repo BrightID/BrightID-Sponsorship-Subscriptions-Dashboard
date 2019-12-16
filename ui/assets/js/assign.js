@@ -47,7 +47,7 @@ function assignSp() {
   $(".sp-assign-input").hide();
   $(".sp-assign-step").show();
   changeActiveStep(3);
-  spContract.assignContext.sendTransaction(context, amount, function (error, result) {
+  spContract.methods.assignContext.sendTransaction(context, amount, function (error, result) {
     if (error) {
       console.log(error);
       return;
@@ -57,7 +57,7 @@ function assignSp() {
 }
 
 function checkSpBalance() {
-  spContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  spContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
