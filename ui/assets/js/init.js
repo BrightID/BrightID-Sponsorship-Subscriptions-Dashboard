@@ -149,6 +149,6 @@ function updateActiveBalance(err, events){
   if (err){
     return;
   }
-  const totalAmount = events.reduce((total, event) => parseInt(event.returnValues.amount) + total);
+  const totalAmount = events.reduce((total, event) => parseInt(event.returnValues.amount) + total, 0);
   $("#subsActiveBalance").html(numberDecorator(totalAmount));
 }
