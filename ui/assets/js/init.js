@@ -98,7 +98,7 @@ function init() {
   // ptContract = pt_contract.at(addresses.pt);
 
 
-  spMinterContract.price(function (error, result) {
+  spMinterContract.price().call(function (error, result) {
     if (error) {
       return;
     }
