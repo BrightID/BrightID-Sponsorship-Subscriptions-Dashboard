@@ -73,12 +73,12 @@ function purchaseSubs() {
       });
       return;
     }
-    checkApproveResult(result, buySubsConfrim);
+    checkApproveResult(result, buySubsConfirm);
   });
   $("#subsBuyBtn").prop("disabled", true);
 }
 
-function buySubsConfrim() {
+function buySubsConfirm() {
   subsMinterContract.purchase.sendTransaction(function(error, result) {
     if (error) {
       console.log(error);

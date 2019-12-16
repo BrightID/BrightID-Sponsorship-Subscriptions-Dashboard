@@ -72,12 +72,12 @@ function purchaseSp() {
       });
       return;
     }
-    checkApproveResult(result, buySpConfrim);
+    checkApproveResult(result, buySpConfirm);
   });
   $("#spBuyBtn").prop("disabled", true);
 }
 
-function buySpConfrim() {
+function buySpConfirm() {
   spMinterContract.purchase.sendTransaction(function(error, result) {
     if (error) {
       console.log(error);
