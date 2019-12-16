@@ -19,7 +19,8 @@ async function init(){
   var web3;
   if (window.ethereum) {
     Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
-    web3 = window.web3 = new Web3(ethereum);
+    web3 = new Web3(ethereum);
+    window.web3 = web3;
     try {
       // Request account access if needed
       await ethereum.enable();
@@ -32,6 +33,7 @@ async function init(){
       });
     }
   } else {
+    window.web3 = new Web3(web3.currentProvider);
     web3 = window.web3;
   }
 
