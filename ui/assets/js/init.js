@@ -24,7 +24,6 @@ async function init(){
     try {
       // Request account access if needed
       await ethereum.enable();
-      ptContract = new web3.eth.Contract(abies.pt, addresses.pt);
     } catch (error) {
       Swal.fire({
         type: "error",
@@ -93,7 +92,7 @@ async function init(){
     if (error) {
       return;
     }
-    spPrice = parseInt(result.c[0] / 10000);
+    spPrice = result / 10000;
     $("#spPrice").html(spPrice);
   });
 
@@ -108,7 +107,7 @@ async function init(){
     if (error) {
       return;
     }
-    subsPrice = parseInt(result.c[0] / 10000);
+    subsPrice = result / 10000;
     $("#subsPrice").html(subsPrice);
   });
 
@@ -116,27 +115,27 @@ async function init(){
     if (error) {
       return;
     }
-    $("#subsLeft").html(numberDecorator(900000 - parseInt(result.c[0])));
+    $("#subsLeft").html(numberDecorator(900000 - result));
   });
 
   subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
     if (error) {
       return;
     }
-    $("#subsInactiveBalance").html(numberDecorator(parseInt(result.c[0])));
+    $("#subsInactiveBalance").html(numberDecorator(result));
   });
 
   spContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
     if (error) {
       return;
     }
-    $("#spBalance").html(numberDecorator(parseInt(result.c[0])));
+    $("#spBalance").html(numberDecorator(result));
   });
 
   $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.sp}" target="_blank">${addresses.sp}</a>`);
   $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.subs}" target="_blank">${addresses.subs}</a>`);
 
-  subsContract.methods.SubscriptionsActivated({}, {
+  subsContract.events.SubscriptionsActivated({}, {
     fromBlock: 0
   }).call(
     function(err, data){
