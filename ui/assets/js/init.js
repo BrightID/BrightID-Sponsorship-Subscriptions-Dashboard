@@ -128,7 +128,7 @@ function init() {
     $("#subsLeft").html(numberDecorator(900000 - parseInt(result.c[0])));
   });
 
-  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(web3.eth.defaultAccount, function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }
