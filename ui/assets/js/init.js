@@ -128,14 +128,14 @@ function init() {
     $("#subsLeft").html(numberDecorator(900000 - parseInt(result.c[0])));
   });
 
-  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.Contract.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }
     $("#subsInactiveBalance").html(numberDecorator(parseInt(result.c[0])));
   });
 
-  spContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+  spContract.methods.balanceOf(web3.eth.Contract.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }
