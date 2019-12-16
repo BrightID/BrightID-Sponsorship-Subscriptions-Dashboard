@@ -16,11 +16,9 @@ ethereum.on("networkChanged", init);
 ethereum.on("accountsChanged", init);
 
 async function init(){
-  var web3;
-  if (window.ethereum) {
+  if (ethereum) {
     Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
-    window.web3 = new Web3(ethereum);
-    web3 = window.web3;
+    web3 = new Web3(ethereum);
     try {
       // Request account access if needed
       await ethereum.enable();
@@ -32,9 +30,8 @@ async function init(){
         footer: ""
       });
     }
-  } else if (window.web3) {
-    window.web3 = new Web3(web3.currentProvider);
-    web3 = window.web3;
+  } else if (web3) {
+    web3 = new Web3(web3.currentProvider);
   } else {
     Swal.fire({
       type: "error",
@@ -45,7 +42,7 @@ async function init(){
     return;
   }
 
-  web3.eth.getAccounts(function(error, accounts){
+  await web3.eth.getAccounts(function(error, accounts){
     if (error != null) {
       Swal.fire({
         type: "error",
@@ -53,13 +50,16 @@ async function init(){
         text: error.message || error,
         footer: ""
       });
-    } else if (accounts.length === 0) {
+      return;
+    }
+    if (accounts.length === 0) {
       Swal.fire({
         type: "info",
         title: "Your wallet provider is locked",
         text: "Please unlock your wallet",
         footer: ""
       });
+      return;
     }
     web3.eth.defaultAccount = accounts[0];
   });
@@ -137,6 +137,8 @@ async function init(){
 
   subsContract.getPastEvents('SubscriptionsActivated', {
       filter: {
+        // This won't work because we didn't put the word "indexed" next to this parameter in the smart contract.
+        // Now we have to get all the events of this type and filter in memory
         account: web3.eth.defaultAccount
       },
       fromBlock: 0
@@ -149,6 +151,9 @@ function updateActiveBalance(err, events){
   if (err){
     return;
   }
-  const totalAmount = events.reduce((total, event) => parseInt(event.returnValues.amount) + total, 0);
+  // We have to get all the events into memory and do the filtering ourselves because we didn't put the word "indexed"
+  // next to the "account" parameter in the smart contract.
+  const totalAmount = events.filter(event => event.returnValues.account === web3.eth.defaultAccount)
+    .reduce((total, event) => parseInt(event.returnValues.amount) + total, 0);
   $("#subsActiveBalance").html(numberDecorator(totalAmount));
 }
