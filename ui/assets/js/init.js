@@ -135,23 +135,20 @@ async function init(){
   $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.sp}" target="_blank">${addresses.sp}</a>`);
   $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.subs}" target="_blank">${addresses.subs}</a>`);
 
-  subsContract.events.SubscriptionsActivated({}, {
-    fromBlock: 0
-  }).call(
-    function(err, data){
-      activeBalance(data);
-    }
-  )
+  subsContract.getPastEvents('SubscriptionsActivated', {
+      filter: {
+        account: web3.eth.defaultAccount
+      },
+      fromBlock: 0
+    },
+    updateActiveBalance
+  );
 }
 
-function activeBalance(events){
-  var totalAmount = events.reduce(function(total, event){
-    if (event.args.account == web3.eth.defaultAccount) {
-      amount = event.args.amount.c[0];
-    } else {
-      amount = 0;
-    }
-    return total + amount;
-  }, 0);
-  $("#subsActiveBalance").html(numberDecorator(parseInt(totalAmount)));
+function updateActiveBalance(err, events){
+  if (err){
+    return;
+  }
+  const totalAmount = events.reduce((total, event) => event.returnValues.amount + total);
+  $("#subsActiveBalance").html(numberDecorator(totalAmount));
 }
