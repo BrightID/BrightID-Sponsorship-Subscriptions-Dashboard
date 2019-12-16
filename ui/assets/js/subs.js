@@ -68,7 +68,7 @@ function purchaseSubs() {
       Swal.fire({
         type: "error",
         title: "Something went wrong",
-        text: "Error message: " + (error.message || error),
+        text: error.message || error,
         footer: ""
       });
       return;
