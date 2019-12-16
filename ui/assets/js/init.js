@@ -1,4 +1,8 @@
-var spMinterContract = subsMinterContract = spContract = subsContract = ptContract = null;
+var spMinterContract = null;
+var subsMinterContract = null;
+var spContract = null;
+var subsContract = null;
+var ptContract = null;
 var spPrice, subsPrice;
 var enoughFund = false;
 var val = 0;
@@ -70,20 +74,11 @@ function init() {
 
   web3.eth.defaultAccount = web3.eth.accounts[0];
 
-  var pt_contract = web3.eth.contract(abies.pt);
-  ptContract = pt_contract.at(addresses.pt);
-
-  var sp_contract = web3.eth.contract(abies.sp);
-  spContract = sp_contract.at(addresses.sp);
-
-  var subs_contract = web3.eth.contract(abies.subs);
-  subsContract = subs_contract.at(addresses.subs);
-
-  var sp_minter_contract = web3.eth.contract(abies.sp_minter);
-  spMinterContract = sp_minter_contract.at(addresses.sp_minter);
-
-  var subs_minter_contract = web3.eth.contract(abies.subs_minter);
-  subsMinterContract = subs_minter_contract.at(addresses.subs_minter);
+  ptContract = new web3.eth.Contract(abies.pt, addresses.pt);
+  spContract = new web3.eth.Contract(abies.sp, addresses.sp);
+  subsContract = new web3.eth.Contract(abies.subs, addresses.subs);
+  spMinterContract = new web3.eth.Contract(abies.sp_minter, addresses.sp_minter);
+  subsMinterContract = new web3.eth.Contract(abies.subs_minter, addresses.subs_minter);
 
   // var InfuraWeb3 = new Web3(new Web3.providers.HttpProvider(rpcUrl));
 
