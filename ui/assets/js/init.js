@@ -11,22 +11,30 @@ var business = true;
 
 ethereum.autoRefreshOnNetworkChange = false;
 
-window.onload = function () {
-  init();
-};
+window.addEventListener('load', init);
+ethereum.on("networkChanged", init);
+ethereum.on("accountsChanged", init);
 
-ethereum.on("networkChanged", function () {
-  init();
-  return;
-})
+async function init(){
+  var web3;
+  if (window.ethereum) {
+    Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
+    web3 = window.web3 = new Web3(ethereum);
+    try {
+      // Request account access if needed
+      await ethereum.enable();
+    } catch (error) {
+      Swal.fire({
+        type: "error",
+        title: "Something went wrong",
+        text: error.message || error,
+        footer: ""
+      });
+    }
+  } else {
+    web3 = window.web3;
+  }
 
-ethereum.on("accountsChanged", function () {
-  init();
-  return;
-})
-
-function init() {
-  var web3 = window.web3;
   if (typeof web3 === "undefined") {
     Swal.fire({
       type: "error",
@@ -37,7 +45,7 @@ function init() {
     return;
   }
 
-  web3.eth.getAccounts(function (error, accounts) {
+  web3.eth.getAccounts(function(error, accounts){
     if (error != null) {
       Swal.fire({
         type: "error",
@@ -48,31 +56,13 @@ function init() {
     } else if (accounts.length === 0) {
       Swal.fire({
         type: "info",
-        title: "MetaMask is locked",
-        text: "Please unlock MetaMask",
+        title: "Your wallet provider is locked",
+        text: "Please unlock your wallet",
         footer: ""
       });
     }
+    web3.eth.defaultAccount = accounts[0];
   });
-
-  if (window.ethereum) {
-    window.web3 = new Web3(ethereum);
-    try {
-      Web3.providers.HttpProvider.prototype.sendAsync =
-        Web3.providers.HttpProvider.prototype.send;
-      ethereum.enable();
-    } catch (error) {
-      console.log("User denied account access...");
-      return;
-    }
-  } else if (window.web3) {
-    window.web3 = new Web3(web3.currentProvider);
-  } else {
-    console.log("You should consider trying MetaMask");
-    return;
-  }
-
-  web3.eth.defaultAccount = web3.eth.accounts[0];
 
   ptContract = new web3.eth.Contract(abies.pt, addresses.pt);
   spContract = new web3.eth.Contract(abies.sp, addresses.sp);
@@ -98,7 +88,7 @@ function init() {
   // ptContract = pt_contract.at(addresses.pt);
 
 
-  spMinterContract.methods.price().call(function (error, result) {
+  spMinterContract.methods.price().call(function(error, result){
     if (error) {
       return;
     }
@@ -113,7 +103,7 @@ function init() {
   //   $("#spTotalSold").html(parseInt(result.c[0]));
   // });
 
-  subsMinterContract.methods.price().call(function (error, result) {
+  subsMinterContract.methods.price().call(function(error, result){
     if (error) {
       return;
     }
@@ -121,21 +111,21 @@ function init() {
     $("#subsPrice").html(subsPrice);
   });
 
-  subsMinterContract.methods.totalSold().call(function (error, result) {
+  subsMinterContract.methods.totalSold().call(function(error, result){
     if (error) {
       return;
     }
     $("#subsLeft").html(numberDecorator(900000 - parseInt(result.c[0])));
   });
 
-  subsContract.methods.balanceOf(web3.eth.Contract.defaultAccount).call(function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
     if (error) {
       return;
     }
     $("#subsInactiveBalance").html(numberDecorator(parseInt(result.c[0])));
   });
 
-  spContract.methods.balanceOf(web3.eth.Contract.defaultAccount).call(function (error, result) {
+  spContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
     if (error) {
       return;
     }
@@ -148,14 +138,14 @@ function init() {
   subsContract.methods.SubscriptionsActivated({}, {
     fromBlock: 0
   }).call(
-    function (err, data) {
+    function(err, data){
       activeBalance(data);
     }
   )
 }
 
-function activeBalance(events) {
-  var totalAmount = events.reduce(function (total, event) {
+function activeBalance(events){
+  var totalAmount = events.reduce(function(total, event){
     if (event.args.account == web3.eth.defaultAccount) {
       amount = event.args.amount.c[0];
     } else {
