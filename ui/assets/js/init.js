@@ -113,7 +113,7 @@ function init() {
   //   $("#spTotalSold").html(parseInt(result.c[0]));
   // });
 
-  subsMinterContract.price(function (error, result) {
+  subsMinterContract.price().call(function (error, result) {
     if (error) {
       return;
     }
@@ -121,21 +121,21 @@ function init() {
     $("#subsPrice").html(subsPrice);
   });
 
-  subsMinterContract.totalSold(function (error, result) {
+  subsMinterContract.totalSold().call(function (error, result) {
     if (error) {
       return;
     }
     $("#subsLeft").html(numberDecorator(900000 - parseInt(result.c[0])));
   });
 
-  subsContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  subsContract.balanceOf().call(web3.eth.defaultAccount, function (error, result) {
     if (error) {
       return;
     }
     $("#subsInactiveBalance").html(numberDecorator(parseInt(result.c[0])));
   });
 
-  spContract.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  spContract.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }
@@ -147,7 +147,7 @@ function init() {
 
   subsContract.SubscriptionsActivated({}, {
     fromBlock: 0
-  }).get(
+  }).call(
     function (err, data) {
       activeBalance(data);
     }
