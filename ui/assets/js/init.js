@@ -92,7 +92,7 @@ async function init(){
     if (error) {
       return;
     }
-    spPrice = result / 10000;
+    spPrice = result / (10 ** 18);
     $("#spPrice").html(spPrice);
   });
 
@@ -107,7 +107,7 @@ async function init(){
     if (error) {
       return;
     }
-    subsPrice = result / 10000;
+    subsPrice = result / (10 ** 18);
     $("#subsPrice").html(subsPrice);
   });
 
