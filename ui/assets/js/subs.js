@@ -58,7 +58,7 @@ function purchaseSubs(){
   $(".subs-input").hide();
   $(".subs-step").show();
   changeActiveStep(1);
-  dai = parseFloat($("#subsDai").val()) * 10 ** 18;
+  dai = parseInt($("#subsDai").val() * 10 ** 18);
   ptContract.methods.approve(addresses.subs_minter, dai).send( {from: web3.eth.defaultAccount}, function(error, hash){
     if (error) {
       console.log(error);

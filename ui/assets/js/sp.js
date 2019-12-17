@@ -57,7 +57,7 @@ function purchaseSp(){
   $(".sp-input").hide();
   $(".sp-step").show();
   changeActiveStep(1);
-  dai = parseFloat($("#spDai").val()) * 10 ** 18;
+  dai = parseInt($("#spDai").val() * 10 ** 18);
   ptContract.methods.approve(addresses.sp_minter, dai).send( {from: web3.eth.defaultAccount}, function(error, hash){
     if (error) {
       console.log(error);
