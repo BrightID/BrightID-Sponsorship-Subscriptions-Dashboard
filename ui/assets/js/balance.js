@@ -25,6 +25,7 @@ function contextBalance(){
     });
     return;
   }
+  context = web3.utils.fromAscii(context);
   spContract.methods.totalContextBalance(context).call(function(error, result){
     if (error) {
       console.log(error);
