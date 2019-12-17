@@ -40,6 +40,7 @@ function assignSp() {
     });
     return;
   }
+  context = web3.utils.fromAscii(context);
   $(".sp-assign-input").hide();
   $(".sp-assign-step").show();
   changeActiveStep(3);
