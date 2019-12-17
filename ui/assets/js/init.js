@@ -16,53 +16,7 @@ ethereum.on("networkChanged", init);
 ethereum.on("accountsChanged", init);
 
 async function init(){
-  if (ethereum) {
-    Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
-    web3 = new Web3(ethereum);
-    try {
-      // Request account access if needed
-      await ethereum.enable();
-    } catch (error) {
-      Swal.fire({
-        type: "error",
-        title: "Something went wrong",
-        text: error.message || error,
-        footer: ""
-      });
-    }
-  } else if (web3) {
-    web3 = new Web3(web3.currentProvider);
-  } else {
-    Swal.fire({
-      type: "error",
-      title: "MetaMask is not installed",
-      text: "Please install MetaMask from below link",
-      footer: '<a href="https://metamask.io">Install MetaMask</a>'
-    });
-    return;
-  }
-
-  await web3.eth.getAccounts(function(error, accounts){
-    if (error != null) {
-      Swal.fire({
-        type: "error",
-        title: "Something went wrong",
-        text: error.message || error,
-        footer: ""
-      });
-      return;
-    }
-    if (accounts.length === 0) {
-      Swal.fire({
-        type: "info",
-        title: "Your wallet provider is locked",
-        text: "Please unlock your wallet",
-        footer: ""
-      });
-      return;
-    }
-    web3.eth.defaultAccount = accounts[0];
-  });
+  await unlockProvider();
 
   ptContract = new web3.eth.Contract(abies.pt, addresses.pt);
   spContract = new web3.eth.Contract(abies.sp, addresses.sp);
@@ -86,7 +40,6 @@ async function init(){
 
   // var pt_contract = InfuraWeb3.eth.contract(abies.pt);
   // ptContract = pt_contract.at(addresses.pt);
-
 
   spMinterContract.methods.price().call(function(error, result){
     if (error) {

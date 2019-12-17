@@ -2,12 +2,16 @@ var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
   $("#activateBtn").prop('disabled', !$activatePrivacyCheckbox.is(":checked"));
 });
 
-function activateInit() {
-  subsContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
+async function activateForm() {
+  privacyAgreement = false;
+
+  await unlockProvider();
+
+  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }
-    $("#subsActivate").val(parseInt(result.c[0]));
+    $("#subsActivate").val(result);
   });
 
   $("#subsActivateMsg").html("Waiting for input");
@@ -25,12 +29,6 @@ function activateInit() {
   $(".loading-icon").hide();
   $(".loader").hide();
 };
-
-function activateForm() {
-  privacyAgreement = false;
-  checkMetaMask();
-  activateInit();
-}
 
 function activate() {
   let amount = $("#subsActivate").val();
@@ -56,7 +54,7 @@ function activate() {
   $(".subs-activate-input").hide();
   $(".subs-activate-step").show();
   changeActiveStep(3);
-  subsContract.methods.activate.sendTransaction(amount, function (error, result) {
+  subsContract.methods.activate(amount).send(function (error, result) {
     if (error) {
       console.log(error);
       return;
@@ -66,7 +64,7 @@ function activate() {
 }
 
 function checkSubsBalance() {
-  subsContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }

@@ -22,7 +22,7 @@ function spPurchaseForm() {
 	business = true;
   privacyAgreement = false;
   enoughFund = false;
-  checkMetaMask();
+  unlockProvider();
   spInit();
 }
 
@@ -61,7 +61,7 @@ function purchaseSp() {
   $(".sp-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#spDai").val()) * 10 ** 18;
-  ptContract.methods.approve.sendTransaction(addresses.sp_minter, dai, function (error, result) {
+  ptContract.methods.approve(addresses.sp_minter, dai).send(function (error, result) {
     if (error) {
       console.log(error);
       Swal.fire({
@@ -78,7 +78,7 @@ function purchaseSp() {
 }
 
 function buySpConfirm() {
-  spMinterContract.methods.purchase.sendTransaction(function(error, result) {
+  spMinterContract.methods.purchase().send(function(error, result) {
     if (error) {
       console.log(error);
       return;
@@ -89,7 +89,7 @@ function buySpConfirm() {
 }
 
 function checkSpState() {
-  ptContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }

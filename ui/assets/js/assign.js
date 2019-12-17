@@ -1,4 +1,4 @@
-function assignInit() {
+async function assignSpForm() {
   $("#spContextMsg").html("Waiting for input");
   $("#spContextMsg").css("color", "white");
 
@@ -16,12 +16,9 @@ function assignInit() {
   $(".confirm-icon").hide();
   $(".loading-icon").hide();
   $(".loader").hide();
-};
 
-function assignSpForm() {
-  checkMetaMask();
-  assignInit();
-}
+  await unlockProvider();
+};
 
 function assignSp() {
   let amount = $("#spAssign").val();
@@ -47,7 +44,7 @@ function assignSp() {
   $(".sp-assign-input").hide();
   $(".sp-assign-step").show();
   changeActiveStep(3);
-  spContract.methods.assignContext.sendTransaction(context, amount, function (error, result) {
+  spContract.methods.assignContext(context, amount).send(function (error, result) {
     if (error) {
       console.log(error);
       return;
@@ -57,7 +54,7 @@ function assignSp() {
 }
 
 function checkSpBalance() {
-  spContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  spContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }

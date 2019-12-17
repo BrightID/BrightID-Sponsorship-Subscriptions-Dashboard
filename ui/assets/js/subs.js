@@ -23,7 +23,7 @@ function subsPurchaseForm() {
   business = true;
   privacyAgreement = false;
   enoughFund = false;
-  checkMetaMask();
+  unlockProvider();
   subsInit();
 }
 
@@ -62,7 +62,7 @@ function purchaseSubs() {
   $(".subs-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#subsDai").val()) * 10 ** 18;
-  ptContract.methods.approve.sendTransaction(addresses.subs_minter, dai, function (error, result) {
+  ptContract.methods.approve(addresses.subs_minter, dai).send(function (error, result) {
     if (error) {
       console.log(error);
       Swal.fire({
@@ -79,7 +79,7 @@ function purchaseSubs() {
 }
 
 function buySubsConfirm() {
-  subsMinterContract.methods.purchase.sendTransaction(function(error, result) {
+  subsMinterContract.methods.purchase().send(function(error, result) {
     if (error) {
       console.log(error);
       return;
@@ -91,7 +91,7 @@ function buySubsConfirm() {
 
 
 function checkSubsState() {
-  ptContract.methods.balanceOf(web3.eth.defaultAccount, function (error, result) {
+  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       return;
     }

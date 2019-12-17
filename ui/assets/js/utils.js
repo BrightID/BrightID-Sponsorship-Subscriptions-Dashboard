@@ -2,32 +2,53 @@ $('a[href$="#Modal"]').on("click", function () {
   $('#privacyPolicyModal').modal('show');
 });
 
-function checkMetaMask() {
-  if (typeof web3 === "undefined") {
+async function unlockProvider() {
+  if (ethereum) {
+    Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
+    web3 = new Web3(ethereum);
+    try {
+      // Request account access if needed
+      await ethereum.enable();
+    } catch (error) {
+      Swal.fire({
+        type: "error",
+        title: "Something went wrong",
+        text: error.message || error,
+        footer: ""
+      });
+    }
+  } else if (web3) {
+    web3 = new Web3(web3.currentProvider);
+  } else {
     Swal.fire({
       type: "error",
       title: "MetaMask is not installed",
-      text: "Please install MetaMask.",
+      text: "Please install MetaMask from below link",
       footer: '<a href="https://metamask.io">Install MetaMask</a>'
     });
     return;
   }
-  web3.eth.getAccounts(function (err, accounts) {
-    if (err != null) {
+
+  await web3.eth.getAccounts(function(error, accounts){
+    if (error != null) {
       Swal.fire({
         type: "error",
-        title: "Something wrong",
-        text: "Check this error: " + err,
+        title: "Something went wrong",
+        text: error.message || error,
         footer: ""
       });
-    } else if (accounts.length === 0) {
+      return;
+    }
+    if (accounts.length === 0) {
       Swal.fire({
         type: "info",
-        title: "MetaMask is locked",
-        text: "Please unlock MetaMask",
+        title: "Your wallet provider is locked",
+        text: "Please unlock your wallet",
         footer: ""
       });
+      return;
     }
+    web3.eth.defaultAccount = accounts[0];
   });
 }
 

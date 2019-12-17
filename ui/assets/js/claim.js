@@ -7,7 +7,7 @@ function claimForm() {
   dai = 0;
   business = true;
   privacyAgreement = false;
-  checkMetaMask();
+  unlockProvider();
   claimInit();
 }
 
@@ -36,13 +36,13 @@ function claim() {
     return;
   }
   changeActiveStep(3);
-  subsContract.methods.claimable(web3.eth.defaultAccount, function (error, result) {
+  subsContract.methods.claimable(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {
       console.log(error);
       return;
     }
     val = parseInt(result.c[0]);
-    subsMinterContract.methods.claim.sendTransaction(function (error, result) {
+    subsMinterContract.methods.claim().send(function (error, result) {
       if (error) {
         console.log(error);
         return;
