@@ -88,7 +88,7 @@ async function init(){
   $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.sp}" target="_blank">${addresses.sp}</a>`);
   $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.subs}" target="_blank">${addresses.subs}</a>`);
 
-  subsContract.getPastEvents('SubscriptionsActivated', updateActiveBalance);
+  subsContract.getPastEvents('SubscriptionsActivated', { fromBlock: 0 }, updateActiveBalance);
 }
 
 function updateActiveBalance(err, events){
