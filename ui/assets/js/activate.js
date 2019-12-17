@@ -11,7 +11,7 @@ async function activateForm() {
     if (error) {
       return;
     }
-    $("#subsActivate").val(result);
+    $("#subsActivate").val(parseInt(result));
   });
 
   $("#subsActivateMsg").html("Waiting for input");
@@ -54,12 +54,12 @@ function activate() {
   $(".subs-activate-input").hide();
   $(".subs-activate-step").show();
   changeActiveStep(3);
-  subsContract.methods.activate(amount).send(function (error, result) {
+  subsContract.methods.activate(amount).send(function (error, hash) {
     if (error) {
       console.log(error);
       return;
     }
-    checkTX(result, 'activateSubs');
+    checkTX(hash, 'activateSubs');
   });
 }
 
@@ -68,7 +68,7 @@ function checkSubsBalance() {
     if (error) {
       return;
     }
-    updateBalanceState(result);
+    updateBalanceState(parseInt(result));
   });
 }
 

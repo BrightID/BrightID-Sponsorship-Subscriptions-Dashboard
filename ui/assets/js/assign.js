@@ -58,7 +58,7 @@ function checkSpBalance() {
     if (error) {
       return;
     }
-    updateBalanceState(result);
+    updateBalanceState(parseInt(result));
   });
 }
 

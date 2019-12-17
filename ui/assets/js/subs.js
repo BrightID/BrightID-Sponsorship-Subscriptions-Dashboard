@@ -58,7 +58,7 @@ function purchaseSubs(){
   $(".subs-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#subsDai").val()) * 10 ** 18;
-  ptContract.methods.approve(addresses.subs_minter, dai).send(function(error, result){
+  ptContract.methods.approve(addresses.subs_minter, dai).send(function(error, hash){
     if (error) {
       console.log(error);
       Swal.fire({
@@ -69,19 +69,19 @@ function purchaseSubs(){
       });
       return;
     }
-    checkApproveResult(result, buySubsConfirm);
+    checkApproveResult(hash, buySubsConfirm);
   });
   $("#subsBuyBtn").prop("disabled", true);
 }
 
 function buySubsConfirm(){
-  subsMinterContract.methods.purchase().send(function(error, result){
+  subsMinterContract.methods.purchase().send(function(error, hash){
     if (error) {
       console.log(error);
       return;
     }
     let account = web3.eth.defaultAccount;
-    checkTX(result, 'buy', account, 'Subs', val, dai, business);
+    checkTX(hash, 'buy', account, 'Subs', val, dai, business);
   });
 }
 

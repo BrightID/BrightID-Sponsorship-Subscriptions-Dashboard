@@ -91,7 +91,7 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
       }, 5000);
       return;
     }
-    if (result.status == '0x1' || result.status == 1) {
+    if (result.status) {
       isConfirmed(result.blockNumber, type);
       if (type == 'buy' || type == 'claim') {
         recordAction({

@@ -57,7 +57,7 @@ function purchaseSp(){
   $(".sp-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#spDai").val()) * 10 ** 18;
-  ptContract.methods.approve(addresses.sp_minter, dai).send(function(error, result){
+  ptContract.methods.approve(addresses.sp_minter, dai).send(function(error, hash){
     if (error) {
       console.log(error);
       Swal.fire({
@@ -68,19 +68,19 @@ function purchaseSp(){
       });
       return;
     }
-    checkApproveResult(result, buySpConfirm);
+    checkApproveResult(hash, buySpConfirm);
   });
   $("#spBuyBtn").prop("disabled", true);
 }
 
 function buySpConfirm(){
-  spMinterContract.methods.purchase().send(function(error, result){
+  spMinterContract.methods.purchase().send(function(error, hash){
     if (error) {
       console.log(error);
       return;
     }
     let account = web3.eth.defaultAccount;
-    checkTX(result, 'buy', account, 'Sp', val, dai, business);
+    checkTX(hash, 'buy', account, 'Sp', val, dai, business);
   });
 }
 
