@@ -2,25 +2,21 @@ var $claimPrivacyCheckbox = $('#claimPrivacyCheckbox').change(function() {
   $("#claimBtn").prop('disabled', !$claimPrivacyCheckbox.is(":checked"));
 });
 
-function claimForm() {
+async function claimForm() {
   val = 0;
   dai = 0;
   business = true;
   privacyAgreement = false;
-  unlockProvider();
-  claimInit();
-}
-
-function claimInit() {
   $(".claim-step").hide();
   $(".claim-input").show();
   $("#claimModal").modal({
     backdrop: "static",
     keyboard: false
   });
+  await unlockProvider();
   $(".confirm-icon").hide();
   $(".loader").hide();
-};
+}
 
 function claim() {
   $(".claim-input").hide();
@@ -41,7 +37,7 @@ function claim() {
       console.log(error);
       return;
     }
-    val = parseInt(result.c[0]);
+    val = parseInt(result);
     subsMinterContract.methods.claim().send(function (error, result) {
       if (error) {
         console.log(error);

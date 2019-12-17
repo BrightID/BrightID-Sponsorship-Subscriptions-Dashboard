@@ -1,8 +1,13 @@
-var $spPrivacyCheckbox = $('#spPrivacyCheckbox').change(function() {
-  $("#spBuyBtn").prop('disabled', !$spPrivacyCheckbox.is(":checked"));
+var $spPrivacyCheckbox = $('#spPrivacyCheckbox').change(function(){
+  $("#spBuyBtn").prop('disabled', ! $spPrivacyCheckbox.is(":checked"));
 });
 
-function spInit() {
+async function spPurchaseForm(){
+  val = 0;
+  dai = 0;
+  business = true;
+  privacyAgreement = false;
+  enoughFund = false;
   $("#spMsg").html("Waiting for input");
   $("#spMsg").css("color", "white");
   $(".sp-step").hide();
@@ -12,25 +17,16 @@ function spInit() {
     keyboard: false
   });
   clearInputs();
+  await unlockProvider();
   $(".confirm-icon").hide();
   $(".loader").hide();
-};
-
-function spPurchaseForm() {
-	val = 0;
-	dai = 0;
-	business = true;
-  privacyAgreement = false;
-  enoughFund = false;
-  unlockProvider();
-  spInit();
 }
 
-function purchaseSp() {
+function purchaseSp(){
   val = $("#sp").val();
   business = $("#spCheckbox").prop('checked');
   privacyAgreement = $("#spPrivacyCheckbox").prop('checked');
-  if ( !privacyAgreement ) {
+  if (! privacyAgreement) {
     Swal.fire({
       type: "error",
       title: "Attention",
@@ -39,7 +35,7 @@ function purchaseSp() {
     });
     return;
   }
-  if (val < 1 ) {
+  if (val < 1) {
     Swal.fire({
       type: "error",
       title: "Amount too small",
@@ -48,7 +44,7 @@ function purchaseSp() {
     });
     return;
   }
-  if (!enoughFund) {
+  if (! enoughFund) {
     Swal.fire({
       type: "error",
       title: "Insufficient funds",
@@ -61,7 +57,7 @@ function purchaseSp() {
   $(".sp-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#spDai").val()) * 10 ** 18;
-  ptContract.methods.approve(addresses.sp_minter, dai).send(function (error, result) {
+  ptContract.methods.approve(addresses.sp_minter, dai).send(function(error, result){
     if (error) {
       console.log(error);
       Swal.fire({
@@ -77,8 +73,8 @@ function purchaseSp() {
   $("#spBuyBtn").prop("disabled", true);
 }
 
-function buySpConfirm() {
-  spMinterContract.methods.purchase().send(function(error, result) {
+function buySpConfirm(){
+  spMinterContract.methods.purchase().send(function(error, result){
     if (error) {
       console.log(error);
       return;
@@ -88,18 +84,18 @@ function buySpConfirm() {
   });
 }
 
-function checkSpState() {
-  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+function checkSpState(){
+  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
     if (error) {
       return;
     }
-    updateSpState(result.c[0] / 10000);
+    updateSpState(result / 10 ** 18);
   });
 }
 
-function updateSpState(ptBalance) {
+function updateSpState(ptBalance){
   amount = $("#sp").val();
-  if (!amount || parseFloat(amount) <= 0) {
+  if (! amount || parseFloat(amount) <= 0) {
     $("#spMsg").css("color", "white");
     $("#spDai").val("");
     return;

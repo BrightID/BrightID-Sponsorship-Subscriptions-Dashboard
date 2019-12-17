@@ -12,12 +12,11 @@ async function assignSpForm() {
     keyboard: false
   });
   clearInputs();
+  await unlockProvider();
   $("#assignBtn").prop("disabled", false);
   $(".confirm-icon").hide();
   $(".loading-icon").hide();
   $(".loader").hide();
-
-  await unlockProvider();
 };
 
 function assignSp() {
@@ -58,7 +57,7 @@ function checkSpBalance() {
     if (error) {
       return;
     }
-    updateBalanceState(result.c[0]);
+    updateBalanceState(result);
   });
 }
 

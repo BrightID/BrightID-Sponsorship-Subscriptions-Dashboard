@@ -1,4 +1,4 @@
-function balanceInit() {
+async function contextBalanceForm(){
   $(".totalAssigned").html("");
   $(".youAssigned").html("");
 
@@ -8,19 +8,15 @@ function balanceInit() {
     keyboard: false
   });
   clearInputs();
+  await unlockProvider();
 };
 
-function contextBalanceForm() {
-  unlockProvider();
-  balanceInit();
-}
-
-function contextBalance() {
+function contextBalance(){
   var context = $("#assignContextName").val();
-  if (!context){
+  if (! context) {
     var context = $("#balanceContextName").val();
   }
-  if (!context) {
+  if (! context) {
     Swal.fire({
       type: "error",
       title: "Missing context",
@@ -29,19 +25,19 @@ function contextBalance() {
     });
     return;
   }
-  spContract.methods.totalContextBalance(context).call(function (error, result) {
+  spContract.methods.totalContextBalance(context).call(function(error, result){
     if (error) {
       console.log(error);
       return;
     }
-    $(".totalAssigned").html('Total Assigned: '+numberDecorator(parseInt(result.c[0])+' SP'));
+    $(".totalAssigned").html('Total Assigned: ' + numberDecorator(result) + ' SP');
   });
-  spContract.methods.contextBalance(web3.eth.defaultAccount, context).call(function (error, result) {
+  spContract.methods.contextBalance(web3.eth.defaultAccount, context).call(function(error, result){
     if (error) {
       console.log(error);
       return;
     }
-    $(".youAssigned").html('You Assigned: '+numberDecorator(parseInt(result.c[0])+' SP'));
+    $(".youAssigned").html('You Assigned: ' + numberDecorator(result) + ' SP');
   });
 
 }

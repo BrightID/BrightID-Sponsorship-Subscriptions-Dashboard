@@ -1,8 +1,13 @@
-var $subsPrivacyCheckbox = $('#subsPrivacyCheckbox').change(function() {
-  $("#subsBuyBtn").prop('disabled', !$subsPrivacyCheckbox.is(":checked"));
+var $subsPrivacyCheckbox = $('#subsPrivacyCheckbox').change(function(){
+  $("#subsBuyBtn").prop('disabled', ! $subsPrivacyCheckbox.is(":checked"));
 });
 
-function subsInit() {
+async function subsPurchaseForm(){
+  val = 0;
+  dai = 0;
+  business = true;
+  privacyAgreement = false;
+  enoughFund = false;
   $("#subsMsg").html("Waiting for input");
   $("#subsMsg").css("color", "white");
   $(".subs-step").hide();
@@ -12,26 +17,17 @@ function subsInit() {
     keyboard: false
   });
   clearInputs();
+  await unlockProvider();
   $(".confirm-icon").hide();
   $(".loading-icon").hide();
   $(".loader").hide();
 };
 
-function subsPurchaseForm() {
-  val = 0;
-  dai = 0;
-  business = true;
-  privacyAgreement = false;
-  enoughFund = false;
-  unlockProvider();
-  subsInit();
-}
-
-function purchaseSubs() {
+function purchaseSubs(){
   val = $("#subs").val();
   business = $("#subsCheckbox").prop('checked');
   privacyAgreement = $("#subsPrivacyCheckbox").prop('checked');
-  if ( !privacyAgreement ) {
+  if (! privacyAgreement) {
     Swal.fire({
       type: "error",
       title: "Attention",
@@ -40,7 +36,7 @@ function purchaseSubs() {
     });
     return;
   }
-  if (val < 1 ) {
+  if (val < 1) {
     Swal.fire({
       type: "error",
       title: "Amount too small",
@@ -49,7 +45,7 @@ function purchaseSubs() {
     });
     return;
   }
-  if (!enoughFund) {
+  if (! enoughFund) {
     Swal.fire({
       type: "error",
       title: "Insufficient funds",
@@ -62,7 +58,7 @@ function purchaseSubs() {
   $(".subs-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#subsDai").val()) * 10 ** 18;
-  ptContract.methods.approve(addresses.subs_minter, dai).send(function (error, result) {
+  ptContract.methods.approve(addresses.subs_minter, dai).send(function(error, result){
     if (error) {
       console.log(error);
       Swal.fire({
@@ -78,8 +74,8 @@ function purchaseSubs() {
   $("#subsBuyBtn").prop("disabled", true);
 }
 
-function buySubsConfirm() {
-  subsMinterContract.methods.purchase().send(function(error, result) {
+function buySubsConfirm(){
+  subsMinterContract.methods.purchase().send(function(error, result){
     if (error) {
       console.log(error);
       return;
@@ -90,18 +86,18 @@ function buySubsConfirm() {
 }
 
 
-function checkSubsState() {
-  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+function checkSubsState(){
+  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
     if (error) {
       return;
     }
-    updateSubsState(result.c[0] / 10000);
+    updateSubsState(result / 10 ** 18);
   });
 }
 
-function updateSubsState(ptBalance) {
+function updateSubsState(ptBalance){
   let amount = $("#subs").val();
-  if (!amount || parseFloat(amount) <= 0) {
+  if (! amount || parseFloat(amount) <= 0) {
     $("#subsMsg").css("color", "white");
     $("#subsDai").val("");
     return;

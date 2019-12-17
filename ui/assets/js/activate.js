@@ -68,7 +68,7 @@ function checkSubsBalance() {
     if (error) {
       return;
     }
-    updateBalanceState(result.c[0]);
+    updateBalanceState(result);
   });
 }
 
