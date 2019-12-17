@@ -58,7 +58,7 @@ function purchaseSubs(){
   $(".subs-step").show();
   changeActiveStep(1);
   dai = parseFloat($("#subsDai").val()) * 10 ** 18;
-  ptContract.methods.approve(addresses.subs_minter, dai).send(function(error, hash){
+  ptContract.methods.approve(addresses.subs_minter, dai).send( {from: web3.eth.defaultAccount}, function(error, hash){
     if (error) {
       console.log(error);
       Swal.fire({
@@ -75,7 +75,7 @@ function purchaseSubs(){
 }
 
 function buySubsConfirm(){
-  subsMinterContract.methods.purchase().send(function(error, hash){
+  subsMinterContract.methods.purchase().send( {from: web3.eth.defaultAccount}, function(error, hash){
     if (error) {
       console.log(error);
       return;

@@ -54,7 +54,7 @@ function activate() {
   $(".subs-activate-input").hide();
   $(".subs-activate-step").show();
   changeActiveStep(3);
-  subsContract.methods.activate(amount).send(function (error, hash) {
+  subsContract.methods.activate(amount).send( {from: web3.eth.defaultAccount}, function (error, hash) {
     if (error) {
       console.log(error);
       return;
