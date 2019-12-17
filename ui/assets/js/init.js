@@ -135,16 +135,7 @@ async function init(){
   $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.sp}" target="_blank">${addresses.sp}</a>`);
   $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.subs}" target="_blank">${addresses.subs}</a>`);
 
-  subsContract.getPastEvents('SubscriptionsActivated', {
-      filter: {
-        // This won't work because we didn't put the word "indexed" next to this parameter in the smart contract.
-        // Now we have to get all the events of this type and filter in memory
-        account: web3.eth.defaultAccount
-      },
-      fromBlock: 0
-    },
-    updateActiveBalance
-  );
+  subsContract.getPastEvents('SubscriptionsActivated', updateActiveBalance);
 }
 
 function updateActiveBalance(err, events){
