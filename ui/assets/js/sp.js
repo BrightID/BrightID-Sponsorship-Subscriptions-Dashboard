@@ -57,7 +57,7 @@ function purchaseSp(){
   $(".sp-input").hide();
   $(".sp-step").show();
   changeActiveStep(1);
-  dai = parseInt($("#spDai").val() * 10 ** 18);
+  dai = web3.utils.toBN($("#spDai").val() + "000000000000000000");
   ptContract.methods.approve(addresses.sp_minter, dai).send( {from: web3.eth.defaultAccount}, function(error, hash){
     if (error) {
       console.log(error);
@@ -81,7 +81,7 @@ function buySpConfirm(){
       return;
     }
     let account = web3.eth.defaultAccount;
-    checkTX(hash, 'buy', account, 'Sp', val, dai, business);
+    checkTX(hash, 'buy', account, 'Sp', val, dai.toString(), business);
   });
 }
 

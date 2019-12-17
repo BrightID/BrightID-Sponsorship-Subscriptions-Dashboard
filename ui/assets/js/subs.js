@@ -58,7 +58,7 @@ function purchaseSubs(){
   $(".subs-input").hide();
   $(".subs-step").show();
   changeActiveStep(1);
-  dai = parseInt($("#subsDai").val() * 10 ** 18);
+  dai = web3.utils.toBN($("#subsDai").val() + "000000000000000000");
   ptContract.methods.approve(addresses.subs_minter, dai).send( {from: web3.eth.defaultAccount}, function(error, hash){
     if (error) {
       console.log(error);
@@ -81,7 +81,7 @@ function buySubsConfirm(){
       console.log(error);
       return;
     }
-    checkTX(hash, 'buy', web3.eth.defaultAccount, 'Subs', val, dai, business);
+    checkTX(hash, 'buy', web3.eth.defaultAccount, 'Subs', val, dai.toString(), business);
   });
 }
 
