@@ -7,6 +7,7 @@ async function spPurchaseForm(){
   dai = 0;
   business = true;
   privacyAgreement = false;
+  $("#spPrivacyCheckbox").prop('checked', false);
   enoughFund = false;
   $("#spMsg").html("Waiting for input");
   $("#spMsg").css("color", "white");

@@ -7,6 +7,7 @@ async function claimForm(){
   dai = 0;
   business = true;
   privacyAgreement = false;
+  $("#claimsPrivacyCheckbox").prop('checked', false);
   $(".claim-step").hide();
   $(".claim-input").show();
   $("#claimModal").modal({

@@ -4,6 +4,7 @@ var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
 
 async function activateForm() {
   privacyAgreement = false;
+  $("#activatePrivacyCheckbox").prop('checked', false);
 
   await unlockProvider();
 

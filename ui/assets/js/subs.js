@@ -7,6 +7,7 @@ async function subsPurchaseForm(){
   dai = 0;
   business = true;
   privacyAgreement = false;
+  $("#subsPrivacyCheckbox").prop('checked', false);
   enoughFund = false;
   $("#subsMsg").html("Waiting for input");
   $("#subsMsg").css("color", "white");
