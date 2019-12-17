@@ -81,15 +81,14 @@ function buySubsConfirm(){
       console.log(error);
       return;
     }
-    let account = web3.eth.defaultAccount;
-    checkTX(hash, 'buy', account, 'Subs', val, dai, business);
+    checkTX(hash, 'buy', web3.eth.defaultAccount, 'Subs', val, dai, business);
   });
 }
-
 
 function checkSubsState(){
   ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
     if (error) {
+      console.log(error);
       return;
     }
     updateSubsState(result / 10 ** 18);
