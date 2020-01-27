@@ -3,6 +3,10 @@ var $spPrivacyCheckbox = $('#spPrivacyCheckbox').change(function(){
 });
 
 async function spPurchaseForm(){
+  await unlockProvider();
+  if (! window.ethereum ) {
+    return;
+  }
   val = 0;
   dai = 0;
   business = true;
@@ -18,7 +22,6 @@ async function spPurchaseForm(){
     keyboard: false
   });
   clearInputs();
-  await unlockProvider();
   $(".confirm-icon").hide();
   $(".loader").hide();
 }

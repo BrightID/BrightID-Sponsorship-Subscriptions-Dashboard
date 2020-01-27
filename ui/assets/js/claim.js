@@ -3,6 +3,10 @@ var $claimPrivacyCheckbox = $('#claimPrivacyCheckbox').change(function(){
 });
 
 async function claimForm(){
+  await unlockProvider();
+  if (! window.ethereum ) {
+    return;
+  }
   val = 0;
   dai = 0;
   business = true;
@@ -14,7 +18,6 @@ async function claimForm(){
     backdrop: "static",
     keyboard: false
   });
-  await unlockProvider();
   $(".confirm-icon").hide();
   $(".loader").hide();
 }

@@ -3,10 +3,12 @@ var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
 });
 
 async function activateForm() {
+  await unlockProvider();
+  if (! window.ethereum ) {
+    return;
+  }
   privacyAgreement = false;
   $("#activatePrivacyCheckbox").prop('checked', false);
-
-  await unlockProvider();
 
   subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
     if (error) {

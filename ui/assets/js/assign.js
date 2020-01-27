@@ -1,4 +1,8 @@
 async function assignSpForm() {
+  await unlockProvider();
+  if (! window.ethereum ) {
+    return;
+  }
   $("#spContextMsg").html("Waiting for input");
   $("#spContextMsg").css("color", "white");
 
@@ -12,7 +16,6 @@ async function assignSpForm() {
     keyboard: false
   });
   clearInputs();
-  await unlockProvider();
   $("#assignBtn").prop("disabled", false);
   $(".confirm-icon").hide();
   $(".loading-icon").hide();

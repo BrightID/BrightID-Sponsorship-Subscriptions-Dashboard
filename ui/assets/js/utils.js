@@ -3,7 +3,7 @@ $('a[href$="#Modal"]').on("click", function () {
 });
 
 async function unlockProvider() {
-  if (ethereum) {
+  if (window.ethereum) {
     Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
     web3 = new Web3(ethereum);
     try {
@@ -17,8 +17,6 @@ async function unlockProvider() {
         footer: ""
       });
     }
-  } else if (web3) {
-    web3 = new Web3(web3.currentProvider);
   } else {
     Swal.fire({
       type: "error",
@@ -49,6 +47,7 @@ async function unlockProvider() {
       return;
     }
     web3.eth.defaultAccount = accounts[0];
+    load_data()
   });
 }
 

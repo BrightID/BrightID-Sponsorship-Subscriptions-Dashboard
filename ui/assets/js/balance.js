@@ -1,4 +1,8 @@
 async function contextBalanceForm(){
+  await unlockProvider();
+  if (! window.ethereum ) {
+    return;
+  }
   $(".totalAssigned").html("");
   $(".youAssigned").html("");
 
@@ -8,7 +12,6 @@ async function contextBalanceForm(){
     keyboard: false
   });
   clearInputs();
-  await unlockProvider();
 };
 
 function contextBalance(){

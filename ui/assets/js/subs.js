@@ -3,6 +3,10 @@ var $subsPrivacyCheckbox = $('#subsPrivacyCheckbox').change(function(){
 });
 
 async function subsPurchaseForm(){
+  await unlockProvider();
+  if (! window.ethereum ) {
+    return;
+  }
   val = 0;
   dai = 0;
   business = true;
@@ -18,7 +22,6 @@ async function subsPurchaseForm(){
     keyboard: false
   });
   clearInputs();
-  await unlockProvider();
   $(".confirm-icon").hide();
   $(".loading-icon").hide();
   $(".loader").hide();
