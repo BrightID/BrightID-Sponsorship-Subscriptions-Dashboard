@@ -8,6 +8,7 @@ var enoughFund = false;
 var val = 0;
 var dai = 0;
 var business = true;
+var reference = null;
 
 if (window.ethereum) {
   ethereum.autoRefreshOnNetworkChange = false;

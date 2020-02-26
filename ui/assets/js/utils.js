@@ -60,6 +60,7 @@ function clearInputs() {
   $("#assignContextName").val("");
   $("#balanceContextName").val("");
   $("#subsActivate").val("");
+  $("#reference").val("");
 }
 
 function changeActiveStep(step) {
@@ -76,7 +77,7 @@ function changeActiveStep(step) {
     .show();
 }
 
-function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
+function checkTX(hash, type, buyer, token, amount, daiAmount, business, reference) {
   confirmed = false;
   changeActiveStep(4);
   web3.eth.getTransactionReceipt(hash, function (error, result) {
@@ -86,7 +87,7 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
     }
     if (result == null) {
       setTimeout(function () {
-        checkTX(hash, type, buyer, token, amount, daiAmount, business);
+        checkTX(hash, type, buyer, token, amount, daiAmount, business, reference);
       }, 5000);
       return;
     }
@@ -98,7 +99,8 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business) {
           token,
           amount,
           daiAmount,
-          business
+          business,
+          reference
         });
       }
     } else {
