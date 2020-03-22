@@ -19,7 +19,8 @@ if (window.ethereum) {
 window.addEventListener('load', init);
 
 async function init(){
-  load_data()
+  load_data();
+  load_contexts();
   await unlockProvider();
   if (window.ethereum) {
     ptContract = new web3.eth.Contract(abies.pt, addresses.pt);
@@ -28,4 +29,5 @@ async function init(){
     spMinterContract = new web3.eth.Contract(abies.sp_minter, addresses.sp_minter);
     subsMinterContract = new web3.eth.Contract(abies.subs_minter, addresses.subs_minter); 
   }
+
 }

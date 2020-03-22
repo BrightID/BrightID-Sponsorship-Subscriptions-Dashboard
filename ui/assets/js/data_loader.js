@@ -72,3 +72,22 @@ function updateActiveBalance(err, events){
     .reduce((total, event) => parseInt(event.returnValues.amount) + total, 0);
   $("#subsActiveBalance").html(numberDecorator(totalAmount));
 }
+
+async function load_contexts(){
+  $.ajax({
+    type: "GET",
+    url: "http://test.brightid.org/brightid/v4/contexts/",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(data){
+      $(".contextSelect option").remove();
+      $(".contextSelect").append($("<option selected />").val("").text("Context Name"));
+      $.each(data.data.contexts, function(index, context){
+        $(".contextSelect").append($("<option />").val(context).text(context));
+      });
+    },
+    failure: function () {
+      alert("Failed to get contexts!");
+    }
+  });
+}
