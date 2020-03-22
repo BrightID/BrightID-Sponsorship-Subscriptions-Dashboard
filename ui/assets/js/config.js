@@ -1,4 +1,5 @@
 var rpcUrl = "https://mainnet.infura.io/v3/588bb93634084be69f62f302a279d76f";
+var nodeUrl = "http://node.brightid.org/brightid/v4"
 
 var addresses = {
   pt: "0x6b175474e89094c44da98b954eedeac495271d0f",

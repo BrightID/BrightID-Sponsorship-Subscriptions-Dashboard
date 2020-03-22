@@ -74,9 +74,10 @@ function updateActiveBalance(err, events){
 }
 
 async function load_contexts(){
+  let contextsUrl = nodeUrl+"/contexts/";
   $.ajax({
     type: "GET",
-    url: "http://test.brightid.org/brightid/v4/contexts/",
+    url: contextsUrl,
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(data){
