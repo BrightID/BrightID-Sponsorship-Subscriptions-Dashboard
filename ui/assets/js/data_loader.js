@@ -84,7 +84,7 @@ async function load_contexts(){
       $(".contextSelect option").remove();
       $(".contextSelect").append($("<option selected />").val("").text("Context Name"));
       $.each(data.data.contexts, function(index, context){
-        $(".contextSelect").append($("<option />").val(context).text(context));
+        $(".contextSelect").append($("<option />").val(context.name).text(context.name));
       });
     },
     failure: function () {
