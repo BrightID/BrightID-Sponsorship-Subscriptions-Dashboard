@@ -60,6 +60,13 @@ async function load_data(){
     }
     $("#subsLeft").html(numberDecorator(900000 - result));
   });
+
+  infura_subsMinterContract.methods.totalSold().call(function(error, result){
+    if (error) {
+      return;
+    }
+    $("#subsOneDollarLeft").html(numberDecorator(Math.max(0, 400000 - result)));
+  });
 }
 
 function updateActiveBalance(err, events){
