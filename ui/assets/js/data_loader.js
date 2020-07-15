@@ -54,18 +54,16 @@ async function load_data(){
     $("#subsPrice").html(subsPrice);
   });
 
-  infura_subsMinterContract.methods.totalSold().call(function(error, result){
+  infura_subsMinterContract.methods.totalSold().call(function(error, sold){
     if (error) {
       return;
     }
-    $("#subsLeft").html(numberDecorator(900000 - result));
-  });
-
-  infura_subsMinterContract.methods.totalSold().call(function(error, result){
-    if (error) {
-      return;
+    let subtractFromForThisPrice = 900000;
+    if (sold < 400000){
+      subtractFromForThisPrice = 400000;
     }
-    $("#subsOneDollarLeft").html(numberDecorator(Math.max(0, 400000 - result)));
+    $("#subsLeftAtThisPrice").html(numberDecorator(subtractFromForThisPrice - sold));
+    $("#subsLeftTotal").html(numberDecorator(900000 - sold));
   });
 }
 
