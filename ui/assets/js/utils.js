@@ -57,8 +57,8 @@ function clearInputs() {
   $("#subs").val("");
   $("#subsDai").val("");
   $("#spAssign").val("");
-  $("#assignContextName").val("");
-  $("#balanceContextName").val("");
+  $("#assignAppName").val("");
+  $("#balanceAppName").val("");
   $("#subsActivate").val("");
   $("#reference").val("");
 }
@@ -123,7 +123,7 @@ function isConfirmed(txBlockNumber, type) {
     } else if (1 <= blockNumber - txBlockNumber) {
       changeActiveStep(5);
       let alertText;
-      if (type == 'assignContext') {
+      if (type == 'assignApp') {
         alertText = 'Sponsorships were assigned.';
       } else if (type == 'activateSubs') {
         alertText = 'Subscriptions were activated.';

@@ -78,22 +78,22 @@ function updateActiveBalance(err, events){
   $("#subsActiveBalance").html(numberDecorator(totalAmount));
 }
 
-async function load_contexts(){
-  let contextsUrl = nodeUrl+"/contexts/";
+async function load_apps(){
+  let appsUrl = nodeUrl+"/apps/";
   $.ajax({
     type: "GET",
-    url: contextsUrl,
+    url: appsUrl,
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(data){
-      $(".contextSelect option").remove();
-      $(".contextSelect").append($("<option selected />").val("").text("Context Name"));
-      $.each(data.data.contexts, function(index, context){
-        $(".contextSelect").append($("<option />").val(context.name).text(context.name));
+      $(".appSelect option").remove();
+      $(".appSelect").append($("<option selected />").val("").text("App Name"));
+      $.each(data.data.apps, function(index, app){
+        $(".appSelect").append($("<option />").val(app.id).text(app.name));
       });
     },
     failure: function () {
-      alert("Failed to get contexts!");
+      alert("Failed to get apps!");
     }
   });
 }

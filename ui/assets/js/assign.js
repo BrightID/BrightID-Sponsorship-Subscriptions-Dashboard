@@ -3,8 +3,8 @@ async function assignSpForm() {
   if (! window.ethereum ) {
     return;
   }
-  $("#spContextMsg").html("Waiting for input");
-  $("#spContextMsg").css("color", "white");
+  $("#spAppMsg").html("Waiting for input");
+  $("#spAppMsg").css("color", "white");
 
   $(".totalAssigned").html("");
   $(".youAssigned").html("");
@@ -24,7 +24,7 @@ async function assignSpForm() {
 
 function assignSp() {
   let amount = $("#spAssign").val();
-  let context = $("#assignContextName").val();
+  let app = $("#assignAppName").val();
   if (amount < 1 ) {
     Swal.fire({
       type: "error",
@@ -34,25 +34,25 @@ function assignSp() {
     });
     return;
   }
-  if (!context) {
+  if (!app) {
     Swal.fire({
       type: "error",
-      title: "Missing context",
-      text: "Please enter the name of a context",
+      title: "Missing app",
+      text: "Please enter the name of the app",
       footer: ""
     });
     return;
   }
-  context = web3.utils.fromAscii(context);
+  app = web3.utils.fromAscii(app);
   $(".sp-assign-input").hide();
   $(".sp-assign-step").show();
   changeActiveStep(3);
-  spContract.methods.assignContext(context, amount).send( {from: web3.eth.defaultAccount}, function (error, hash) {
+  spContract.methods.assignContext(app, amount).send( {from: web3.eth.defaultAccount}, function (error, hash) {
     if (error) {
       console.log(error);
       return;
     }
-    checkTX(hash, 'assignContext');
+    checkTX(hash, 'assignApp');
   });
 }
 
@@ -68,15 +68,15 @@ function checkSpBalance() {
 function updateBalanceState(spBalance) {
   amount = $("#spAssign").val();
   if (!amount || parseFloat(amount) <= 0) {
-    $("#spContextMsg").css("color", "white");
+    $("#spAppMsg").css("color", "white");
     $("#spAssign").val("");
     return;
   }
   if (spBalance < amount) {
-    $("#spContextMsg").css("color", "red");
-    $("#spContextMsg").html("Insufficient Sp");
+    $("#spAppMsg").css("color", "red");
+    $("#spAppMsg").html("Insufficient Sp");
   } else {
-    $("#spContextMsg").css("color", "green");
-    $("#spContextMsg").html("Sufficient Sp");
+    $("#spAppMsg").css("color", "green");
+    $("#spAppMsg").html("Sufficient Sp");
   }
 }

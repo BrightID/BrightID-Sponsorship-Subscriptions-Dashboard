@@ -1,4 +1,4 @@
-async function contextBalanceForm(){
+async function appBalanceForm(){
   await unlockProvider();
   if (! window.ethereum ) {
     return;
@@ -6,37 +6,37 @@ async function contextBalanceForm(){
   $(".totalAssigned").html("");
   $(".youAssigned").html("");
 
-  $(".context-balance-input").show();
-  $("#contextBalanceModal").modal({
+  $(".app-balance-input").show();
+  $("#appBalanceModal").modal({
     backdrop: "static",
     keyboard: false
   });
   clearInputs();
 };
 
-function contextBalance(){
-  var context = $("#assignContextName").val();
-  if (! context) {
-    var context = $("#balanceContextName").val();
+function appBalance(){
+  var app = $("#assignAppName").val();
+  if (! app) {
+    var app = $("#balanceAppName").val();
   }
-  if (! context) {
+  if (! app) {
     Swal.fire({
       type: "error",
-      title: "Missing context",
-      text: "Please enter the name of a context",
+      title: "Missing app",
+      text: "Please enter the name of the app",
       footer: ""
     });
     return;
   }
-  context = web3.utils.fromAscii(context);
-  spContract.methods.totalContextBalance(context).call(function(error, result){
+  app = web3.utils.fromAscii(app);
+  spContract.methods.totalContextBalance(app).call(function(error, result){
     if (error) {
       console.log(error);
       return;
     }
     $(".totalAssigned").html('Total Assigned: ' + numberDecorator(result) + ' SP');
   });
-  spContract.methods.contextBalance(web3.eth.defaultAccount, context).call(function(error, result){
+  spContract.methods.contextBalance(web3.eth.defaultAccount, app).call(function(error, result){
     if (error) {
       console.log(error);
       return;

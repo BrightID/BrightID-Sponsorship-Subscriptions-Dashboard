@@ -44,8 +44,8 @@
                 <button type="button" onclick="assignSpForm();"
                         class="btn btn-lg btn-block btn-info">Assign
                 </button>
-                <button type="button" onclick="contextBalanceForm();" class="btn btn-lg btn-block btn-info">Check
-                    Context Balance
+                <button type="button" onclick="appBalanceForm();" class="btn btn-lg btn-block btn-info">Check
+                    App Balance
                 </button>
 
             </div>
@@ -466,17 +466,17 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Context</span>
+                                <span class="input-group-text modal-input-txt">App</span>
                             </div>
-                            <select class="custom-select contextSelect" id="assignContextName" class="form-control">
+                            <select class="custom-select appSelect" id="assignAppName" class="form-control">
                             </select>
                             <div class="input-group-append">
-                                <button class="btn btn-info" type="button" onclick="contextBalance()">Balance
+                                <button class="btn btn-info" type="button" onclick="appBalance()">Balance
                                 </button>
                             </div>
                         </div>
                         <div class="col col-12" style="margin-bottom: 4%;">
-                            <span id="spContextMsg"></span>
+                            <span id="spAppMsg"></span>
                             </br>
                             <span class="totalAssigned"></span>
                             </br>
@@ -527,26 +527,26 @@
     </div>
 </div>
 
-<!-- The Context Balance Modal -->
-<div class="modal animated fadeIn" id="contextBalanceModal">
+<!-- The App Balance Modal -->
+<div class="modal animated fadeIn" id="appBalanceModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title m-title">Context's Balance</h4>
+                <h4 class="modal-title m-title">App's Balance</h4>
                 <button type="button" class="close" data-dismiss="modal" onclick="init()">
                     &times;
                 </button>
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <div class="col col-12 context-balance-input">
+                <div class="col col-12 app-balance-input">
                     <form>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text modal-input-txt">Context</span>
+                                <span class="input-group-text modal-input-txt">App</span>
                             </div>
-                            <select class="custom-select contextSelect" id="balanceContextName" class="form-control">
+                            <select class="custom-select appSelect" id="balanceAppName" class="form-control">
                             </select>
                         </div>
                         <div class="col col-12" style="margin-bottom: 4%;">
@@ -556,7 +556,7 @@
                         </div>
                         <div class="input-group-append">
                             <button class="btn btn-info col col-12" type="button"
-                                    onclick="contextBalance()">Balance
+                                    onclick="appBalance()">Balance
                             </button>
                         </div>
                     </form>
