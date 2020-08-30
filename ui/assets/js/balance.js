@@ -5,6 +5,7 @@ async function appBalanceForm(){
   }
   $(".totalAssigned").html("");
   $(".youAssigned").html("");
+  $(".usedSponsorships").html("");
 
   $(".app-balance-input").show();
   $("#appBalanceModal").modal({
@@ -28,14 +29,23 @@ function appBalance(){
     });
     return;
   }
-  app = web3.utils.fromAscii(app);
-  spContract.methods.totalContextBalance(app).call(function(error, result){
-    if (error) {
-      console.log(error);
-      return;
+  let appsUrl = nodeUrl + "/apps/" + app;
+  $.ajax({
+    type: "GET",
+    url: appsUrl,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(res) {
+      let assignedSponsorships = res.data.assignedSponsorships;
+      let usedSponsorships = assignedSponsorships - res.data.unusedSponsorships;
+      $(".totalAssigned").html('Total Assigned: ' + numberDecorator(assignedSponsorships) + ' SP');
+      $(".usedSponsorships").html('Used Sponsorships: ' + numberDecorator(usedSponsorships) + ' SP');
+    },
+    failure: function() {
+      alert("Failed to get app's data!");
     }
-    $(".totalAssigned").html('Total Assigned: ' + numberDecorator(result) + ' SP');
   });
+  app = web3.utils.fromAscii(app);
   spContract.methods.contextBalance(web3.eth.defaultAccount, app).call(function(error, result){
     if (error) {
       console.log(error);
@@ -43,5 +53,4 @@ function appBalance(){
     }
     $(".youAssigned").html('You Assigned: ' + numberDecorator(result) + ' SP');
   });
-
 }

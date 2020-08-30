@@ -1,6 +1,6 @@
 async function assignSpForm() {
   await unlockProvider();
-  if (! window.ethereum ) {
+  if (!window.ethereum) {
     return;
   }
   $("#spAppMsg").html("Waiting for input");
@@ -8,6 +8,7 @@ async function assignSpForm() {
 
   $(".totalAssigned").html("");
   $(".youAssigned").html("");
+  $(".usedSponsorships").html("");
 
   $(".sp-assign-step").hide();
   $(".sp-assign-input").show();
@@ -25,7 +26,7 @@ async function assignSpForm() {
 function assignSp() {
   let amount = $("#spAssign").val();
   let app = $("#assignAppName").val();
-  if (amount < 1 ) {
+  if (amount < 1) {
     Swal.fire({
       type: "error",
       title: "Amount too small",
@@ -47,7 +48,7 @@ function assignSp() {
   $(".sp-assign-input").hide();
   $(".sp-assign-step").show();
   changeActiveStep(3);
-  spContract.methods.assignContext(app, amount).send( {from: web3.eth.defaultAccount}, function (error, hash) {
+  spContract.methods.assignContext(app, amount).send({ from: web3.eth.defaultAccount }, function(error, hash) {
     if (error) {
       console.log(error);
       return;
@@ -57,7 +58,7 @@ function assignSp() {
 }
 
 function checkSpBalance() {
-  spContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+  spContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result) {
     if (error) {
       return;
     }
