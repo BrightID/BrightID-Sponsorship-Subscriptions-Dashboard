@@ -62,11 +62,11 @@ function checkSpBalance() {
     if (error) {
       return;
     }
-    updateBalanceState(parseInt(result));
+    updateSpBalanceState(parseInt(result));
   });
 }
 
-function updateBalanceState(spBalance) {
+function updateSpBalanceState(spBalance) {
   amount = $("#spAssign").val();
   if (!amount || parseFloat(amount) <= 0) {
     $("#spAppMsg").css("color", "white");

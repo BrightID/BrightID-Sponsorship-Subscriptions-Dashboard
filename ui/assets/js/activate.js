@@ -71,11 +71,11 @@ function checkSubsBalance() {
     if (error) {
       return;
     }
-    updateBalanceState(parseInt(result));
+    updateSubsBalanceState(parseInt(result));
   });
 }
 
-function updateBalanceState(subsBalance) {
+function updateSubsBalanceState(subsBalance) {
   amount = $("#subsActivate").val();
   if (!amount || parseFloat(amount) <= 0) {
     $("#subsActivateMsg").css("color", "white");
