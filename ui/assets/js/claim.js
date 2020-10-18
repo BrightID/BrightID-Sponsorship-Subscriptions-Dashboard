@@ -20,6 +20,13 @@ async function claimForm(){
   });
   $(".confirm-icon").hide();
   $(".loader").hide();
+  subsContract.methods.claimable(web3.eth.defaultAccount).call(function(error, result){
+    if (error) {
+      console.log(error);
+      return;
+    }
+    $("#claimableAmount").html(numberDecorator(result));
+  });
 }
 
 function claim(){
