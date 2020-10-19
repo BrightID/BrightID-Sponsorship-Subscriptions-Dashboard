@@ -1,6 +1,6 @@
 async function appBalanceForm(){
   await unlockProvider();
-  if (! window.ethereum ) {
+  if (! window.provider ) {
     return;
   }
   $(".totalAssigned").html("");

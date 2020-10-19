@@ -4,7 +4,7 @@ var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
 
 async function activateForm() {
   await unlockProvider();
-  if (! window.ethereum ) {
+  if (! window.provider ) {
     return;
   }
   privacyAgreement = false;

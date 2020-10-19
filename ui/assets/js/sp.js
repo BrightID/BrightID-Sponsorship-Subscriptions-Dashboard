@@ -4,7 +4,7 @@ var $spPrivacyCheckbox = $('#spPrivacyCheckbox').change(function(){
 
 async function spPurchaseForm(){
   await unlockProvider();
-  if (! window.ethereum ) {
+  if (! window.provider ) {
     return;
   }
   val = 0;

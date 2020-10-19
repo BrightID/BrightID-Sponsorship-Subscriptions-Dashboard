@@ -10,6 +10,7 @@ async function unlockProvider() {
       // Request account access if needed
       await ethereum.enable();
     } catch (error) {
+      window.provider = false;
       Swal.fire({
         type: "error",
         title: "Something went wrong",
@@ -18,6 +19,7 @@ async function unlockProvider() {
       });
     }
   } else {
+    window.provider = false;
     Swal.fire({
       type: "error",
       title: "MetaMask is not installed",
@@ -29,6 +31,7 @@ async function unlockProvider() {
 
   await web3.eth.getAccounts(function(error, accounts){
     if (error != null) {
+      window.provider = false;
       Swal.fire({
         type: "error",
         title: "Something went wrong",
@@ -38,6 +41,7 @@ async function unlockProvider() {
       return;
     }
     if (accounts.length === 0) {
+      window.provider = false;
       Swal.fire({
         type: "info",
         title: "Your wallet provider is locked",
@@ -45,9 +49,33 @@ async function unlockProvider() {
         footer: ""
       });
       return;
+    } else {
+      web3.eth.defaultAccount = accounts[0];
+      load_data();
     }
-    web3.eth.defaultAccount = accounts[0];
-    load_data()
+    web3.eth.net.getNetworkType(function(error, network){
+      if (error != null) {
+        window.provider = false;
+        Swal.fire({
+          type: "error",
+          title: "Something went wrong",
+          text: error.message || error,
+          footer: ""
+        });
+        return;
+      }
+      if (network !== 'main') {
+        window.provider = false;
+        Swal.fire({
+          type: "info",
+          title: "Wrong network",
+          text: "Please select the main network in your wallet and try again.",
+          footer: ""
+        });
+        return;
+      }
+      window.provider = true;
+    });
   });
 }
 

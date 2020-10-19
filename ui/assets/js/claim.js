@@ -4,7 +4,7 @@ var $claimPrivacyCheckbox = $('#claimPrivacyCheckbox').change(function(){
 
 async function claimForm(){
   await unlockProvider();
-  if (! window.ethereum ) {
+  if (! window.provider ) {
     return;
   }
   val = 0;

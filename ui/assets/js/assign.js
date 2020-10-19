@@ -1,6 +1,6 @@
 async function assignSpForm() {
   await unlockProvider();
-  if (!window.ethereum) {
+  if (! window.provider ) {
     return;
   }
   $("#spAppMsg").html("Waiting for input");

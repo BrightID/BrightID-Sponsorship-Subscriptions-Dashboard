@@ -4,7 +4,7 @@ var $subsPrivacyCheckbox = $('#subsPrivacyCheckbox').change(function(){
 
 async function subsPurchaseForm(){
   await unlockProvider();
-  if (! window.ethereum ) {
+  if (! window.provider ) {
     return;
   }
   val = 0;
