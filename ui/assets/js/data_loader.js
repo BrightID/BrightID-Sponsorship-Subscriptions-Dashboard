@@ -36,6 +36,8 @@ async function load_data(){
         return;
       }
       $("#claimable").html(numberDecorator(result));
+      $('#claimButton').html(`Claim (${numberDecorator(result)} Sp)`);
+
     });
 
     infura_subsContract.getPastEvents('SubscriptionsActivated', { fromBlock: 0 }, updateActiveBalance);
