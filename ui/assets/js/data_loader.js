@@ -16,7 +16,7 @@ async function load_data(){
   infura_spMinterContract = new infura_web3.eth.Contract(abies.sp_minter, addresses.sp_minter);
   infura_subsMinterContract = new infura_web3.eth.Contract(abies.subs_minter, addresses.subs_minter);
 
-  if (window.web3 && window.web3.eth.defaultAccount) {
+  if (window.web3 && window.web3.eth && window.web3.eth.defaultAccount) {
     infura_subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
       if (error) {
         return;
@@ -31,11 +31,19 @@ async function load_data(){
       $("#spBalance").html(numberDecorator(result));
     });
 
+    infura_subsContract.methods.claimable(web3.eth.defaultAccount).call(function(error, result){
+      if (error) {
+        return;
+      }
+      $("#claimable").html(numberDecorator(result));
+    });
+
     infura_subsContract.getPastEvents('SubscriptionsActivated', { fromBlock: 0 }, updateActiveBalance);
   } else {
     $("#subsInactiveBalance").html('_');
     $("#spBalance").html('_');
     $("#subsActiveBalance").html('_');
+    $("#claimable").html('_');
   }
 
   infura_spMinterContract.methods.price().call(function(error, result){
@@ -58,13 +66,45 @@ async function load_data(){
     if (error) {
       return;
     }
-    let subtractFromForThisPrice = 900000;
-    if (sold < 400000){
-      subtractFromForThisPrice = 400000;
-    }
-    $("#subsLeftAtThisPrice").html(numberDecorator(subtractFromForThisPrice - sold));
+    $("#subsLeftAtThisPrice").html(numberDecorator(sold));
     $("#subsLeftTotal").html(numberDecorator(900000 - sold));
   });
+
+  infura_subsContract.methods.totalSupply().call(function(error, totalSupply){
+    if (error) {
+      return;
+    }
+    $("#subsActivated").html(numberDecorator(900000 - totalSupply));
+  });
+
+  infura_spContract.methods.totalSupply().call(function(error, totalSupply){
+    if (error) {
+      return;
+    }
+    let appsUrl = nodeUrl+"/apps/";
+    let totalAssigned = 0;
+    $.ajax({
+      type: "GET",
+      url: appsUrl,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function(data){
+        $(".appSelect option").remove();
+        $(".appSelect").append($("<option selected />").val("").text("App Name"));
+        $.each(data.data.apps, function(index, app){
+          totalAssigned += app.assignedSponsorships;
+          $(".appSelect").append($("<option />").val(app.id).text(app.name));
+        });
+        $("#spSupply").html(numberDecorator(parseInt(totalSupply) + totalAssigned));
+        $("#spTotalAssigned").html(numberDecorator(totalAssigned));
+      },
+      failure: function () {
+        alert("Failed to get apps!");
+      }
+    });
+  });
+
+
 }
 
 function updateActiveBalance(err, events){
@@ -76,24 +116,4 @@ function updateActiveBalance(err, events){
   const totalAmount = events.filter(event => event.returnValues.account === web3.eth.defaultAccount)
     .reduce((total, event) => parseInt(event.returnValues.amount) + total, 0);
   $("#subsActiveBalance").html(numberDecorator(totalAmount));
-}
-
-async function load_apps(){
-  let appsUrl = nodeUrl+"/apps/";
-  $.ajax({
-    type: "GET",
-    url: appsUrl,
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function(data){
-      $(".appSelect option").remove();
-      $(".appSelect").append($("<option selected />").val("").text("App Name"));
-      $.each(data.data.apps, function(index, app){
-        $(".appSelect").append($("<option />").val(app.id).text(app.name));
-      });
-    },
-    failure: function () {
-      alert("Failed to get apps!");
-    }
-  });
 }

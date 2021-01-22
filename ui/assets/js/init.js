@@ -20,7 +20,6 @@ window.addEventListener('load', init);
 
 async function init(){
   load_data();
-  load_apps();
   await unlockProvider();
   if (window.ethereum) {
     ptContract = new web3.eth.Contract(abies.pt, addresses.pt);
