@@ -76,6 +76,7 @@ async function load_data(){
     if (error) {
       return;
     }
+    $("#subsSupply").html(numberDecorator(totalSupply));
     $("#subsActivated").html(numberDecorator(900000 - totalSupply));
   });
 
@@ -85,6 +86,7 @@ async function load_data(){
     }
     let appsUrl = nodeUrl+"/apps/";
     let totalAssigned = 0;
+    let totalUsed = 0;
     $.ajax({
       type: "GET",
       url: appsUrl,
@@ -95,10 +97,12 @@ async function load_data(){
         $(".appSelect").append($("<option selected />").val("").text("App Name"));
         $.each(data.data.apps, function(index, app){
           totalAssigned += app.assignedSponsorships;
+          totalUsed += (app.assignedSponsorships - app.unusedSponsorships);
           $(".appSelect").append($("<option />").val(app.id).text(app.name));
         });
         $("#spSupply").html(numberDecorator(parseInt(totalSupply) + totalAssigned));
         $("#spTotalAssigned").html(numberDecorator(totalAssigned));
+        $("#spTotalUsed").html(numberDecorator(totalUsed));
       },
       failure: function () {
         alert("Failed to get apps!");
