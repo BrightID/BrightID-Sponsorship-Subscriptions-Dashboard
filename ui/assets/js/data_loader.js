@@ -12,9 +12,6 @@ var mainnetWeb3 = new Web3(new Web3.providers.HttpProvider(mainnetRpcUrl));
 var idchainWeb3 = new Web3(new Web3.providers.HttpProvider(idchainRpcUrl));
 
 async function load_data() {
-  $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.sp}" target="_blank">${addresses.mainnet.sp}</a>`);
-  $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.subs}" target="_blank">${addresses.mainnet.subs}</a>`);
-
   mainnet_ptContract = new mainnetWeb3.eth.Contract(abies.mainnet.pt, addresses.mainnet.pt);
   mainnet_spContract = new mainnetWeb3.eth.Contract(abies.mainnet.sp, addresses.mainnet.sp);
   mainnet_subsContract = new mainnetWeb3.eth.Contract(abies.mainnet.subs, addresses.mainnet.subs);
