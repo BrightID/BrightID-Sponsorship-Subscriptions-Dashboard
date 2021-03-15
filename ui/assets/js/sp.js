@@ -1,10 +1,10 @@
-var $spPrivacyCheckbox = $('#spPrivacyCheckbox').change(function(){
-  $("#spBuyBtn").prop('disabled', ! $spPrivacyCheckbox.is(":checked"));
+var $spPrivacyCheckbox = $('#spPrivacyCheckbox').change(function() {
+  $("#spBuyBtn").prop('disabled', !$spPrivacyCheckbox.is(":checked"));
 });
 
-async function spPurchaseForm(){
+async function spPurchaseForm() {
   await unlockProvider();
-  if (! window.provider ) {
+  if (!window.provider) {
     return;
   }
   val = 0;
@@ -26,11 +26,11 @@ async function spPurchaseForm(){
   $(".loader").hide();
 }
 
-function purchaseSp(){
+function purchaseSp() {
   val = $("#sp").val();
   business = $("#spCheckbox").prop('checked');
   privacyAgreement = $("#spPrivacyCheckbox").prop('checked');
-  if (! privacyAgreement) {
+  if (!privacyAgreement) {
     Swal.fire({
       type: "error",
       title: "Attention",
@@ -48,7 +48,7 @@ function purchaseSp(){
     });
     return;
   }
-  if (! enoughFund) {
+  if (!enoughFund) {
     Swal.fire({
       type: "error",
       title: "Insufficient funds",
@@ -61,7 +61,9 @@ function purchaseSp(){
   $(".sp-step").show();
   changeActiveStep(1);
   dai = web3.utils.toBN($("#spDai").val() + "000000000000000000");
-  ptContract.methods.approve(addresses.sp_minter, dai).send( {from: web3.eth.defaultAccount}, function(error, hash){
+  const fContractSp = (fTokenSp == 'Sp') ? bridgeSpContract : spContract;
+
+  ptContract.methods.approve(spMinterContract.options.address, dai).send({ from: web3.eth.defaultAccount }, function(error, hash) {
     if (error) {
       console.log(error);
       Swal.fire({
@@ -77,8 +79,8 @@ function purchaseSp(){
   $("#spBuyBtn").prop("disabled", true);
 }
 
-function buySpConfirm(){
-  spMinterContract.methods.purchase().send( {from: web3.eth.defaultAccount}, function(error, hash){
+function buySpConfirm() {
+  spMinterContract.methods.purchase().send({ from: web3.eth.defaultAccount }, function(error, hash) {
     if (error) {
       console.log(error);
       return;
@@ -88,8 +90,8 @@ function buySpConfirm(){
   });
 }
 
-function checkSpState(){
-  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result){
+function checkSpState() {
+  ptContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result) {
     if (error) {
       return;
     }
@@ -97,9 +99,9 @@ function checkSpState(){
   });
 }
 
-function updateSpState(ptBalance){
+function updateSpState(ptBalance) {
   amount = $("#sp").val();
-  if (! amount || parseFloat(amount) <= 0) {
+  if (!amount || parseFloat(amount) <= 0) {
     $("#spMsg").css("color", "white");
     $("#spDai").val("");
     return;

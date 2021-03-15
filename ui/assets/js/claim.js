@@ -1,10 +1,10 @@
-var $claimPrivacyCheckbox = $('#claimPrivacyCheckbox').change(function(){
-  $("#claimBtn").prop('disabled', ! $claimPrivacyCheckbox.is(":checked"));
+var $claimPrivacyCheckbox = $('#claimPrivacyCheckbox').change(function() {
+  $("#claimBtn").prop('disabled', !$claimPrivacyCheckbox.is(":checked"));
 });
 
-async function claimForm(){
+async function claimForm() {
   await unlockProvider();
-  if (! window.provider ) {
+  if (!window.provider) {
     return;
   }
   val = 0;
@@ -20,20 +20,20 @@ async function claimForm(){
   });
   $(".confirm-icon").hide();
   $(".loader").hide();
-  subsContract.methods.claimable(web3.eth.defaultAccount).call(function(error, result){
+  subsContract.methods.claimable(web3.eth.defaultAccount).call(function(error, result) {
     if (error) {
       console.log(error);
       return;
     }
-    $("#claimableAmount").html(numberDecorator(result));
+    $("#claimableAmount").html(numberDecorator(parseInt(networkId == 1 ? result : result / 10 ** 18)));
   });
 }
 
-function claim(){
+function claim() {
   $(".claim-input").hide();
   $(".claim-step").show();
   privacyAgreement = $("#claimPrivacyCheckbox").prop('checked');
-  if (! privacyAgreement) {
+  if (!privacyAgreement) {
     Swal.fire({
       type: "error",
       title: "Attention",
@@ -43,13 +43,13 @@ function claim(){
     return;
   }
   changeActiveStep(3);
-  subsContract.methods.claimable(web3.eth.defaultAccount).call(function(error, result){
+  subsContract.methods.claimable(web3.eth.defaultAccount).call(function(error, result) {
     if (error) {
       console.log(error);
       return;
     }
-    val = parseInt(result);
-    subsMinterContract.methods.claim().send({ from: web3.eth.defaultAccount }, function(error, hash){
+    val = parseInt(networkId == 1 ? result : result / 10 ** 18);
+    subsMinterContract.methods.claim().send({ from: web3.eth.defaultAccount }, function(error, hash) {
       if (error) {
         console.log(error);
         return;

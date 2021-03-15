@@ -1,83 +1,6 @@
-$('a[href$="#Modal"]').on("click", function () {
+$('a[href$="#Modal"]').on("click", function() {
   $('#privacyPolicyModal').modal('show');
 });
-
-async function unlockProvider() {
-  if (window.ethereum) {
-    Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
-    web3 = new Web3(ethereum);
-    try {
-      // Request account access if needed
-      await ethereum.enable();
-    } catch (error) {
-      window.provider = false;
-      Swal.fire({
-        type: "error",
-        title: "Something went wrong",
-        text: error.message || error,
-        footer: ""
-      });
-    }
-  } else {
-    window.provider = false;
-    Swal.fire({
-      type: "error",
-      title: "MetaMask is not installed",
-      text: "Please install MetaMask from below link",
-      footer: '<a href="https://metamask.io">Install MetaMask</a>'
-    });
-    return;
-  }
-
-  await web3.eth.getAccounts(function(error, accounts){
-    if (error != null) {
-      window.provider = false;
-      Swal.fire({
-        type: "error",
-        title: "Something went wrong",
-        text: error.message || error,
-        footer: ""
-      });
-      return;
-    }
-    if (accounts.length === 0) {
-      window.provider = false;
-      Swal.fire({
-        type: "info",
-        title: "Your wallet provider is locked",
-        text: "Please unlock your wallet",
-        footer: ""
-      });
-      return;
-    } else {
-      web3.eth.defaultAccount = accounts[0];
-      load_data();
-    }
-    web3.eth.net.getNetworkType(function(error, network){
-      if (error != null) {
-        window.provider = false;
-        Swal.fire({
-          type: "error",
-          title: "Something went wrong",
-          text: error.message || error,
-          footer: ""
-        });
-        return;
-      }
-      if (network !== 'main') {
-        window.provider = false;
-        Swal.fire({
-          type: "info",
-          title: "Wrong network",
-          text: "Please select the main network in your wallet and try again.",
-          footer: ""
-        });
-        return;
-      }
-      window.provider = true;
-    });
-  });
-}
 
 function clearInputs() {
   $("#sp").val("");
@@ -89,6 +12,10 @@ function clearInputs() {
   $("#balanceAppName").val("");
   $("#subsActivate").val("");
   $("#reference").val("");
+  $("#fAmountSp").val("");
+  $("#tAmountSp").val("");
+  $("#fAmountSubs").val("");
+  $("#tAmountSubs").val("");
 }
 
 function changeActiveStep(step) {
@@ -108,13 +35,13 @@ function changeActiveStep(step) {
 function checkTX(hash, type, buyer, token, amount, daiAmount, business, reference) {
   confirmed = false;
   changeActiveStep(4);
-  web3.eth.getTransactionReceipt(hash, function (error, result) {
+  web3.eth.getTransactionReceipt(hash, function(error, result) {
     if (error) {
       console.error(error);
       return;
     }
     if (result == null) {
-      setTimeout(function () {
+      setTimeout(function() {
         checkTX(hash, type, buyer, token, amount, daiAmount, business, reference);
       }, 5000);
       return;
@@ -144,7 +71,7 @@ function checkTX(hash, type, buyer, token, amount, daiAmount, business, referenc
 }
 
 function isConfirmed(txBlockNumber, type) {
-  web3.eth.getBlockNumber(function (error, blockNumber) {
+  web3.eth.getBlockNumber(function(error, blockNumber) {
     if (error) {
       console.error(error);
       return false;
@@ -167,7 +94,7 @@ function isConfirmed(txBlockNumber, type) {
         footer: ""
       });
     } else {
-      setTimeout(function () {
+      setTimeout(function() {
         isConfirmed(txBlockNumber, type);
       }, 5000);
       return;
@@ -177,13 +104,13 @@ function isConfirmed(txBlockNumber, type) {
 
 function checkApproveResult(hash, cb) {
   changeActiveStep(2);
-  web3.eth.getTransactionReceipt(hash, function (error, result) {
+  web3.eth.getTransactionReceipt(hash, function(error, result) {
     if (error) {
       console.error(error);
       return;
     }
     if (result == null) {
-      setTimeout(function () {
+      setTimeout(function() {
         checkApproveResult(hash, cb);
       }, 5000);
       return;

@@ -4,17 +4,17 @@ var $activatePrivacyCheckbox = $('#activatePrivacyCheckbox').change(function() {
 
 async function activateForm() {
   await unlockProvider();
-  if (! window.provider ) {
+  if (!window.provider) {
     return;
   }
   privacyAgreement = false;
   $("#activatePrivacyCheckbox").prop('checked', false);
 
-  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result) {
     if (error) {
       return;
     }
-    $("#subsActivate").val(parseInt(result));
+    $("#subsActivate").val(parseInt(networkId == 1 ? result : result / 10 ** 18));
   });
 
   $("#subsActivateMsg").html("Waiting for input");
@@ -34,9 +34,9 @@ async function activateForm() {
 };
 
 function activate() {
-  let amount = $("#subsActivate").val();
+  let amount = parseInt($("#subsActivate").val());
   privacyAgreement = $("#activatePrivacyCheckbox").prop('checked');
-  if ( !privacyAgreement ) {
+  if (!privacyAgreement) {
     Swal.fire({
       type: "error",
       title: "Attention",
@@ -45,7 +45,7 @@ function activate() {
     });
     return;
   }
-  if (amount < 1 ) {
+  if (amount < 1) {
     Swal.fire({
       type: "error",
       title: "Amount too small",
@@ -57,7 +57,8 @@ function activate() {
   $(".subs-activate-input").hide();
   $(".subs-activate-step").show();
   changeActiveStep(3);
-  subsContract.methods.activate(amount).send( {from: web3.eth.defaultAccount}, function (error, hash) {
+  amount = (networkId == 1 ? amount : web3.utils.toBN(amount + "000000000000000000"));
+  subsContract.methods.activate(amount).send({ from: web3.eth.defaultAccount }, function(error, hash) {
     if (error) {
       console.log(error);
       return;
@@ -67,17 +68,17 @@ function activate() {
 }
 
 function checkSubsBalance() {
-  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function (error, result) {
+  subsContract.methods.balanceOf(web3.eth.defaultAccount).call(function(error, result) {
     if (error) {
       return;
     }
-    updateSubsBalanceState(parseInt(result));
+    updateSubsBalanceState(parseFloat(networkId == 1 ? result : result / 10 ** 18));
   });
 }
 
 function updateSubsBalanceState(subsBalance) {
-  amount = $("#subsActivate").val();
-  if (!amount || parseFloat(amount) <= 0) {
+  amount = parseInt($("#subsActivate").val());
+  if (!amount || amount <= 0) {
     $("#subsActivateMsg").css("color", "white");
     $("#subsActivate").val("");
     return;

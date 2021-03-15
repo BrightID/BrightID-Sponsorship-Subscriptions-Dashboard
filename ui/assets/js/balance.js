@@ -1,6 +1,6 @@
-async function appBalanceForm(){
+async function appBalanceForm() {
   await unlockProvider();
-  if (! window.provider ) {
+  if (!window.provider) {
     return;
   }
   $(".totalAssigned").html("");
@@ -15,12 +15,12 @@ async function appBalanceForm(){
   clearInputs();
 };
 
-function appBalance(){
+function appBalance() {
   var app = $("#assignAppName").val();
-  if (! app) {
+  if (!app) {
     var app = $("#balanceAppName").val();
   }
-  if (! app) {
+  if (!app) {
     Swal.fire({
       type: "error",
       title: "Missing app",
@@ -46,11 +46,20 @@ function appBalance(){
     }
   });
   app = web3.utils.fromAscii(app);
-  spContract.methods.contextBalance(web3.eth.defaultAccount, app).call(function(error, result){
+  let youAssigned = 0;
+  spContract.methods.contextBalance(web3.eth.defaultAccount, app).call(function(error, result) {
     if (error) {
       console.log(error);
       return;
     }
-    $(".youAssigned").html('You Assigned: ' + numberDecorator(result) + ' SP');
+    youAssigned += parseInt(networkId == 1 ? result : result / 10 ** 18);
+    spContract2.methods.contextBalance(web3.eth.defaultAccount, app).call(function(error, result) {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      youAssigned += (networkId == 1 ? parseInt(result) / 10 ** 18 : parseInt(result));
+      $(".youAssigned").html('You Assigned: ' + numberDecorator(youAssigned) + ' SP');
+    });
   });
 }
