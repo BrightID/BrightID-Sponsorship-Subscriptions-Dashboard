@@ -127,3 +127,34 @@ function recordAction(data) {
 function numberDecorator(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+
+async function addIdchain() {
+  if (!window.ethereum) {
+    return alert('Metamask is not installed on this browser!');
+  }
+  ethereum
+    .request({
+      method: 'wallet_addEthereumChain',
+      params: [{
+      chainId: '0x4a',
+      chainName: 'IDChain',
+      nativeCurrency: {
+        name: 'Eidi',
+        symbol: 'Eidi',
+        decimals: 18,
+      },
+      rpcUrls: ['https://idchain.one/rpc/'],
+      blockExplorerUrls: ['https://explorer.idchain.one'],
+      iconUrls: ['https://apps.brightid.org/logos/idchain.png']
+    }]
+  })
+  .then((args) => console.log(args))
+  .catch((error) => {
+    if (error.code === 4001) {
+      alert('Please connect to MetaMask.');
+    } else {
+      console.error(error);
+    }
+  });
+}

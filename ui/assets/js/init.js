@@ -101,6 +101,7 @@ async function unlockProvider() {
         $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.sp}" target="_blank">${addresses.mainnet.sp}</a>`);
         $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.subs}" target="_blank">${addresses.mainnet.subs}</a>`);
         $(".wrapBtn").hide();
+        $("#addIdchainBtn").show();
         ptContract = new web3.eth.Contract(abies.mainnet.pt, addresses.mainnet.pt);
         spContract = new web3.eth.Contract(abies.mainnet.sp, addresses.mainnet.sp);
         spContract2 = new idchainWeb3.eth.Contract(abies.idchain.sp, addresses.idchain.sp);
@@ -113,6 +114,7 @@ async function unlockProvider() {
         $("#spContractAddress").html(`<a href="https://explorer.idchain.one/address/${addresses.idchain.sp}/transactions" target="_blank">${addresses.idchain.sp}</a>`);
         $("#subsContractAddress").html(`<a href="https://explorer.idchain.one/address/${addresses.idchain.subs}/transactions" target="_blank">${addresses.idchain.subs}</a>`);
         $(".wrapBtn").show();
+        $("#addIdchainBtn").hide();
         ptContract = new web3.eth.Contract(abies.idchain.pt, addresses.idchain.pt);
         spContract = new web3.eth.Contract(abies.idchain.sp, addresses.idchain.sp);
         spContract2 = new mainnetWeb3.eth.Contract(abies.mainnet.sp, addresses.mainnet.sp);
@@ -125,6 +127,7 @@ async function unlockProvider() {
       } else {
         $(".uniswapLink").attr("href", "https://info.uniswap.org/pair/0x9bf9df78b45f9c3848094cbcd90e2cc5da29eb77");
         $(".wrapBtn").hide();
+        $("#addIdchainBtn").show();
         window.provider = false;
         Swal.fire({
           type: "info",
