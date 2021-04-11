@@ -48,7 +48,6 @@ function assignSp() {
   $(".sp-assign-input").hide();
   $(".sp-assign-step").show();
   changeActiveStep(3);
-  amount = web3.utils.toBN(amount + "000000000000000000");
   spContract.methods.assignContext(app, amount).send({ from: web3.eth.defaultAccount }, function(error, hash) {
     if (error) {
       console.log(error);

@@ -34,6 +34,7 @@ async function load_data() {
   if (window.web3 && window.web3.eth && window.web3.eth.defaultAccount) {
     (networkId == 1 ? mainnet_subsContract : idchain_subsContract).methods.balanceOf(web3.eth.defaultAccount).call(function(error, result) {
       if (error) {
+        console.log(error)
         return;
       }
       $("#subsInactiveBalance").html(numberDecorator(networkId == 1 ? result : result / 10 ** 18));
@@ -43,15 +44,15 @@ async function load_data() {
       if (error) {
         return;
       }
-      $("#spBalance").html(numberDecorator(networkId == 1 ? result : result / 10 ** 18));
+      $("#spBalance").html(numberDecorator(result));
     });
 
     (networkId == 1 ? mainnet_subsContract : idchain_subsContract).methods.claimable(web3.eth.defaultAccount).call(function(error, result) {
       if (error) {
         return;
       }
-      $("#claimable").html(numberDecorator(networkId == 1 ? result : result / 10 ** 18));
-      $('#claimButton').html(`Claim (${numberDecorator(networkId == 1 ? result : result / 10**18)} Sp)`);
+      $("#claimable").html(numberDecorator(result));
+      $('#claimButton').html(`Claim (${numberDecorator(result)} Sp)`);
 
     });
     if (networkId == 1) {
@@ -93,8 +94,8 @@ async function load_data() {
       if (error) {
         return;
       }
-      $("#subsSupply").html(numberDecorator(totalSupply - activated / 10 ** 18));
-      $("#subsActivated").html(numberDecorator(900000 - totalSupply + activated / 10 ** 18));
+      $("#subsSupply").html(numberDecorator(totalSupply - (activated / 10 ** 18)));
+      $("#subsActivated").html(numberDecorator(900000 - totalSupply + (activated / 10 ** 18)));
     });
   });
 
@@ -122,8 +123,8 @@ async function load_data() {
             totalUsed += (app.assignedSponsorships - app.unusedSponsorships);
             $(".appSelect").append($("<option />").val(app.id).text(app.name));
           });
-          $("#spSupply").html(numberDecorator(parseInt(totalSupply) + totalAssigned));
-          $("#spTotalAssigned").html(numberDecorator(totalAssigned + minted / 10 ** 18));
+          $("#spSupply").html(numberDecorator(parseInt(totalSupply) + minted));
+          $("#spTotalAssigned").html(numberDecorator(totalAssigned));
           $("#spTotalUsed").html(numberDecorator(totalUsed));
         },
         failure: function() {

@@ -61,7 +61,6 @@ function purchaseSp() {
   $(".sp-step").show();
   changeActiveStep(1);
   dai = web3.utils.toBN($("#spDai").val() + "000000000000000000");
-  const fContractSp = (fTokenSp == 'Sp') ? bridgeSpContract : spContract;
 
   ptContract.methods.approve(spMinterContract.options.address, dai).send({ from: web3.eth.defaultAccount }, function(error, hash) {
     if (error) {

@@ -42,9 +42,6 @@ function wrapSp() {
 
   const fTokenSp = $("#fTokenSp").val();
   let fAmountSp = $("#fAmountSp").val();
-  if (fTokenSp == 'IdSp') {
-    fAmountSp *= 10 ** 18;
-  }
 
   if (!enoughFund) {
     Swal.fire({
@@ -120,9 +117,6 @@ function updateWrappingSpState(fBalanceSp) {
     return;
   }
   $("#tAmountSp").val(fAmountSp);
-  if (fTokenSp == 'IdSp') {
-    fAmountSp *= 10 ** 18;
-  }
   if (fBalanceSp < fAmountSp) {
     $("#spWrappingMsg").css("color", "red");
     $("#spWrappingMsg").html("INSUFFICIENT BALANCE");

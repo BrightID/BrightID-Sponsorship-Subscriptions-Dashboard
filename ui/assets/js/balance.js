@@ -52,13 +52,13 @@ function appBalance() {
       console.log(error);
       return;
     }
-    youAssigned += parseInt(networkId == 1 ? result : result / 10 ** 18);
+    youAssigned += parseInt(result);
     spContract2.methods.contextBalance(web3.eth.defaultAccount, app).call(function(error, result) {
       if (error) {
         console.log(error);
         return;
       }
-      youAssigned += (networkId == 1 ? parseInt(result) / 10 ** 18 : parseInt(result));
+      youAssigned += parseInt(result);
       $(".youAssigned").html('You Assigned: ' + numberDecorator(youAssigned) + ' SP');
     });
   });
