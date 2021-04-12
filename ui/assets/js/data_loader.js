@@ -123,7 +123,7 @@ async function load_data() {
             totalUsed += (app.assignedSponsorships - app.unusedSponsorships);
             $(".appSelect").append($("<option />").val(app.id).text(app.name));
           });
-          $("#spSupply").html(numberDecorator(parseInt(totalSupply) + minted));
+          $("#spSupply").html(numberDecorator(parseInt(totalSupply) + parseInt(minted)));
           $("#spTotalAssigned").html(numberDecorator(totalAssigned));
           $("#spTotalUsed").html(numberDecorator(totalUsed));
         },
