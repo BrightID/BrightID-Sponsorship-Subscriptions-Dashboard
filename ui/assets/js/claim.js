@@ -25,7 +25,7 @@ async function claimForm() {
       console.log(error);
       return;
     }
-    $("#claimableAmount").html(numberDecorator(parseInt(networkId == 1 ? result : result / 10 ** 18)));
+    $("#claimableAmount").html(numberDecorator(result));
   });
 }
 
