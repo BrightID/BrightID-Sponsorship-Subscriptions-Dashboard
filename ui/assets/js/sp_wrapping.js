@@ -1,7 +1,3 @@
-var $spWrappingPrivacyCheckbox = $('#spWrappingPrivacyCheckbox').change(function() {
-  $("#spWrappingBtn").prop('disabled', !$spWrappingPrivacyCheckbox.is(":checked"));
-});
-
 async function spWrappingForm() {
   await unlockProvider();
   if (!window.provider) {
@@ -9,9 +5,6 @@ async function spWrappingForm() {
   }
   fAmountSp = 0;
   tAmountSp = 0;
-  business = true;
-  privacyAgreement = false;
-  $("#spWrappingPrivacyCheckbox").prop('checked', false);
   enoughFund = false;
   $("#spWrappingMsg").html("Waiting for input");
   $("#spWrappingMsg").css("color", "white");
@@ -27,21 +20,18 @@ async function spWrappingForm() {
 }
 
 function wrapSp() {
-  business = $("#spWrappingCheckbox").prop('checked');
+  const fTokenSp = $("#fTokenSp").val();
+  let fAmountSp = $("#fAmountSp").val();
 
-  privacyAgreement = $("#spWrappingPrivacyCheckbox").prop('checked');
-  if (!privacyAgreement) {
+  if (!fAmountSp) {
     Swal.fire({
       type: "error",
-      title: "Attention",
-      text: "Please read and agree to the privacy policy and terms of use.",
+      title: "Attentions",
+      text: "Please fill out all required fields",
       footer: ""
     });
     return;
   }
-
-  const fTokenSp = $("#fTokenSp").val();
-  let fAmountSp = $("#fAmountSp").val();
 
   if (!enoughFund) {
     Swal.fire({

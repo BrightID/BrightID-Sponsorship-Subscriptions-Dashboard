@@ -1,7 +1,3 @@
-var $subsWrappingPrivacyCheckbox = $('#subsWrappingPrivacyCheckbox').change(function() {
-  $("#subsWrappingBtn").prop('disabled', !$subsWrappingPrivacyCheckbox.is(":checked"));
-});
-
 async function subsWrappingForm() {
   await unlockProvider();
   if (!window.provider) {
@@ -9,9 +5,6 @@ async function subsWrappingForm() {
   }
   fAmountSubs = 0;
   tAmountSubs = 0;
-  business = true;
-  privacyAgreement = false;
-  $("#subsWrappingPrivacyCheckbox").prop('checked', false);
   enoughFund = false;
   $("#subsWrappingMsg").html("Waiting for input");
   $("#subsWrappingMsg").css("color", "white");
@@ -27,22 +20,22 @@ async function subsWrappingForm() {
 }
 
 function wrapSubs() {
-  business = $("#subsWrappingCheckbox").prop('checked');
-  privacyAgreement = $("#subsWrappingPrivacyCheckbox").prop('checked');
-  if (!privacyAgreement) {
-    Swal.fire({
-      type: "error",
-      title: "Attention",
-      text: "Please read and agree to the privacy policy and terms of use.",
-      footer: ""
-    });
-    return;
-  }
   const fTokenSubs = $("#fTokenSubs").val();
   let fAmountSubs = $("#fAmountSubs").val();
   if (fTokenSubs == 'IdSubs') {
     fAmountSubs *= 10 ** 18;
   }
+
+  if (!fAmountSubs) {
+    Swal.fire({
+      type: "error",
+      title: "Attentions",
+      text: "Please fill out all required fields",
+      footer: ""
+    });
+    return;
+  }
+
   if (!enoughFund) {
     Swal.fire({
       type: "error",
