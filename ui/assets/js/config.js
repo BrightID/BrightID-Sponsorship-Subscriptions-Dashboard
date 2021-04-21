@@ -12,14 +12,14 @@ var addresses = {
     subs: "0x61CEAc48136d6782DBD83c09f51E23514D12470a"
   },
   idchain: {
-    pt: "",
-    sp_minter: "",
-    sp: "",
-    subs_minter: "",
-    subs: "",
-    bridge_sp: "",
-    bridge_subs: "",
-    wrapper: "",
+    pt: "0x128741612e7575AEA3F6e94CB567c75c4c415D89",
+    sp_minter: "0x37A29078403489895c651d8b615C3B3307B6F08D",
+    sp: "0x183C5D2d1E43A3aCC8a977023796996f8AFd2327",
+    subs_minter: "0x37A29078403489895c651d8b615C3B3307B6F08D",
+    subs: "0xC7D025eeDeB6BF7A4f4B952E71B4C3999d9c98E0",
+    bridge_sp: "0xa7DF699BbDC9292a38ee7E7117203E9B4FC019F2",
+    bridge_subs: "0x5EF7e0DF1148Bbaa90A2bDCf7eA977087929D60C",
+    wrapper: "0x6828f09b2a01b2f562baeA1cF00dd806038c0797",
   }
 };
 
