@@ -132,7 +132,7 @@ async function unlockProvider() {
         Swal.fire({
           type: "info",
           title: "Wrong network",
-          text: "Please select the main network in your wallet and try again.",
+          text: "Please select the IDChain or main network in your wallet and try again.",
           footer: ""
         });
         $body.removeClass("loading");
