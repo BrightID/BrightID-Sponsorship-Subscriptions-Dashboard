@@ -97,7 +97,7 @@ async function unlockProvider() {
       load_data();
       console.log('networkId', networkId);
       if (networkId == 1) {
-        $(".uniswapLink").attr("href", "https://info.uniswap.org/pair/0x9bf9df78b45f9c3848094cbcd90e2cc5da29eb77");
+        $(".uniswapLink").attr("href", "https://app.uniswap.org/#/swap?inputCurrency=0x61ceac48136d6782dbd83c09f51e23514d12470a");
         $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.sp}" target="_blank">${addresses.mainnet.sp}</a>`);
         $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.subs}" target="_blank">${addresses.mainnet.subs}</a>`);
         $(".wrapBtn").hide();
@@ -125,7 +125,7 @@ async function unlockProvider() {
         bridgeSubsContract = new web3.eth.Contract(abies.idchain.bridge_subs, addresses.idchain.bridge_subs);
         wrapperContract = new web3.eth.Contract(abies.idchain.wrapper, addresses.idchain.wrapper);
       } else {
-        $(".uniswapLink").attr("href", "https://info.uniswap.org/pair/0x9bf9df78b45f9c3848094cbcd90e2cc5da29eb77");
+        $(".uniswapLink").attr("href", "https://app.uniswap.org/#/swap?inputCurrency=0x61ceac48136d6782dbd83c09f51e23514d12470a");
         $(".wrapBtn").hide();
         $("#addIdchainBtn").show();
         window.provider = false;
