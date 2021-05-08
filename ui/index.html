@@ -28,11 +28,19 @@
           <h4 class="my-0 font-weight-normal">Sponsorships</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title">$<span id="spPrice"></span></h1>
-          <h6>
-            <b>Sp</b>
-          </h6>
+          <span id="mainSpHeader">
+            <h1 class="card-title">$<span id="spPrice"></span></h1>
+            <h6>
+              <b>Sp</b>
+            </h6>
+          </span>
           <ul class="list-unstyled mt-3 mb-4">
+            <span  id="idchainSpHeader">
+              <li><img src="assets/img/uniswap.png" height="57" class="uniswap-logo" /></li>
+              <li>
+                <a class="uniswapLink spUniswapLink" target="_blank" class="uniswap-lin">Buy Sp on Uniswap</a>
+              </li>
+            </span>
             <li>Unassigned Sp Supply: <span id="spSupply"></span></li>
             <li>Assigned Sp Supply: <span id="spTotalAssigned"></span></li>
             <li>Previously Used Sp: <span id="spTotalUsed"></span></li>
@@ -44,8 +52,9 @@
           <button type="button" onclick="spWrappingForm();" class="wrapBtn btn btn-lg btn-block btn-info">Sp &#10234;
             IdSp
           </button>
-          <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info">Purchase
+          <button type="button" onclick="spPurchaseForm();" class="btn btn-lg btn-block btn-info" id="spPurchaseBtn">Purchase
           </button>
+          <a target="_blank" class="btn btn-lg btn-block btn-info spUniswapLink" id="spUniswapBtn">Purchase</a>
           <button type="button" onclick="assignSpForm();" class="btn btn-lg btn-block btn-info">Assign
           </button>
           <button type="button" onclick="appBalanceForm();" class="btn btn-lg btn-block btn-info">Check
@@ -61,7 +70,7 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li><img src="assets/img/uniswap.png" height="57" class="uniswap-logo" /></li>
             <li>
-              <a class="uniswapLink" target="_blank" class="uniswap-lin">Buy Subs on Uniswap</a>
+              <a class="uniswapLink subsUniswapLink" target="_blank" class="uniswap-lin">Buy Subs on Uniswap</a>
             </li>
             <li>&#160;</li>
             <li>Inactive Subs Supply: <span id="subsSupply"></span></li>
@@ -74,7 +83,7 @@
           <button type="button" onclick="subsWrappingForm();" class="wrapBtn btn btn-lg btn-block btn-info">Subs
             &#10234; IdSubs
           </button>
-          <a target="_blank" class="uniswapLink btn btn-lg btn-block btn-info">Purchase</a>
+          <a target="_blank" class="subsUniswapLink uniswapLink btn btn-lg btn-block btn-info">Purchase</a>
           <button type="button" onclick="activateForm()" class="btn btn-lg btn-block btn-info">Activate
           </button>
           <button type="button" onclick="claimForm()" class="btn btn-lg btn-block btn-info"

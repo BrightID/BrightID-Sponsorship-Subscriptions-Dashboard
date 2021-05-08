@@ -97,11 +97,15 @@ async function unlockProvider() {
       load_data();
       console.log('networkId', networkId);
       if (networkId == 1) {
-        $(".uniswapLink").attr("href", "https://app.uniswap.org/#/swap?inputCurrency=0x61ceac48136d6782dbd83c09f51e23514d12470a");
+        $(".subsUniswapLink").attr("href", "https://app.uniswap.org/#/swap?inputCurrency=0x61ceac48136d6782dbd83c09f51e23514d12470a");
         $("#spContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.sp}" target="_blank">${addresses.mainnet.sp}</a>`);
         $("#subsContractAddress").html(`<a href="https://etherscan.io/token/${addresses.mainnet.subs}" target="_blank">${addresses.mainnet.subs}</a>`);
         $(".wrapBtn").hide();
         $("#addIdchainBtn").show();
+        $("#spPurchaseBtn").show();
+        $("#spUniswapBtn").hide();
+        $("#mainSpHeader").show();
+        $("#idchainSpHeader").hide();
         ptContract = new web3.eth.Contract(abies.mainnet.pt, addresses.mainnet.pt);
         spContract = new web3.eth.Contract(abies.mainnet.sp, addresses.mainnet.sp);
         spContract2 = new idchainWeb3.eth.Contract(abies.idchain.sp, addresses.idchain.sp);
@@ -110,11 +114,16 @@ async function unlockProvider() {
         subsMinterContract = new web3.eth.Contract(abies.mainnet.subs_minter, addresses.mainnet.subs_minter);
 
       } else if (networkId == 74) {
-        $(".uniswapLink").attr("href", "#");
+        $(".subsUniswapLink").attr("href", "https://uniswap-info.idchain.one/pair/0xbacfacbf099ad186b18b674905269b189c8c06cc");
         $("#spContractAddress").html(`<a href="https://explorer.idchain.one/address/${addresses.idchain.sp}/transactions" target="_blank">${addresses.idchain.sp}</a>`);
         $("#subsContractAddress").html(`<a href="https://explorer.idchain.one/address/${addresses.idchain.subs}/transactions" target="_blank">${addresses.idchain.subs}</a>`);
+        $(".spUniswapLink").attr("href", "https://uniswap-info.idchain.one/pair/0x8bC1CFFB4d44ba7616E2B12C9093a592633db48f");
         $(".wrapBtn").show();
         $("#addIdchainBtn").hide();
+        $("#spPurchaseBtn").hide();
+        $("#spUniswapBtn").show();
+        $("#mainSpHeader").hide();
+        $("#idchainSpHeader").show();
         ptContract = new web3.eth.Contract(abies.idchain.pt, addresses.idchain.pt);
         spContract = new web3.eth.Contract(abies.idchain.sp, addresses.idchain.sp);
         spContract2 = new mainnetWeb3.eth.Contract(abies.mainnet.sp, addresses.mainnet.sp);
@@ -125,9 +134,13 @@ async function unlockProvider() {
         bridgeSubsContract = new web3.eth.Contract(abies.idchain.bridge_subs, addresses.idchain.bridge_subs);
         wrapperContract = new web3.eth.Contract(abies.idchain.wrapper, addresses.idchain.wrapper);
       } else {
-        $(".uniswapLink").attr("href", "https://app.uniswap.org/#/swap?inputCurrency=0x61ceac48136d6782dbd83c09f51e23514d12470a");
+        $(".subsUniswapLink").attr("href", "https://app.uniswap.org/#/swap?inputCurrency=0x61ceac48136d6782dbd83c09f51e23514d12470a");
         $(".wrapBtn").hide();
         $("#addIdchainBtn").show();
+        $("#spPurchaseBtn").show();
+        $("#spUniswapBtn").hide();
+        $("#mainSpHeader").show();
+        $("#idchainSpHeader").hide();
         window.provider = false;
         Swal.fire({
           type: "info",
