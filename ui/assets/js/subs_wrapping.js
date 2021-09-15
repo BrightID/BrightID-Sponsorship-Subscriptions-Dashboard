@@ -23,7 +23,7 @@ function wrapSubs() {
   const fTokenSubs = $("#fTokenSubs").val();
   let fAmountSubs = $("#fAmountSubs").val();
   if (fTokenSubs == 'IdSubs') {
-    fAmountSubs *= 10 ** 18;
+    fAmountSubs = web3.utils.toWei(fAmountSubs.toString(), 'ether');
   }
 
   if (!fAmountSubs) {
@@ -109,7 +109,7 @@ function updateWrappingSubsState(fBalanceSubs) {
   }
   $("#tAmountSubs").val(fAmountSubs);
   if (fTokenSubs == 'IdSubs') {
-    fAmountSubs *= 10 ** 18;
+    fAmountSubs = web3.utils.toWei(fAmountSubs.toString(), 'ether');
   }
   if (fBalanceSubs < fAmountSubs) {
     $("#subsWrappingMsg").css("color", "red");
