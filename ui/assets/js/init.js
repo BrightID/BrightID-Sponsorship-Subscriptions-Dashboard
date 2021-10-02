@@ -114,10 +114,10 @@ async function unlockProvider() {
         subsMinterContract = new web3.eth.Contract(abies.mainnet.subs_minter, addresses.mainnet.subs_minter);
 
       } else if (networkId == 74) {
-        $(".subsUniswapLink").attr("href", "https://uniswap-info.idchain.one/pair/0xbacfacbf099ad186b18b674905269b189c8c06cc");
+        $(".subsUniswapLink").attr("href", "https://swap-info.idchain.one/pair/0xbacfacbf099ad186b18b674905269b189c8c06cc");
         $("#spContractAddress").html(`<a href="https://explorer.idchain.one/address/${addresses.idchain.sp}/transactions" target="_blank">${addresses.idchain.sp}</a>`);
         $("#subsContractAddress").html(`<a href="https://explorer.idchain.one/address/${addresses.idchain.subs}/transactions" target="_blank">${addresses.idchain.subs}</a>`);
-        $(".spUniswapLink").attr("href", "https://uniswap-info.idchain.one/pair/0x8bC1CFFB4d44ba7616E2B12C9093a592633db48f");
+        $(".spUniswapLink").attr("href", "https://swap-info.idchain.one/pair/0x8bC1CFFB4d44ba7616E2B12C9093a592633db48f");
         $(".wrapBtn").show();
         $("#addIdchainBtn").hide();
         $("#spPurchaseBtn").hide();
